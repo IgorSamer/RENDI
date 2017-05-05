@@ -1,0 +1,31 @@
+JFXTextField, JFXPasswordField {
+	-fx-font-size: 14px;
+	-fx-unfocus-color: #000;
+	-fx-width: 100px;
+}
+
+.btn {
+	-fx-padding: 10px 20px;
+	-fx-font-size: 16px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #fff;
+	-fx-cursor: hand;
+}
+
+.btn_sucesso {
+	-fx-text-fill: #000;
+	-fx-background-color: #8BC34A;
+}
+
+.btn_sucesso:hover {
+	-fx-text-fill: #fff;
+	-fx-background-color: #689F38;
+}
+
+.btn_erro {
+	-fx-background-color: #F44336;
+}
+
+.btn_erro:hover {
+	-fx-background-color: #E53935;
+}
