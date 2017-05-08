@@ -34,8 +34,6 @@ public class Conexao {
 		}
 	}
 	
-	//Igor GAY !
-	
 	public static void fecharConexao(Connection con, PreparedStatement stmt) {
 		if(stmt != null) {
 			try {
