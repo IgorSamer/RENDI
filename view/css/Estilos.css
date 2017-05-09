@@ -13,13 +13,12 @@ JFXTextField, JFXPasswordField {
 }
 
 .btn_sucesso {
-	-fx-text-fill: #000;
-	-fx-background-color: #8BC34A;
+	-fx-background-color: #FF9800;
 }
 
 .btn_sucesso:hover {
 	-fx-text-fill: #fff;
-	-fx-background-color: #689F38;
+	-fx-background-color: #F57C00;
 }
 
 .btn_erro {
@@ -27,5 +26,5 @@ JFXTextField, JFXPasswordField {
 }
 
 .btn_erro:hover {
-	-fx-background-color: #E53935;
+	-fx-background-color: #D32F2F;
 }

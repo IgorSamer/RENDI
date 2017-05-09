@@ -18,7 +18,7 @@
                <image>
                   <Image url="@../img/Logo.png" />
                </image></ImageView>
-            <JFXTextField fx:id="txtUsuario" alignment="TOP_LEFT" focusColor="#238a39" labelFloat="true" maxWidth="300.0" minWidth="300.0" opacity="0.0" prefWidth="300.0" promptText="Usuário" />
+            <JFXTextField fx:id="txtUsuario" alignment="TOP_LEFT" focusColor="#ff9800" labelFloat="true" maxWidth="300.0" minWidth="300.0" opacity="0.0" prefWidth="300.0" promptText="Usuário" />
             <HBox alignment="CENTER">
                <children>
                   <JFXButton fx:id="btnEntrarUsuario" buttonType="RAISED" opacity="0.0" text="Entrar">
