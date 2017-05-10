@@ -1,6 +1,6 @@
 package model.bean;
 
-public class Funcionario {
+public class Funcionario extends Pessoa {
 	private Integer id;
 	private String data_admissao;
 	private String data_demissao;
@@ -9,6 +9,14 @@ public class Funcionario {
 	private Integer ativo;
 	private Funcao funcao;
 	private Setor setor;
+	
+	public Funcionario(Integer id, String nome, String sobrenome, String foto, Funcao funcao) {
+		this.setId(id);
+		this.setNome(nome);
+		this.setSobrenome(sobrenome);
+		this.setFoto(foto);
+		this.setFuncao(funcao);
+	}
 	
 	public Integer getId() {
 		return id;

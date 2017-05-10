@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
+import model.dao.FuncionarioDAO;
 
 public class EntrarController implements Initializable {
 	@FXML
@@ -66,7 +67,11 @@ public class EntrarController implements Initializable {
 		btnEntrarUsuario.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				txtUsuario.setText("Leonardo baitola");
+				if(FuncionarioDAO.entrar(txtUsuario.getText().trim())) {
+					System.out.println("ENTROUOOUOUOU");
+				} else {
+					System.out.println("NINGUEEEEM");
+				}
 			}
 		});
 		

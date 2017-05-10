@@ -4,6 +4,10 @@ public class Funcao {
 	private Integer id;
 	private String nome;
 	
+	public Funcao(String nome) {
+		this.setNome(nome);
+	}
+	
 	public Integer getId() {
 		return id;
 	}
