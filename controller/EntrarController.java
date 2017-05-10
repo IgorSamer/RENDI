@@ -10,6 +10,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -64,14 +65,17 @@ public class EntrarController implements Initializable {
 			fadeInEntrar2.play();
 		});
 		
+		txtUsuario.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				entrar(txtUsuario.getText().trim());
+			}
+		});
+		
 		btnEntrarUsuario.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				if(FuncionarioDAO.entrar(txtUsuario.getText().trim())) {
-					System.out.println("ENTROUOOUOUOU");
-				} else {
-					System.out.println("NINGUEEEEM");
-				}
+				entrar(txtUsuario.getText().trim());
 			}
 		});
 		
@@ -81,5 +85,13 @@ public class EntrarController implements Initializable {
 				Platform.exit();
 			}
 		});
+	}
+
+	protected void entrar(String usuario) {
+		if(FuncionarioDAO.entrar(usuario)) {
+			System.out.println("ENTROUOOUOUOU");
+		} else {
+			System.out.println("NINGUEEEEM");
+		}
 	}
 }
