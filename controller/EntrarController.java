@@ -38,7 +38,7 @@ public class EntrarController implements Initializable {
 	private JFXPasswordField txtSenha;
 	
 	@FXML
-    private JFXButton btnEntrarUsuario;
+    private JFXButton btnEntrar;
 	
 	@FXML
 	private JFXButton btnSair;
@@ -71,7 +71,7 @@ public class EntrarController implements Initializable {
 			fadeInUsuario.setToValue(1);
 			fadeInUsuario.play();
 
-			FadeTransition fadeInEntrar1 = new FadeTransition(Duration.seconds(0.5), btnEntrarUsuario);
+			FadeTransition fadeInEntrar1 = new FadeTransition(Duration.seconds(0.5), btnEntrar);
 			fadeInEntrar1.setFromValue(0);
 			fadeInEntrar1.setToValue(1);
 			fadeInEntrar1.play();
@@ -85,14 +85,21 @@ public class EntrarController implements Initializable {
 		txtUsuario.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				entrar(txtUsuario.getText().trim());
+				entrar();
 			}
 		});
 		
-		btnEntrarUsuario.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		txtSenha.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				entrar();
+			}
+		});
+		
+		btnEntrar.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				entrar(txtUsuario.getText().trim());
+				entrar();
 			}
 		});
 		
@@ -104,9 +111,9 @@ public class EntrarController implements Initializable {
 		});
 	}
 
-	protected void entrar(String usuario) {
+	protected void entrar() {
 		if(!entrouUsuario) {
-			String entrou = FuncionarioDAO.entrar(usuario);
+			String entrou = FuncionarioDAO.entrar(txtUsuario.getText().trim());
 			
 			if(!entrou.equals("")) {
 				entrouUsuario = true;
@@ -134,6 +141,16 @@ public class EntrarController implements Initializable {
 			} else {
 				JFXSnackbar mensagem = new JFXSnackbar(stackPane);
 				mensagem.show("Usuário incorreto!", 2000);
+			}
+		} else {
+			Funcionario funcionario = FuncionarioDAO.entrar(txtUsuario.getText().trim(), txtSenha.getText().trim());
+			
+			if(funcionario != null) {
+				JFXSnackbar mensagem = new JFXSnackbar(stackPane);
+				mensagem.show("FOOOOOOI!", 2000);
+			} else {
+				JFXSnackbar mensagem = new JFXSnackbar(stackPane);
+				mensagem.show("Senha incorreta!", 2000);
 			}
 		}
 	}

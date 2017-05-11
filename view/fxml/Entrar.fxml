@@ -27,7 +27,7 @@
             </StackPane>
             <HBox alignment="CENTER">
                <children>
-                  <JFXButton fx:id="btnEntrarUsuario" buttonType="RAISED" opacity="0.0" text="Entrar">
+                  <JFXButton fx:id="btnEntrar" buttonType="RAISED" opacity="0.0" text="Entrar">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_sucesso" />

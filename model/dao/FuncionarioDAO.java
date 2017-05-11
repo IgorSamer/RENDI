@@ -45,8 +45,8 @@ public class FuncionarioDAO {
 		
 		try {
 			stmt = con.prepareStatement("SELECT f.id, f.nome, f.sobrenome, f.foto, fun.nome AS nomeFuncao "
-									+ 	"FROM usuarios u INNER JOIN "
-									+ 	"FROM funcionarios f "
+									+ 	"FROM usuarios u "
+									+ 	"INNER JOIN funcionarios f ON u.id_funcionario = f.id "
 									+ 	"INNER JOIN funcoes fun ON f.id_funcao = fun.id "
 									+ 	"WHERE u.usuario = ? and u.senha = ? and u.ativo = 1 LIMIT 1");
 			stmt.setString(1, usuario);
