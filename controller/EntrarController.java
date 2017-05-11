@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,11 +16,15 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.bean.Funcionario;
 import model.dao.FuncionarioDAO;
@@ -133,11 +138,9 @@ public class EntrarController implements Initializable {
 				fadeTxtUsuario.setToValue(1);
 				fadeTxtUsuario.play();
 				
-				fadeTxtUsuario.setOnFinished((e) -> {
-					txtUsuario.setEditable(false);
-					
-					txtSenha.requestFocus();
-				});
+				txtUsuario.setEditable(false);
+				
+				txtSenha.requestFocus();
 			} else {
 				JFXSnackbar mensagem = new JFXSnackbar(stackPane);
 				mensagem.show("Usuário incorreto!", 2000);
@@ -146,8 +149,23 @@ public class EntrarController implements Initializable {
 			Funcionario funcionario = FuncionarioDAO.entrar(txtUsuario.getText().trim(), txtSenha.getText().trim());
 			
 			if(funcionario != null) {
-				JFXSnackbar mensagem = new JFXSnackbar(stackPane);
-				mensagem.show("FOOOOOOI!", 2000);
+				try {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/fxml/Painel.fxml"));
+					
+					Parent root = loader.load();
+				
+					PainelController painelController = loader.getController();
+					painelController.setFuncionario(funcionario);
+					
+					Scene telaEntrar = (Scene) stackPane.getScene();
+					
+					Scene cena = new Scene(root, telaEntrar.getWidth(), telaEntrar.getHeight());
+					
+					Stage stage = (Stage) stackPane.getScene().getWindow();
+					stage.setScene(cena);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			} else {
 				JFXSnackbar mensagem = new JFXSnackbar(stackPane);
 				mensagem.show("Senha incorreta!", 2000);
