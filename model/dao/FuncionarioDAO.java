@@ -10,22 +10,22 @@ import model.bean.Funcionario;
 import model.conexao.Conexao;
 
 public class FuncionarioDAO {
-	public static boolean entrar(String usuario) {
+	public static String entrar(String usuario) {
 		Connection con = Conexao.getConexao();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		boolean entrou = false;
+		String entrou = "";
 		
 		try {
-			stmt = con.prepareStatement("SELECT id FROM usuarios WHERE usuario = ? and ativo = 1 LIMIT 1");
+			stmt = con.prepareStatement("SELECT f.foto FROM usuarios u INNER JOIN funcionarios f ON u.id_funcionario = f.id WHERE u.usuario = ? and u.ativo = 1 LIMIT 1");
 			
 			stmt.setString(1, usuario);
 			
 			rs = stmt.executeQuery();
 			
 			if(rs.first()) {
-				entrou = true;
+				entrou = rs.getString("foto");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

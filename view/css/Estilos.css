@@ -28,3 +28,12 @@ JFXTextField, JFXPasswordField {
 .btn_erro:hover {
 	-fx-background-color: #D32F2F;
 }
+
+.jfx-snackbar-content {
+	-fx-background-color: #333333;
+  	-fx-background-radius: 6px 6px 0px 0px;
+}
+
+.jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;	
+}
