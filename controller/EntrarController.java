@@ -65,6 +65,7 @@ public class EntrarController implements Initializable {
 		});
 		
 		btnEntrarUsuario.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
 			@Override
 			public void handle(MouseEvent arg0) {
 				if(FuncionarioDAO.entrar(txtUsuario.getText().trim())) {
@@ -76,8 +77,10 @@ public class EntrarController implements Initializable {
 		});
 		
 		btnSair.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			
 			@Override
 			public void handle(MouseEvent arg0) {
+				System.out.println("ENTROUOOUOUOU");
 				Platform.exit();
 			}
 		});
