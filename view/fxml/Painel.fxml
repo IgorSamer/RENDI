@@ -59,7 +59,7 @@
          <effect>
             <DropShadow />
          </effect></JFXDrawer>
-      <StackPane fx:id="conteudo" layoutY="58.0" prefHeight="50.0" prefWidth="715.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <StackPane fx:id="conteudo" layoutY="58.0" prefHeight="44.0" prefWidth="715.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>
             <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                <image>
