@@ -50,3 +50,7 @@ JFXTextField, JFXPasswordField {
 .jfx-snackbar-toast {
 	-fx-text-fill: #ffffff;	
 }
+
+.jfx-drawer StackPane {
+	-fx-background-color: #424242;
+}

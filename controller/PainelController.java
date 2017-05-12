@@ -52,6 +52,7 @@ public class PainelController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		conteudo.toBack();
 		
+	
 		drawer.open();
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -108,7 +109,7 @@ public class PainelController implements Initializable {
 									
 									Stage stage = (Stage) anchorPane.getScene().getWindow();
 									stage.setScene(cena);
-									stage.setTitle("LIA");
+									stage.setTitle("RENDI - Soluções Rentáveis.");
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
