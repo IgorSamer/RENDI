@@ -81,4 +81,8 @@ public class Funcionario extends Pessoa {
 	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
+	
+	public static String getCaminhoFoto(String foto) {
+		return "/view/img/" + foto;
+	}
 }
