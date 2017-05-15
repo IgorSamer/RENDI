@@ -4,7 +4,7 @@
 <?import java.lang.String?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="693.0" style="-fx-background-color: #424242;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXButton id="sair" prefHeight="25.0" prefWidth="175.0" text="Sair">
          <styleClass>
