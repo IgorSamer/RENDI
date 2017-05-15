@@ -8,6 +8,10 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXPopup;
+import com.jfoenix.controls.JFXPopup.PopupHPosition;
+import com.jfoenix.controls.JFXPopup.PopupVPosition;
 import com.jfoenix.controls.JFXSpinner;
 
 import javafx.animation.Animation;
@@ -52,7 +56,6 @@ public class PainelController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		conteudo.toBack();
 		
-	
 		drawer.open();
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -71,6 +74,17 @@ public class PainelController implements Initializable {
 
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
+		
+		JFXListView<String> list = new JFXListView<String>();
+		list.getItems().add("Editar Perfil");
+		list.setPrefWidth(100);
+		list.setPrefHeight(35);
+		
+		JFXPopup popup = new JFXPopup();
+		popup.setContent(list);
+		popup.setPopupContainer(anchorPane);
+		popup.setSource(lblTipoNome);
+		lblTipoNome.setOnMouseClicked((e)-> popup.show(PopupVPosition.TOP, PopupHPosition.RIGHT));
 	}
 	
 	public void setFuncionario(Funcionario func) {
