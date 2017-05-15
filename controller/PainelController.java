@@ -141,6 +141,17 @@ public class PainelController implements Initializable {
 							}
 						}
 					});
+				} else {
+					botaoMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						@Override
+						public void handle(MouseEvent arg0) {
+							if(botaoMenu.getId().equals("sair")) {
+								
+							} else {
+								
+							}
+						}
+					});
 				}
 			}
 		} catch (IOException e) {
