@@ -42,6 +42,14 @@ JFXTextField, JFXPasswordField {
 	-fx-background-color: #ffffff;
 }
 
+.lbl_titulo {
+	-fx-margin-top: 60px;
+	-fx-margin-bottom: 30px;
+	-fx-text-fill: #424242;
+	-fx-font-size: 30px;
+	-fx-font-weight: bold;
+}
+
 .jfx-snackbar-content {
 	-fx-background-color: #333333;
   	-fx-background-radius: 6px 6px 0px 0px;

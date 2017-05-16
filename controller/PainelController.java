@@ -32,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.bean.Funcionario;
@@ -51,6 +52,12 @@ public class PainelController implements Initializable {
 
     @FXML
     private StackPane conteudo;
+    
+    private JFXListView<Label> listaControle = new JFXListView<Label>();
+    private JFXListView<String> listaServicos = new JFXListView<String>();
+    
+    private JFXPopup popupControle = new JFXPopup();
+    private JFXPopup popupServicos = new JFXPopup();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -75,16 +82,36 @@ public class PainelController implements Initializable {
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
 		
-		JFXListView<String> list = new JFXListView<String>();
-		list.getItems().add("Editar Perfil");
-		list.setPrefWidth(100);
-		list.setPrefHeight(35);
+		JFXListView<String> lista = new JFXListView<String>();
+		lista.getItems().add("Editar Perfil");
+		lista.setPrefWidth(100);
+		lista.setPrefHeight(35);
 		
 		JFXPopup popup = new JFXPopup();
-		popup.setContent(list);
+		popup.setContent(lista);
 		popup.setPopupContainer(anchorPane);
 		popup.setSource(lblTipoNome);
 		lblTipoNome.setOnMouseClicked((e)-> popup.show(PopupVPosition.TOP, PopupHPosition.RIGHT));
+		
+		Label itemControle = new Label("Ordem de Compra");
+		itemControle.setId("GerenciarLicencas");
+		itemControle.setAccessibleText("Ordem de Compra");
+		
+		Label itemControle2 = new Label("Clientes");
+		itemControle2.setId("GerenciarClientes");
+		itemControle2.setAccessibleText("Clientes");
+		
+		Label itemControle3 = new Label("Estoque");
+		itemControle3.setId("GerenciarEstoque");
+		itemControle3.setAccessibleText("Estoque");
+		
+		listaControle.getItems().addAll(itemControle, itemControle2, itemControle3);
+		listaControle.setPrefHeight(170);
+
+		listaServicos.getItems().add("Troca de Óleo");
+		listaServicos.getItems().add("Lava-car");
+		listaServicos.getItems().add("Abastecimento");
+		listaServicos.setPrefHeight(130);
 	}
 	
 	public void setFuncionario(Funcionario func) {
@@ -145,10 +172,34 @@ public class PainelController implements Initializable {
 					botaoMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
 						@Override
 						public void handle(MouseEvent arg0) {
-							if(botaoMenu.getId().equals("sair")) {
+							switch(botaoMenu.getAccessibleText()) {
+								case "controle":
+									listaControle.setPrefWidth(((Region) botaoMenu).getWidth());
+									popupControle.setContent(listaControle);
+									popupControle.setPopupContainer(anchorPane);
+									popupControle.setSource(botaoMenu);
+									popupControle.show(PopupVPosition.TOP, PopupHPosition.RIGHT, 0, 58);
+									
+									for(Node botaoPopup : listaControle.getItems()) {
+										botaoPopup.setOnMouseClicked(new EventHandler<MouseEvent>() {
+											@Override
+											public void handle(MouseEvent arg0) {
+												mudaConteudo(botaoPopup.getId());
+												
+												Stage stage = (Stage) anchorPane.getScene().getWindow();
+												stage.setTitle("RENDI - " + botaoMenu.getAccessibleText());
+											}
+										});
+									}
+								break;
 								
-							} else {
-								
+								case "servicos":
+									listaServicos.setPrefWidth(((Region) botaoMenu).getWidth());
+									popupServicos.setContent(listaServicos);
+									popupServicos.setPopupContainer(anchorPane);
+									popupServicos.setSource(botaoMenu);
+									popupServicos.show(PopupVPosition.TOP, PopupHPosition.RIGHT, 0, 58);
+								break;
 							}
 						}
 					});
@@ -183,7 +234,7 @@ public class PainelController implements Initializable {
 					fadeIn.setOnFinished(new EventHandler<ActionEvent>() {
 						@Override
 						public void handle(ActionEvent arg0) {
-							ImageView icone = new ImageView("/view/img/logo_branco.png");
+							ImageView icone = new ImageView("/view/img/Logo.png");
 							icone.setFitWidth(50);
 							icone.setFitHeight(50);
 							icone.setPreserveRatio(true);
