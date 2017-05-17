@@ -69,3 +69,10 @@ JFXTextField, JFXPasswordField {
 .jfx-popup {
 	-fx-cursor: hand;
 }
+
+.lbl_titulo{
+	-fx-font-size: 30px;
+	-fx-margin-botton: 30px;
+	-fx-font-weight: bold;
+	
+}
