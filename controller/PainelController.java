@@ -94,8 +94,8 @@ public class PainelController implements Initializable {
 		lblTipoNome.setOnMouseClicked((e)-> popup.show(PopupVPosition.TOP, PopupHPosition.RIGHT));
 		
 		Label itemControle = new Label("Ordem de Compra");
-		itemControle.setId("GerenciarLicencas");
-		itemControle.setAccessibleText("Ordem de Compra");
+		itemControle.setId("GerenciarOrdemCompra");
+		itemControle.setAccessibleText("Gerenciar Ordem de Compra");
 		
 		Label itemControle2 = new Label("Clientes");
 		itemControle2.setId("GerenciarClientes");
@@ -187,7 +187,7 @@ public class PainelController implements Initializable {
 												mudaConteudo(botaoPopup.getId());
 												
 												Stage stage = (Stage) anchorPane.getScene().getWindow();
-												stage.setTitle("RENDI - " + botaoMenu.getAccessibleText());
+												stage.setTitle("RENDI - " + botaoPopup.getAccessibleText());
 											}
 										});
 									}
