@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<StackPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Estilos.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarLicencasController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="153.0" prefWidth="700.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Licenças" />
+         </children>
+      </VBox>
+   </children>
+</StackPane>

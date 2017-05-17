@@ -8,7 +8,7 @@
 
 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXButton id="controle" prefHeight="25.0" prefWidth="175.0" text="Controle">
+      <JFXButton accessibleText="controle" prefHeight="25.0" prefWidth="175.0" text="Controle">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn_menu" />
@@ -21,7 +21,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton id="controle" prefHeight="25.0" prefWidth="175.0" text="Serviços">
+      <JFXButton accessibleText="servicos" prefHeight="25.0" prefWidth="175.0" text="Serviços">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn_menu" />
@@ -34,7 +34,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton id="controle" prefHeight="25.0" prefWidth="175.0" text="Licenças">
+      <JFXButton accessibleText="licencas" prefHeight="25.0" prefWidth="175.0" text="Licenças">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn_menu" />
@@ -47,7 +47,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton id="controle" prefHeight="25.0" prefWidth="175.0" text="Funcionários">
+      <JFXButton accessibleText="funcionarios" prefHeight="25.0" prefWidth="175.0" text="Funcionários">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn_menu" />
