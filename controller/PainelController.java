@@ -18,6 +18,7 @@ import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -54,10 +55,12 @@ public class PainelController implements Initializable {
     private StackPane conteudo;
     
     private JFXListView<Label> listaControle = new JFXListView<Label>();
-    private JFXListView<String> listaServicos = new JFXListView<String>();
+    private JFXListView<Label> listaServicos = new JFXListView<Label>();
+    private JFXListView<Label> listaFuncionarios = new JFXListView<Label>();
     
     private JFXPopup popupControle = new JFXPopup();
     private JFXPopup popupServicos = new JFXPopup();
+    private JFXPopup popupFuncionarios = new JFXPopup();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -93,6 +96,7 @@ public class PainelController implements Initializable {
 		popup.setSource(lblTipoNome);
 		lblTipoNome.setOnMouseClicked((e)-> popup.show(PopupVPosition.TOP, PopupHPosition.RIGHT));
 		
+		// Opções no menu de Controle
 		Label itemControle = new Label("Ordem de Compra");
 		itemControle.setId("GerenciarOrdemCompra");
 		itemControle.setAccessibleText("Gerenciar Ordem de Compra");
@@ -107,11 +111,34 @@ public class PainelController implements Initializable {
 		
 		listaControle.getItems().addAll(itemControle, itemControle2, itemControle3);
 		listaControle.setPrefHeight(170);
-
-		listaServicos.getItems().add("Troca de Óleo");
-		listaServicos.getItems().add("Lava-car");
-		listaServicos.getItems().add("Abastecimento");
+		
+		//Opções no menu de Serviços
+		Label itemServico = new Label("Troca de Óleo");
+		itemServico.setId("GerenciarOrdemCompra");
+		itemServico.setAccessibleText("Troca de Óleo");
+		
+		Label itemServico2 = new Label("Lava-car");
+		itemServico2.setId("GerenciarClientes");
+		itemServico2.setAccessibleText("Lava-car");
+		
+		Label itemServico3 = new Label("Abastecimento");
+		itemServico3.setId("GerenciarEstoque");
+		itemServico3.setAccessibleText("Abastecimento");
+		
+		listaServicos.getItems().addAll(itemServico, itemServico2, itemServico3);
 		listaServicos.setPrefHeight(130);
+		
+		//Opções no menu de Funcionários
+		Label itemFuncionario = new Label("Gerenciar Funcionários");
+		itemFuncionario.setId("GerenciarFuncionarios");
+		itemFuncionario.setAccessibleText("Gerenciar Funcionários");
+		
+		Label itemFuncionario2 = new Label("Cadastrar Funcionário");
+		itemFuncionario2.setId("CadastrarFuncionario");
+		itemFuncionario2.setAccessibleText("Cadastrar Funcionário");
+		
+		listaFuncionarios.getItems().addAll(itemFuncionario, itemFuncionario2);
+		listaFuncionarios.setPrefHeight(100);
 	}
 	
 	public void setFuncionario(Funcionario func) {
@@ -180,17 +207,7 @@ public class PainelController implements Initializable {
 									popupControle.setSource(botaoMenu);
 									popupControle.show(PopupVPosition.TOP, PopupHPosition.RIGHT, 0, 58);
 									
-									for(Node botaoPopup : listaControle.getItems()) {
-										botaoPopup.setOnMouseClicked(new EventHandler<MouseEvent>() {
-											@Override
-											public void handle(MouseEvent arg0) {
-												mudaConteudo(botaoPopup.getId());
-												
-												Stage stage = (Stage) anchorPane.getScene().getWindow();
-												stage.setTitle("RENDI - " + botaoPopup.getAccessibleText());
-											}
-										});
-									}
+									bindarPopups(listaControle.getItems());
 								break;
 								
 								case "servicos":
@@ -199,6 +216,18 @@ public class PainelController implements Initializable {
 									popupServicos.setPopupContainer(anchorPane);
 									popupServicos.setSource(botaoMenu);
 									popupServicos.show(PopupVPosition.TOP, PopupHPosition.RIGHT, 0, 58);
+									
+									bindarPopups(listaServicos.getItems());
+								break;
+								
+								case "funcionarios":
+									listaFuncionarios.setPrefWidth(((Region) botaoMenu).getWidth());
+									popupFuncionarios.setContent(listaFuncionarios);
+									popupFuncionarios.setPopupContainer(anchorPane);
+									popupFuncionarios.setSource(botaoMenu);
+									popupFuncionarios.show(PopupVPosition.TOP, PopupHPosition.RIGHT, 0, 58);
+									
+									bindarPopups(listaFuncionarios.getItems());
 								break;
 							}
 						}
@@ -207,6 +236,20 @@ public class PainelController implements Initializable {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	protected void bindarPopups(ObservableList<Label> items) {
+		for(Node botaoPopup : items) {
+			botaoPopup.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent arg0) {
+					mudaConteudo(botaoPopup.getId());
+					
+					Stage stage = (Stage) anchorPane.getScene().getWindow();
+					stage.setTitle("RENDI - " + botaoPopup.getAccessibleText());
+				}
+			});
 		}
 	}
 
