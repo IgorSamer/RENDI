@@ -1,7 +1,8 @@
-JFXTextField, JFXPasswordField {
+.jfx-text-field, .jfx-password-field {
 	-fx-font-size: 14px;
 	-fx-unfocus-color: #000;
-	-fx-width: 100px;
+	-fx-pref-width: 200px;
+	-fx-max-width: 200px;
 }
 
 .btn {
