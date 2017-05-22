@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Setor {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Setor extends RecursiveTreeObject<Setor> {
 	private Integer id;
 	private String nome;
 	

@@ -1,6 +1,8 @@
 package model.bean;
 
-public class EstadoCivil {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class EstadoCivil extends RecursiveTreeObject<EstadoCivil> {
 	private Integer id;
 	private String nome;
 	

@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Pessoa {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Pessoa extends RecursiveTreeObject<Pessoa> {
 	private String nome;
 	private String sobrenome;
 	private String data_nascimento;

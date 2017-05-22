@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Fidelidade {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Fidelidade extends RecursiveTreeObject<Fidelidade> {
 	private Integer id;
 	private int pontuacao;
 	private Cliente cliente;

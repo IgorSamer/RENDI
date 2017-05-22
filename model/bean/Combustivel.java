@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Combustivel {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Combustivel extends RecursiveTreeObject<Combustivel> {
 	private Integer id;
 	private String nome;
 	private Double preco;

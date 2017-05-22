@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Bico {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Bico extends RecursiveTreeObject<Bico> {
 	private Integer id;
 	private Bomba bomba;
 	private TanqueReparticao reparticao;

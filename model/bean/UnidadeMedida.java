@@ -1,6 +1,8 @@
 package model.bean;
 
-public class UnidadeMedida {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class UnidadeMedida extends RecursiveTreeObject<UnidadeMedida> {
 	private Integer id;
 	private String nome;
 	

@@ -1,6 +1,8 @@
 package model.bean;
 
-public class PessoaJuridica {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class PessoaJuridica extends RecursiveTreeObject<PessoaJuridica> {
 	private String cnpj;
 	private String inscricao_estadual;
 	private String nome_fantasia;

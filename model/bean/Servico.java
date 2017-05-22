@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Servico {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Servico extends RecursiveTreeObject<Servico> {
 	private Integer id;
 	private String nome;
 	private Double preco;

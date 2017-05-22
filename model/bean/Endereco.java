@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Endereco {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Endereco extends RecursiveTreeObject<Endereco> {
 	private String uf;
 	private String cidade;
 	private String cep;
