@@ -2,45 +2,68 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class CombustivelVenda extends RecursiveTreeObject<CombustivelVenda> {
-	private Integer id;
-	private String data;
-	private Float litros;
-	private Integer status;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty data = new SimpleStringProperty();
+	private FloatProperty litros = new SimpleFloatProperty();
+	private IntegerProperty status = new SimpleIntegerProperty();
 	private Cliente cliente;
 	private Funcionario funcionario;
 	private Bico bico;
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getData() {
+		return data.get();
 	}
 	
-	public String getData() {
+	public final void setData(String Data) {
+		data.set(Data);
+	}
+	
+	public StringProperty dataProperty() {
 		return data;
 	}
 	
-	public void setData(String data) {
-		this.data = data;
+	public final Float getLitros() {
+		return litros.get();
 	}
 	
-	public Float getLitros() {
+	public final void setLitros(Float Data) {
+		litros.set(Data);
+	}
+	
+	public FloatProperty litrosProperty() {
 		return litros;
 	}
 	
-	public void setLitros(Float litros) {
-		this.litros = litros;
+	public final Integer getStatus() {
+		return status.get();
 	}
 	
-	public Integer getStatus() {
+	public final void setStatus(Integer Status) {
+		status.set(Status);
+	}
+	
+	public IntegerProperty statusProperty() {
 		return status;
-	}
-	
-	public void setStatus(Integer status) {
-		this.status = status;
 	}
 	
 	public Cliente getCliente() {
