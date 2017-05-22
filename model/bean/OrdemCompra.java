@@ -1,6 +1,8 @@
 package model.bean;
 
-public class OrdemCompra {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 	private Integer id;
 	private String data;
 	private String data_prevista;

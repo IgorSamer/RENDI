@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Fornecedor {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 	private Integer id;
 	private String email;
 	private String razao_social;

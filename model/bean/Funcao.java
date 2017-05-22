@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Funcao {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Funcao extends RecursiveTreeObject<Funcao> {
 	private Integer id;
 	private String nome;
 	

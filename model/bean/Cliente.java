@@ -1,7 +1,10 @@
 package model.bean;
 
-public class Cliente extends Pessoa {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Cliente extends RecursiveTreeObject<Cliente> {
 	private Integer id;
+	private Pessoa pessoa;
 
 	public Integer getId() {
 		return id;
@@ -9,5 +12,13 @@ public class Cliente extends Pessoa {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 }

@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Genero {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Genero extends RecursiveTreeObject<Genero> {
 	private Integer id;
 	private String nome;
 	

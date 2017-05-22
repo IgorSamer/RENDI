@@ -1,6 +1,8 @@
 package model.bean;
 
-public class ProdutoVenda {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class ProdutoVenda extends RecursiveTreeObject<ProdutoVenda> {
 	private Integer id;
 	private String data;
 	private Integer unidades;

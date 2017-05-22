@@ -1,6 +1,8 @@
 package model.bean;
 
-public class TipoPagamento {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class TipoPagamento extends RecursiveTreeObject<TipoPagamento> {
 	private Integer id;
 	private String nome;
 	

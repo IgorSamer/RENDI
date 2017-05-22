@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Bomba {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Bomba extends RecursiveTreeObject<Bomba> {
 	private Integer id;
 	private Tanque tanque;
 	

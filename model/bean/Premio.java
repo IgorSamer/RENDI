@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Premio {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Premio extends RecursiveTreeObject<Premio> {
 	private Integer id;
 	private String nome;
 	private String descricao;

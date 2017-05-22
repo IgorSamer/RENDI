@@ -1,16 +1,25 @@
 package model.bean;
 
-public class Bico {
-	private Integer id;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+public class Bico extends RecursiveTreeObject<Bico> {
+	private IntegerProperty id = new SimpleIntegerProperty();
 	private Bomba bomba;
 	private TanqueReparticao reparticao;
 	
-	public Integer getId() {
-		return id;
+	public final Integer getId() {
+		return id.get();
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
+		return id;
 	}
 	
 	public Bomba getBomba() {

@@ -1,6 +1,8 @@
 package model.bean;
 
-public class TanqueReparticao {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class TanqueReparticao extends RecursiveTreeObject<TanqueReparticao> {
 	private Integer id;
 	private Combustivel combustivel;
 	private Tanque tanque;

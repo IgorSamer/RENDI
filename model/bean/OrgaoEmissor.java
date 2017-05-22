@@ -1,6 +1,8 @@
 package model.bean;
 
-public class OrgaoEmissor {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class OrgaoEmissor extends RecursiveTreeObject<OrgaoEmissor> {
 	private Integer id;
 	private String nome;
 	

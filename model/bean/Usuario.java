@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Usuario {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Usuario extends RecursiveTreeObject<Usuario> {
 	private Integer id;
 	private String usuario;
 	private String senha;

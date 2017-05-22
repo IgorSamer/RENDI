@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Tanque {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Tanque extends RecursiveTreeObject<Tanque> {
 	private Integer id;
 	private float capacidade;
 	

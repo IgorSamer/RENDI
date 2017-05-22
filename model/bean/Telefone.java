@@ -1,6 +1,8 @@
 package model.bean;
 
-public class Telefone {
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+public class Telefone extends RecursiveTreeObject<Telefone> {
 	private Integer id;
 	private String numero;
 	
