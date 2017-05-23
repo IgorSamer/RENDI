@@ -2,81 +2,120 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
-	private Integer id;
-	private String data;
-	private String data_prevista;
-	private Integer status;
-	private String observacoes;
-	private Double valor;
-	private int parcelas;
-	private int distancia_pagamento;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty data = new SimpleStringProperty();
+	private StringProperty data_prevista = new SimpleStringProperty();
+	private IntegerProperty status = new SimpleIntegerProperty();
+	private StringProperty observacoes = new SimpleStringProperty();
+	private DoubleProperty valor = new SimpleDoubleProperty();
+	private IntegerProperty parcelas = new SimpleIntegerProperty();
+	private IntegerProperty distancia_pagamento = new SimpleIntegerProperty();
 	private Fornecedor fornecedor;
 	private Funcionario funcionario;
 	private TipoPagamento tipo_pagamento;
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getData() {
+		return data.get();
 	}
 	
-	public String getData() {
+	public final void setData(String Data) {
+		data.set(Data);
+	}
+	
+	public StringProperty dataProperty() {
 		return data;
 	}
 	
-	public void setData(String data) {
-		this.data = data;
+	public final String getData_prevista() {
+		return data_prevista.get();
 	}
 	
-	public String getData_prevista() {
+	public final void setData_prevista(String Data_prevista) {
+		data_prevista.set(Data_prevista);
+	}
+	
+	public StringProperty data_previstaProperty() {
 		return data_prevista;
 	}
 	
-	public void setData_prevista(String data_prevista) {
-		this.data_prevista = data_prevista;
+	public final Integer getStatus() {
+		return status.get();
 	}
 	
-	public Integer getStatus() {
+	public final void setStatus(Integer Status) {
+		status.set(Status);
+	}
+	
+	public IntegerProperty statusProperty() {
 		return status;
 	}
 	
-	public void setStatus(Integer status) {
-		this.status = status;
+	public final String getObservacoes() {
+		return observacoes.get();
 	}
 	
-	public String getObservacoes() {
+	public final void setObservacoes(String Observacoes) {
+		observacoes.set(Observacoes);
+	}
+	
+	public StringProperty observacoesProperty() {
 		return observacoes;
 	}
 	
-	public void setObservacoes(String observacoes) {
-		this.observacoes = observacoes;
+	public final Double getValor() {
+		return valor.get();
 	}
 	
-	public Double getValor() {
+	public final void setValor(Double Valor) {
+		valor.set(Valor);
+	}
+	
+	public DoubleProperty valorProperty() {
 		return valor;
 	}
 	
-	public void setValor(Double valor) {
-		this.valor = valor;
+	public final Integer getParcelas() {
+		return parcelas.get();
 	}
 	
-	public int getParcelas() {
+	public final void setParcelas(Integer Parcelas) {
+		parcelas.set(Parcelas);
+	}
+	
+	public IntegerProperty parcelasProperty() {
 		return parcelas;
 	}
 	
-	public void setParcelas(int parcelas) {
-		this.parcelas = parcelas;
+	public final Integer getDistancia_pagamento() {
+		return distancia_pagamento.get();
 	}
 	
-	public int getDistancia_pagamento() {
+	public final void setDistancia_pagamento(Integer Distancia_pagamento) {
+		distancia_pagamento.set(Distancia_pagamento);
+	}
+	
+	public IntegerProperty distancia_pagamentoProperty() {
 		return distancia_pagamento;
-	}
-	
-	public void setDistancia_pagamento(int distancia_pagamento) {
-		this.distancia_pagamento = distancia_pagamento;
 	}
 	
 	public Fornecedor getFornecedor() {
