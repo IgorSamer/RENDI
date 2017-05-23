@@ -11,6 +11,11 @@ public class Escolaridade extends RecursiveTreeObject<Escolaridade> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty nome = new SimpleStringProperty();
 	
+	public Escolaridade(Integer Id, String Nome) {
+		this.setId(Id);
+		this.setNome(Nome);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

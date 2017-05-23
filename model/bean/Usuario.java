@@ -15,6 +15,15 @@ public class Usuario extends RecursiveTreeObject<Usuario> {
 	private IntegerProperty ativo = new SimpleIntegerProperty();
 	private Funcionario funcionario;
 	
+	public Usuario(Integer Id, String Usuario, String Senha, String Data, Integer Ativo, Funcionario Funcionario) {
+		this.setId(Id);
+		this.setUsuario(Usuario);
+		this.setSenha(Senha);
+		this.setData(Data);
+		this.setAtivo(Ativo);
+		this.setFuncionario(Funcionario);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

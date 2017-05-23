@@ -13,6 +13,13 @@ public class Premiacao extends RecursiveTreeObject<Premiacao> {
 	private Fidelidade fidelidade;
 	private Premio premio;
 	
+	public Premiacao(Integer Id, String Data, Fidelidade Fidelidade, Premio Premio) {
+		this.setId(Id);
+		this.setData(Data);
+		this.setFidelidade(Fidelidade);
+		this.setPremio(Premio);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

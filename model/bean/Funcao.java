@@ -11,8 +11,13 @@ public class Funcao extends RecursiveTreeObject<Funcao> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty nome = new SimpleStringProperty();
 	
-	public Funcao(String nome) {
-		this.setNome(nome);
+	public Funcao(Integer Id, String Nome) {
+		this.setId(Id);
+		this.setNome(Nome);
+	}
+	
+	public Funcao(String Nome) {
+		this.setNome(Nome);
 	}
 	
 	public final Integer getId() {

@@ -9,6 +9,11 @@ public class PessoaFisica extends RecursiveTreeObject<PessoaFisica> {
 	private StringProperty rg = new SimpleStringProperty();
 	private StringProperty cpf = new SimpleStringProperty();
 	
+	public PessoaFisica(String Rg, String Cpf) {
+		this.setRg(Rg);
+		this.setCpf(Cpf);
+	}
+	
 	public final String getRg() {
 		return rg.get();
 	}

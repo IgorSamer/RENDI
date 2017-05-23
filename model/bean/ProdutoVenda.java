@@ -15,6 +15,15 @@ public class ProdutoVenda extends RecursiveTreeObject<ProdutoVenda> {
 	private Funcionario funcionario;
 	private Cliente cliente;
 	
+	public ProdutoVenda(Integer Id, String Data, Integer Unidades, Produto Produto, Funcionario Funcionario, Cliente Cliente) {
+		this.setId(Unidades);
+		this.setData(Data);
+		this.setUnidades(Unidades);
+		this.setProduto(Produto);
+		this.setFuncionario(Funcionario);
+		this.setCliente(Cliente);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

@@ -9,6 +9,11 @@ public class Bomba extends RecursiveTreeObject<Bomba> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private Tanque tanque;
 	
+	public Bomba(Integer Id, Tanque Tanque) {
+		this.setId(Id);
+		this.setTanque(Tanque);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

@@ -22,6 +22,20 @@ public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 	private Funcionario funcionario;
 	private TipoPagamento tipo_pagamento;
 	
+	public OrdemCompra(Integer Id, String Data, String Data_prevista, Integer Status, String Observacoes, Double Valor, Integer Parcelas, Integer Distancia_pagamento, Fornecedor Fornecedor, Funcionario Funcionario, TipoPagamento Tipo_pagamento) {
+		this.setId(Id);
+		this.setData(Data_prevista);
+		this.setData_prevista(Data_prevista);
+		this.setStatus(Status);
+		this.setObservacoes(Observacoes);
+		this.setValor(Valor);
+		this.setParcelas(Parcelas);
+		this.setDistancia_pagamento(Distancia_pagamento);
+		this.setFornecedor(Fornecedor);
+		this.setFuncionario(Funcionario);
+		this.setTipo_pagamento(Tipo_pagamento);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

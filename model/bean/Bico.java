@@ -10,6 +10,12 @@ public class Bico extends RecursiveTreeObject<Bico> {
 	private Bomba bomba;
 	private TanqueReparticao reparticao;
 	
+	public Bico(Integer Id, Bomba Bomba, TanqueReparticao Reparticao) {
+		this.setId(Id);
+		this.setBomba(Bomba);
+		this.setReparticao(Reparticao);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

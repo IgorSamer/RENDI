@@ -11,6 +11,11 @@ public class Setor extends RecursiveTreeObject<Setor> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty nome = new SimpleStringProperty();
 	
+	public Setor(Integer Id, String Nome) {
+		this.setId(Id);
+		this.setNome(Nome);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

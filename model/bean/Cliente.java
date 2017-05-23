@@ -8,6 +8,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Cliente extends RecursiveTreeObject<Cliente> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private Pessoa pessoa;
+	
+	public Cliente(Integer Id, Pessoa Pessoa) {
+		this.setId(Id);
+		this.setPessoa(Pessoa);
+	}
 
 	public final Integer getId() {
 		return id.get();

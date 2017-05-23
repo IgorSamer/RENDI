@@ -15,6 +15,15 @@ public class Endereco extends RecursiveTreeObject<Endereco> {
 	private StringProperty rua = new SimpleStringProperty();
 	private IntegerProperty numero = new SimpleIntegerProperty();
 	
+	public Endereco(String Uf, String Cidade, String Cep, String Bairro, String Rua, Integer Numero) {
+		this.setUf(Uf);
+		this.setCidade(Cidade);
+		this.setCep(Cep);
+		this.setBairro(Bairro);
+		this.setRua(Rua);
+		this.setNumero(Numero);
+	}
+	
 	public final String getUf() {
 		return uf.get();
 	}
@@ -79,7 +88,7 @@ public class Endereco extends RecursiveTreeObject<Endereco> {
 		return numero.get();
 	}
 	
-	public final void setRua(Integer Numero) {
+	public final void setNumero(Integer Numero) {
 		numero.set(Numero);
 	}
 	

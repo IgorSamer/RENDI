@@ -11,6 +11,11 @@ public class OrgaoEmissor extends RecursiveTreeObject<OrgaoEmissor> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty nome = new SimpleStringProperty();
 	
+	public OrgaoEmissor(Integer Id, String Nome) {
+		this.setId(Id);
+		this.setNome(Nome);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

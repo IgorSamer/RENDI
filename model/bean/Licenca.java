@@ -19,6 +19,19 @@ public class Licenca extends RecursiveTreeObject<Licenca> {
 	private OrgaoEmissor orgao_emissor;
 	private Funcionario funcionario;
 	
+	public Licenca(Integer Id, String Nome, String Descricao, String Anexo, String Protocolo, String Data_emissao, String Data_vencimento, String Data, OrgaoEmissor Orgao_emissor, Funcionario Funcionario) {
+		this.setId(Id);
+		this.setNome(Nome);
+		this.setDescricao(Descricao);
+		this.setAnexo(Anexo);
+		this.setProtocolo(Protocolo);
+		this.setData_emissao(Data_emissao);
+		this.setData_vencimento(Data_vencimento);
+		this.setData(Data);
+		this.setOrgao_emissor(Orgao_emissor);
+		this.setFuncionario(Funcionario);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

@@ -145,7 +145,7 @@ public class PainelController implements Initializable {
 		String tipoFunc = func.getFuncao().getNome();
 		String tipoMenu = "";
 		
-		lblTipoNome.setText(func.getNome() + "(" + tipoFunc + ")");
+		lblTipoNome.setText(func.getPessoa().getNome() + "(" + tipoFunc + ")");
 		
 		try {
 			switch(tipoFunc) {

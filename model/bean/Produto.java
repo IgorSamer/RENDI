@@ -21,6 +21,17 @@ public class Produto extends RecursiveTreeObject<Produto> {
 	private OrdemCompra ordem_compra;
 	private UnidadeMedida unidade_medida;
 	
+	public Produto(Integer Id, String Nome, String Descricao, Double Preco, Float Quantidade, Setor Setor, OrdemCompra Ordem_compra, UnidadeMedida Unidade_medida) {
+		this.setId(Id);
+		this.setNome(Nome);
+		this.setDescricao(Descricao);
+		this.setPreco(Preco);
+		this.setQuantidade(Quantidade);
+		this.setSetor(Setor);
+		this.setOrdem_compra(Ordem_compra);
+		this.setUnidade_medida(Unidade_medida);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -89,15 +100,15 @@ public class Produto extends RecursiveTreeObject<Produto> {
 		return ordem_compra;
 	}
 	
-	public void setOrdem_compra(OrdemCompra ordem_compra) {
-		this.ordem_compra = ordem_compra;
+	public void setOrdem_compra(OrdemCompra Ordem_compra) {
+		this.ordem_compra = Ordem_compra;
 	}
 	
 	public UnidadeMedida getUnidade_medida() {
 		return unidade_medida;
 	}
 	
-	public void setUnidade_medida(UnidadeMedida unidade_medida) {
-		this.unidade_medida = unidade_medida;
+	public void setUnidade_medida(UnidadeMedida Unidade_medida) {
+		this.unidade_medida = Unidade_medida;
 	}
 }

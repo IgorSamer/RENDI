@@ -15,6 +15,13 @@ public class Servico extends RecursiveTreeObject<Servico> {
 	private DoubleProperty preco = new SimpleDoubleProperty();
 	private Setor setor;
 	
+	public Servico(Integer Id, String Nome, Double Preco, Setor Setor) {
+		this.setId(Id);
+		this.setNome(Nome);
+		this.setPreco(Preco);
+		this.setSetor(Setor);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

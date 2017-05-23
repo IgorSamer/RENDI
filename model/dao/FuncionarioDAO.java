@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import model.bean.Funcao;
 import model.bean.Funcionario;
+import model.bean.Pessoa;
 import model.conexao.Conexao;
 
 public class FuncionarioDAO {
@@ -44,7 +45,7 @@ public class FuncionarioDAO {
 		Funcionario funcionario = null;
 		
 		try {
-			stmt = con.prepareStatement("SELECT f.id, f.nome, f.sobrenome, f.foto, fun.nome AS nomeFuncao "
+			stmt = con.prepareStatement("SELECT f.id, f.nome, f.sobrenome, f.foto, fun.id AS idFuncao, fun.nome AS nomeFuncao "
 									+ 	"FROM usuarios u "
 									+ 	"INNER JOIN funcionarios f ON u.id_funcionario = f.id "
 									+ 	"INNER JOIN funcoes fun ON f.id_funcao = fun.id "
@@ -55,7 +56,7 @@ public class FuncionarioDAO {
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				funcionario = new Funcionario(rs.getInt("id"), rs.getString("nome"), rs.getString("sobrenome"), rs.getString("foto"), new Funcao(rs.getString("nomeFuncao")));
+				funcionario = new Funcionario(rs.getInt("id"), rs.getString("foto"), new Funcao(rs.getInt("idFuncao"), rs.getString("nomeFuncao")), new Pessoa(rs.getString("nome"), rs.getString("sobrenome")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

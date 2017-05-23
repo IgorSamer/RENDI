@@ -18,6 +18,16 @@ public class ServicoVenda extends RecursiveTreeObject<ServicoVenda> {
 	private Funcionario funcionario;
 	private Cliente cliente;
 	
+	public ServicoVenda(Integer Id, String Data, String Placa, Double Quilometragem, Servico Servico, Funcionario Funcionario, Cliente Cliente) {
+		this.setId(Id);
+		this.setData(Data);
+		this.setPlaca(Placa);
+		this.setQuilometragem(Quilometragem);
+		this.setServico(Servico);
+		this.setFuncionario(Funcionario);
+		this.setCliente(Cliente);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

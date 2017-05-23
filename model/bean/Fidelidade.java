@@ -10,6 +10,12 @@ public class Fidelidade extends RecursiveTreeObject<Fidelidade> {
 	private IntegerProperty pontuacao = new SimpleIntegerProperty();
 	private Cliente cliente;
 	
+	public Fidelidade(Integer Id, Integer Pontuacao, Cliente Cliente) {
+		this.setId(Id);
+		this.setPontuacao(Pontuacao);
+		this.setCliente(Cliente);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

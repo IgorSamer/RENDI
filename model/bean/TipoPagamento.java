@@ -11,6 +11,11 @@ public class TipoPagamento extends RecursiveTreeObject<TipoPagamento> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty nome = new SimpleStringProperty();
 	
+	public TipoPagamento(Integer Id, String Nome) {
+		this.setId(Id);
+		this.setNome(Nome);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

@@ -14,6 +14,14 @@ public class Premio extends RecursiveTreeObject<Premio> {
 	private IntegerProperty quantidade_pontos = new SimpleIntegerProperty();
 	private StringProperty imagem = new SimpleStringProperty();
 	
+	public Premio(Integer Id, String Nome, String Descricao, Integer Quantidade_pontos, String Imagem) {
+		this.setId(Id);
+		this.setNome(Nome);
+		this.setDescricao(Descricao);
+		this.setQuantidade_pontos(Quantidade_pontos);
+		this.setImagem(Imagem);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -50,15 +58,15 @@ public class Premio extends RecursiveTreeObject<Premio> {
 		return descricao;
 	}
 	
-	public final Integer getQuantPontos() {
+	public final Integer getQuantidade_pontos() {
 		return id.get();
 	}
 	
-	public final void setQuantPontos(Integer Quant_pontos) {
-		quantidade_pontos.set(Quant_pontos);
+	public final void setQuantidade_pontos(Integer Quantidade_pontos) {
+		quantidade_pontos.set(Quantidade_pontos);
 	}
 	
-	public IntegerProperty quantPontosProperty() {
+	public IntegerProperty quantidade_pontosProperty() {
 		return quantidade_pontos;
 	}
 	

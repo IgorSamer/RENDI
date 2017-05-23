@@ -11,6 +11,11 @@ public class Tanque extends RecursiveTreeObject<Tanque> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private FloatProperty capacidade = new SimpleFloatProperty();
 	
+	public Tanque(Integer Id, Float Capacidade) {
+		this.setId(Id);
+		this.setCapacidade(Capacidade);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -27,7 +32,7 @@ public class Tanque extends RecursiveTreeObject<Tanque> {
 		return capacidade.get();
 	}
 	
-	public final void setQuantidade(Float Capacidade) {
+	public final void setCapacidade(Float Capacidade) {
 		capacidade.set(Capacidade);
 	}
 	

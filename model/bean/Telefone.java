@@ -11,6 +11,11 @@ public class Telefone extends RecursiveTreeObject<Telefone> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty numero = new SimpleStringProperty();
 	
+	public Telefone(Integer Id, String Numero) {
+		this.setId(Id);
+		this.setNumero(Numero);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

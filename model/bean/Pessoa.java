@@ -2,7 +2,6 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -14,6 +13,21 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 	private Genero genero;
 	private EstadoCivil estado_civil;
 	private Telefone telefone;
+	
+	public Pessoa(String Nome, String Sobrenome, String Data_nascimento, String Email, Genero Genero, EstadoCivil Estado_civil, Telefone Telefone) {
+		this.setNome(Nome);
+		this.setSobrenome(Sobrenome);
+		this.setData_nascimento(Data_nascimento);
+		this.setEmail(Email);
+		this.setGenero(Genero);
+		this.setEstado_civil(Estado_civil);
+		this.setTelefone(Telefone);
+	}
+	
+	public Pessoa(String Nome, String Sobrenome) {
+		this.setNome(Sobrenome);
+		this.setSobrenome(Sobrenome);
+	}
 	
 	public final String getNome() {
 		return nome.get();
@@ -27,27 +41,27 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 		return nome;
 	}
 	
-	public final String getSobreNome() {
+	public final String getSobrenome() {
 		return sobrenome.get();
 	}
 	
-	public final void setSobreNome(String SobreNome) {
-		sobrenome.set(SobreNome);
+	public final void setSobrenome(String Sobrenome) {
+		sobrenome.set(Sobrenome);
 	}
 	
 	public StringProperty sobrenomeProperty() {
 		return sobrenome;
 	}
 	
-	public final String getDataNascimento() {
+	public final String getData_nascimento() {
 		return data_nascimento.get();
 	}
 	
-	public final void setDataNascimento(String DataNascimneto) {
-		data_nascimento.set(DataNascimneto);
+	public final void setData_nascimento(String Data_nascimento) {
+		data_nascimento.set(Data_nascimento);
 	}
 	
-	public StringProperty dataNascimentoProperty() {
+	public StringProperty data_nascimentoProperty() {
 		return data_nascimento;
 	}
 	

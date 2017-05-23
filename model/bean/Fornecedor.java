@@ -17,6 +17,17 @@ public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 	private IntegerProperty status = new SimpleIntegerProperty();
 	private Telefone telefone;
 	
+	public Fornecedor(Integer Id, String Email, String Razao_social, String Cnpj, String Inscricao_estadual, String Nome_fantasia, Integer Status, Telefone Telefone) {
+		this.setId(Id);
+		this.setEmail(Email);
+		this.setRazao_social(Razao_social);
+		this.setCnpj(Cnpj);
+		this.setInscricao_estadual(Inscricao_estadual);
+		this.setNome_fantasia(Nome_fantasia);
+		this.setStatus(Status);
+		this.setTelefone(Telefone);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

@@ -18,6 +18,16 @@ public class CombustivelVenda extends RecursiveTreeObject<CombustivelVenda> {
 	private Funcionario funcionario;
 	private Bico bico;
 	
+	public CombustivelVenda(Integer Id, String Data, Float Litros, Integer Status, Cliente Cliente, Funcionario Funcionario, Bico Bico) {
+		this.setId(Id);
+		this.setData(Data);
+		this.setLitros(Litros);
+		this.setStatus(Status);
+		this.setCliente(Cliente);
+		this.setFuncionario(Funcionario);
+		this.setBico(Bico);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -46,8 +56,8 @@ public class CombustivelVenda extends RecursiveTreeObject<CombustivelVenda> {
 		return litros.get();
 	}
 	
-	public final void setLitros(Float Data) {
-		litros.set(Data);
+	public final void setLitros(Float Litros) {
+		litros.set(Litros);
 	}
 	
 	public FloatProperty litrosProperty() {
