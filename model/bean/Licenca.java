@@ -4,18 +4,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-<<<<<<< HEAD
-
-public class Licenca extends RecursiveTreeObject<Licenca> {
-	private IntegerProperty id = new SimpleIntegerProperty();
-	private String nome;
-	private String descricao;
-	private String anexo;
-	private String protocolo;
-	private String data_emissao;
-	private String data_vencimento;
-	private String data;
-=======
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -28,25 +16,11 @@ public class Licenca extends RecursiveTreeObject<Licenca> {
 	private StringProperty data_emissao = new SimpleStringProperty();
 	private StringProperty data_vencimento = new SimpleStringProperty();
 	private StringProperty data = new SimpleStringProperty();
->>>>>>> c60518f793443fd3eec49f3a274709fa63c23e3a
 	private OrgaoEmissor orgao_emissor;
 	private Funcionario funcionario;
 	
 	public final Integer getId() {
 		return id.get();
-<<<<<<< HEAD
-	}
-	
-	public final void setId(Integer Id) {
-		id.set(Id);
-	}
-	
-	public IntegerProperty idProperty() {
-		return id;
-	}
-
-	public String getNome() {
-=======
 	}
 	
 	public final void setId(Integer Id) {
@@ -61,12 +35,11 @@ public class Licenca extends RecursiveTreeObject<Licenca> {
 		return nome.get();
 	}
 	
-	public final void setId(String Nome) {
+	public final void setNome(String Nome) {
 		nome.set(Nome);
 	}
 	
 	public StringProperty nomeProperty() {
->>>>>>> c60518f793443fd3eec49f3a274709fa63c23e3a
 		return nome;
 	}
 	
