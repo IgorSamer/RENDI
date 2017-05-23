@@ -2,41 +2,60 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class PessoaJuridica extends RecursiveTreeObject<PessoaJuridica> {
-	private String cnpj;
-	private String inscricao_estadual;
-	private String nome_fantasia;
-	private String razao_social;
+	private StringProperty cnpj = new SimpleStringProperty();
+	private StringProperty inscricao_estadual = new SimpleStringProperty();
+	private StringProperty nome_fantasia = new SimpleStringProperty();
+	private StringProperty razao_social = new SimpleStringProperty();
 	
-	public String getCnpj() {
+	public final String getCnpj() {
+		return cnpj.get();
+	}
+	
+	public final void setCpng(String Cnpj) {
+		cnpj.set(Cnpj);
+	}
+	
+	public StringProperty cnpjProperty() {
 		return cnpj;
 	}
 	
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public final String getIncricaoEstadual() {
+		return inscricao_estadual.get();
 	}
 	
-	public String getInscricao_estadual() {
+	public final void setIncricaoEstadual(String Inscri_Estadual) {
+		inscricao_estadual.set(Inscri_Estadual);
+	}
+	
+	public StringProperty inscri_estadualProperty() {
 		return inscricao_estadual;
 	}
 	
-	public void setInscricao_estadual(String inscricao_estadual) {
-		this.inscricao_estadual = inscricao_estadual;
+	public final String getNomeFantasia() {
+		return nome_fantasia.get();
 	}
 	
-	public String getNome_fantasia() {
+	public final void setNomeFantasia(String Nome_fantasia) {
+		nome_fantasia.set(Nome_fantasia);
+	}
+	
+	public StringProperty nomeFantasiaProperty() {
 		return nome_fantasia;
 	}
 	
-	public void setNome_fantasia(String nome_fantasia) {
-		this.nome_fantasia = nome_fantasia;
+	public final String getRazaoSocial() {
+		return razao_social.get();
 	}
 	
-	public String getRazao_social() {
+	public final void setRazaoSocial(String RazaoSocial) {
+		razao_social.set(RazaoSocial);
+	}
+	
+	public StringProperty razaoSocialProperty() {
 		return razao_social;
-	}
-	
-	public void setRazao_social(String razao_social) {
-		this.razao_social = razao_social;
 	}
 }

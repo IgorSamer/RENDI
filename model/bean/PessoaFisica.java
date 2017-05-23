@@ -2,23 +2,34 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class PessoaFisica extends RecursiveTreeObject<PessoaFisica> {
-	private String rg;
-	private String cpf;
+	private StringProperty rg = new SimpleStringProperty();
+	private StringProperty cpf = new SimpleStringProperty();
 	
-	public String getRg() {
+	public final String getRg() {
+		return rg.get();
+	}
+	
+	public final void setRg(String Rg) {
+		rg.set(Rg);
+	}
+	
+	public StringProperty rgProperty() {
 		return rg;
 	}
 	
-	public void setRg(String rg) {
-		this.rg = rg;
+	public final String getCpf() {
+		return cpf.get();
 	}
 	
-	public String getCpf() {
+	public final void setCpf(String Cpf) {
+		cpf.set(Cpf);
+	}
+	
+	public StringProperty cpfProperty() {
 		return cpf;
-	}
-	
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 }

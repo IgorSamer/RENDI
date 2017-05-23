@@ -13,7 +13,7 @@ public class Funcionario extends Pessoa {
 	public Funcionario(Integer id, String nome, String sobrenome, String foto, Funcao funcao) {
 		this.setId(id);
 		this.setNome(nome);
-		this.setSobrenome(sobrenome);
+		this.setSobreNome(sobrenome);
 		this.setFoto(foto);
 		this.setFuncao(funcao);
 	}

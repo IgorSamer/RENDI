@@ -2,45 +2,68 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class ServicoVenda extends RecursiveTreeObject<ServicoVenda> {
-	private Integer id;
-	private String data;
-	private String placa;
-	private Double quilometragem;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty data = new SimpleStringProperty();
+	private StringProperty placa = new SimpleStringProperty();
+	private DoubleProperty quilometragem = new SimpleDoubleProperty();
 	private Servico servico;
 	private Funcionario funcionario;
 	private Cliente cliente;
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getData() {
+		return data.get();
 	}
 	
-	public String getData() {
+	public final void setData(String Data) {
+		data.set(Data);
+	}
+	
+	public StringProperty dataProperty() {
 		return data;
 	}
 	
-	public void setData(String data) {
-		this.data = data;
+	public final String getPlaca() {
+		return data.get();
 	}
 	
-	public String getPlaca() {
+	public final void setPlaca(String Placa) {
+		placa.set(Placa);
+	}
+	
+	public StringProperty placaProperty() {
 		return placa;
 	}
 	
-	public void setPlaca(String placa) {
-		this.placa = placa;
+	public final Double getQuilometragem() {
+		return quilometragem.get();
 	}
 	
-	public Double getQuilometragem() {
+	public final void setQuilometragem(Double Quilometragem) {
+		quilometragem.set(Quilometragem);
+	}
+	
+	public DoubleProperty quilometragemProperty() {
 		return quilometragem;
-	}
-	
-	public void setQuilometragem(Double quilometragem) {
-		this.quilometragem = quilometragem;
 	}
 	
 	public Servico getServico() {

@@ -2,52 +2,79 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Usuario extends RecursiveTreeObject<Usuario> {
-	private Integer id;
-	private String usuario;
-	private String senha;
-	private String data;
-	private Integer ativo;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty usuario = new SimpleStringProperty();
+	private StringProperty senha = new SimpleStringProperty();
+	private StringProperty data = new SimpleStringProperty();
+	private IntegerProperty ativo = new SimpleIntegerProperty();
 	private Funcionario funcionario;
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getUsuario() {
+		return usuario.get();
 	}
 	
-	public String getUsuario() {
+	public final void setUsuario(String Usuario) {
+		usuario.set(Usuario);
+	}
+	
+	public StringProperty usuarioProperty() {
 		return usuario;
 	}
 	
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public final String getSenha() {
+		return senha.get();
 	}
 	
-	public String getSenha() {
+	public final void setSenha(String Senha) {
+		senha.set(Senha);
+	}
+	
+	public StringProperty senhaProperty() {
 		return senha;
 	}
 	
-	public void setSenha(String senha) {
-		this.senha = senha;
+	
+	public final String getData() {
+		return data.get();
 	}
 	
-	public String getData() {
+	public final void setData(String Data) {
+		data.set(Data);
+	}
+	
+	public StringProperty dataProperty() {
 		return data;
 	}
 	
-	public void setData(String data) {
-		this.data = data;
+	
+	public final Integer getAtivo() {
+		return id.get();
 	}
 	
-	public Integer getAtivo() {
+	public final void setAtivo(Integer Ativo) {
+		ativo.set(Ativo);
+	}
+	
+	public IntegerProperty ativoProperty() {
 		return ativo;
-	}
-	
-	public void setAtivo(Integer ativo) {
-		this.ativo = ativo;
 	}
 	
 	public Funcionario getFuncionario() {

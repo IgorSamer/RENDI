@@ -2,8 +2,11 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Licenca extends RecursiveTreeObject<Licenca> {
-	private Integer id;
+	private IntegerProperty id = new SimpleIntegerProperty();
 	private String nome;
 	private String descricao;
 	private String anexo;
@@ -14,14 +17,18 @@ public class Licenca extends RecursiveTreeObject<Licenca> {
 	private OrgaoEmissor orgao_emissor;
 	private Funcionario funcionario;
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
+
 	public String getNome() {
 		return nome;
 	}

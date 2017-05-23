@@ -2,26 +2,39 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Premiacao extends RecursiveTreeObject<Premiacao> {
-	private Integer id;
-	private String data;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty data = new SimpleStringProperty();
 	private Fidelidade fidelidade;
 	private Premio premio;
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getData() {
+		return data.get();
 	}
 	
-	public String getData() {
+	public final void setData(String Data) {
+		data.set(Data);
+	}
+	
+	public StringProperty dataProperty() {
 		return data;
-	}
-	
-	public void setData(String data) {
-		this.data = data;
 	}
 	
 	public Fidelidade getFidelidade() {

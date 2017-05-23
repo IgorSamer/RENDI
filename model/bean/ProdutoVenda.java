@@ -2,36 +2,53 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class ProdutoVenda extends RecursiveTreeObject<ProdutoVenda> {
-	private Integer id;
-	private String data;
-	private Integer unidades;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty data = new SimpleStringProperty();
+	private IntegerProperty unidades = new SimpleIntegerProperty();
 	private Produto produto;
 	private Funcionario funcionario;
 	private Cliente cliente;
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getData() {
+		return data.get();
 	}
 	
-	public String getData() {
+	public final void setData(String Data) {
+		data.set(Data);
+	}
+	
+	public StringProperty dataProperty() {
 		return data;
 	}
 	
-	public void setData(String data) {
-		this.data = data;
+	public final Integer getUnidades() {
+		return unidades.get();
 	}
 	
-	public Integer getUnidades() {
+	public final void setUnidades(Integer Unidades) {
+		unidades.set(Unidades);
+	}
+	
+	public IntegerProperty unidadesProperty() {
 		return unidades;
-	}
-	
-	public void setUnidades(Integer unidades) {
-		this.unidades = unidades;
 	}
 	
 	public Produto getProduto() {

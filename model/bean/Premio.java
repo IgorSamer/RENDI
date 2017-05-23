@@ -2,50 +2,75 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Premio extends RecursiveTreeObject<Premio> {
-	private Integer id;
-	private String nome;
-	private String descricao;
-	private int quantidade_pontos;
-	private String imagem;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty nome = new SimpleStringProperty();
+	private StringProperty descricao = new SimpleStringProperty();
+	private IntegerProperty quantidade_pontos = new SimpleIntegerProperty();
+	private StringProperty imagem = new SimpleStringProperty();
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getNome() {
+		return nome.get();
 	}
 	
-	public String getNome() {
+	public final void setNome(String Nome) {
+		nome.set(Nome);
+	}
+	
+	public StringProperty nomeProperty() {
 		return nome;
 	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
+	public final String getDescricao() {
+		return descricao.get();
 	}
 	
-	public String getDescricao() {
+	public final void setDescricao(String Descricao) {
+		descricao.set(Descricao);
+	}
+	
+	public StringProperty descricaoProperty() {
 		return descricao;
 	}
 	
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public final Integer getQuantPontos() {
+		return id.get();
 	}
 	
-	public int getQuantidade_pontos() {
+	public final void setQuantPontos(Integer Quant_pontos) {
+		quantidade_pontos.set(Quant_pontos);
+	}
+	
+	public IntegerProperty quantPontosProperty() {
 		return quantidade_pontos;
 	}
 	
-	public void setQuantidade_pontos(int quantidade_pontos) {
-		this.quantidade_pontos = quantidade_pontos;
+	public final String getImagem() {
+		return imagem.get();
 	}
 	
-	public String getImagem() {
+	public final void setImagem(String Imagem) {
+		imagem.set(Imagem);
+	}
+	
+	public StringProperty imagemProperty() {
 		return imagem;
-	}
-	
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
 	}
 }

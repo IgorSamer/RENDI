@@ -2,23 +2,36 @@ package model.bean;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class TipoPagamento extends RecursiveTreeObject<TipoPagamento> {
-	private Integer id;
-	private String nome;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty nome = new SimpleStringProperty();
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getNome() {
+		return nome.get();
 	}
 	
-	public String getNome() {
+	public final void setNome(String Nome) {
+		nome.set(Nome);
+	}
+	
+	public StringProperty nomeProperty() {
 		return nome;
-	}
-	
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 }
