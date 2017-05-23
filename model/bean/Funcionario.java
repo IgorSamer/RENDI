@@ -1,12 +1,19 @@
 package model.bean;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Funcionario extends Pessoa {
-	private Integer id;
-	private String data_admissao;
-	private String data_demissao;
-	private Double salario;
-	private String foto;
-	private Integer ativo;
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty data_admissao = new SimpleStringProperty();
+	private StringProperty data_demissao = new SimpleStringProperty();
+	private DoubleProperty salario = new SimpleDoubleProperty();
+	private StringProperty foto = new SimpleStringProperty();
+	private IntegerProperty ativo = new SimpleIntegerProperty();
 	private Funcao funcao;
 	private Setor setor;
 	
@@ -18,52 +25,76 @@ public class Funcionario extends Pessoa {
 		this.setFuncao(funcao);
 	}
 	
-	public Integer getId() {
+	public final Integer getId() {
+		return id.get();
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public final String getData_admissao() {
+		return data_admissao.get();
 	}
 	
-	public String getData_admissao() {
+	public final void setData_admissao(String Data_admissao) {
+		data_admissao.set(Data_admissao);
+	}
+	
+	public StringProperty data_admissaoProperty() {
 		return data_admissao;
 	}
 	
-	public void setData_admissao(String data_admissao) {
-		this.data_admissao = data_admissao;
+	public final String getData_demissao() {
+		return data_demissao.get();
 	}
 	
-	public String getData_demissao() {
+	public final void setData_demissao(String Data_demissao) {
+		data_demissao.set(Data_demissao);
+	}
+	
+	public StringProperty data_demissaoProperty() {
 		return data_demissao;
 	}
 	
-	public void setData_demissao(String data_demissao) {
-		this.data_demissao = data_demissao;
+	public final Double getSalario() {
+		return salario.get();
 	}
 	
-	public Double getSalario() {
+	public final void setData_demissao(Double Salario) {
+		salario.set(Salario);
+	}
+	
+	public DoubleProperty salarioProperty() {
 		return salario;
 	}
 	
-	public void setSalario(Double salario) {
-		this.salario = salario;
+	public final String getFoto() {
+		return foto.get();
 	}
 	
-	public String getFoto() {
+	public final void setFoto(String Foto) {
+		foto.set(Foto);
+	}
+	
+	public StringProperty fotoProperty() {
 		return foto;
 	}
 	
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public final Integer getAtivo() {
+		return ativo.get();
 	}
 	
-	public Integer getAtivo() {
+	public final void setAtivo(Integer Ativo) {
+		ativo.set(Ativo);
+	}
+	
+	public IntegerProperty ativoProperty() {
 		return ativo;
-	}
-	
-	public void setAtivo(Integer ativo) {
-		this.ativo = ativo;
 	}
 	
 	public Funcao getFuncao() {

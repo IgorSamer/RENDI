@@ -4,6 +4,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+<<<<<<< HEAD
 
 public class Licenca extends RecursiveTreeObject<Licenca> {
 	private IntegerProperty id = new SimpleIntegerProperty();
@@ -14,11 +15,26 @@ public class Licenca extends RecursiveTreeObject<Licenca> {
 	private String data_emissao;
 	private String data_vencimento;
 	private String data;
+=======
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+public class Licenca extends RecursiveTreeObject<Licenca> {
+	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty nome = new SimpleStringProperty();
+	private StringProperty descricao = new SimpleStringProperty();
+	private StringProperty anexo = new SimpleStringProperty();
+	private StringProperty protocolo = new SimpleStringProperty();
+	private StringProperty data_emissao = new SimpleStringProperty();
+	private StringProperty data_vencimento = new SimpleStringProperty();
+	private StringProperty data = new SimpleStringProperty();
+>>>>>>> c60518f793443fd3eec49f3a274709fa63c23e3a
 	private OrgaoEmissor orgao_emissor;
 	private Funcionario funcionario;
 	
 	public final Integer getId() {
 		return id.get();
+<<<<<<< HEAD
 	}
 	
 	public final void setId(Integer Id) {
@@ -30,59 +46,100 @@ public class Licenca extends RecursiveTreeObject<Licenca> {
 	}
 
 	public String getNome() {
+=======
+	}
+	
+	public final void setId(Integer Id) {
+		id.set(Id);
+	}
+	
+	public IntegerProperty idProperty() {
+		return id;
+	}
+	
+	public final String getNome() {
+		return nome.get();
+	}
+	
+	public final void setId(String Nome) {
+		nome.set(Nome);
+	}
+	
+	public StringProperty nomeProperty() {
+>>>>>>> c60518f793443fd3eec49f3a274709fa63c23e3a
 		return nome;
 	}
 	
-	public void setNome(String nome) {
-		this.nome = nome;
+	public final String getDescricao() {
+		return descricao.get();
 	}
 	
-	public String getDescricao() {
+	public final void setDescricao(String Descricao) {
+		descricao.set(Descricao);
+	}
+	
+	public StringProperty descricaoProperty() {
 		return descricao;
 	}
 	
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public final String getAnexo() {
+		return anexo.get();
 	}
 	
-	public String getAnexo() {
+	public final void setAnexo(String Anexo) {
+		anexo.set(Anexo);
+	}
+	
+	public StringProperty anexoProperty() {
 		return anexo;
 	}
 	
-	public void setAnexo(String anexo) {
-		this.anexo = anexo;
+	public final String getProtocolo() {
+		return protocolo.get();
 	}
 	
-	public String getProtocolo() {
+	public final void setProtocolo(String Protocolo) {
+		protocolo.set(Protocolo);
+	}
+	
+	public StringProperty protocoloProperty() {
 		return protocolo;
 	}
 	
-	public void setProtocolo(String protocolo) {
-		this.protocolo = protocolo;
+	public final String getData_emissao() {
+		return data_emissao.get();
 	}
 	
-	public String getData_emissao() {
+	public final void setData_emissao(String Data_emissao) {
+		data_emissao.set(Data_emissao);
+	}
+	
+	public StringProperty data_emissaoProperty() {
 		return data_emissao;
 	}
 	
-	public void setData_emissao(String data_emissao) {
-		this.data_emissao = data_emissao;
+	public final String getData_vencimento() {
+		return data_vencimento.get();
 	}
 	
-	public String getData_vencimento() {
+	public final void setData_vencimento(String Data_vencimento) {
+		data_vencimento.set(Data_vencimento);
+	}
+	
+	public StringProperty data_vencimentoProperty() {
 		return data_vencimento;
 	}
 	
-	public void setData_vencimento(String data_vencimento) {
-		this.data_vencimento = data_vencimento;
+	public final String getData() {
+		return data.get();
 	}
 	
-	public String getData() {
+	public final void setData(String Data) {
+		data.set(Data);
+	}
+	
+	public StringProperty dataProperty() {
 		return data;
-	}
-	
-	public void setData(String data) {
-		this.data = data;
 	}
 	
 	public OrgaoEmissor getOrgao_emissor() {
