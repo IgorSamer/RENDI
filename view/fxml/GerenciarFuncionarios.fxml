@@ -14,7 +14,10 @@
    <children>
       <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Funcionários" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Funcionários">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Text>
             <JFXTreeTableView fx:id="tblFuncionarios" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
