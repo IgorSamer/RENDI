@@ -28,6 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -42,8 +43,8 @@ public class PainelController implements Initializable {
 	@FXML
     private AnchorPane anchorPane;
     
-    @FXML
-    private StackPane stackIcone;
+	@FXML
+    private ImageView imgLogo;
     
     @FXML
     private Label lblTipoNome, lblData;
@@ -53,6 +54,8 @@ public class PainelController implements Initializable {
 
     @FXML
     private StackPane conteudo;
+    
+    private Image logo, logo_estatica;
     
     private JFXListView<Label> listaControle = new JFXListView<Label>();
     private JFXListView<Label> listaServicos = new JFXListView<Label>();
@@ -64,6 +67,9 @@ public class PainelController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		logo = new Image(getClass().getResource("/view/img/Logo_cinza.gif").toExternalForm());
+		logo_estatica = new Image(getClass().getResource("/view/img/Logo_cinza_estatico.gif").toExternalForm());
+		
 		conteudo.toBack();
 		
 		drawer.open();
@@ -254,7 +260,7 @@ public class PainelController implements Initializable {
 	}
 
 	protected void mudaConteudo(String pagina) {
-		stackIcone.getChildren().setAll(new JFXSpinner());
+		imgLogo.setImage(logo);
 		
 		FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), conteudo);
 		fadeOut.setFromValue(1);
@@ -277,13 +283,7 @@ public class PainelController implements Initializable {
 					fadeIn.setOnFinished(new EventHandler<ActionEvent>() {
 						@Override
 						public void handle(ActionEvent arg0) {
-							ImageView icone = new ImageView("/view/img/Logo.png");
-							icone.setFitWidth(50);
-							icone.setFitHeight(50);
-							icone.setPreserveRatio(true);
-							icone.setPickOnBounds(true);
-							
-							stackIcone.getChildren().setAll(icone);
+							imgLogo.setImage(logo_estatica);
 						}
 					});
 				} catch (IOException e1) {

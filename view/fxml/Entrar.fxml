@@ -17,7 +17,7 @@
          <children>
             <ImageView fx:id="imgLogo" fitHeight="450.0" fitWidth="500.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/Logo.png" />
+                  <Image url="@../img/Logo.gif" />
                </image></ImageView>
             <StackPane>
                <children>

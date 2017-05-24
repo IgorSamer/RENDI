@@ -48,11 +48,11 @@
             </Pane>
          </left>
          <center>
-            <StackPane fx:id="stackIcone" BorderPane.alignment="CENTER">
+            <StackPane BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgLogo" fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/Logo.png" />
+                        <Image url="@../img/Logo_cinza_estatico.gif" />
                      </image>
                   </ImageView>
                </children>
@@ -63,14 +63,6 @@
          <effect>
             <DropShadow />
          </effect></JFXDrawer>
-      <StackPane fx:id="conteudo" layoutY="58.0" prefHeight="44.0" prefWidth="715.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
-         <children>
-            <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/Logo.png" />
-               </image>
-            </ImageView>
-         </children>
-      </StackPane>
+      <StackPane fx:id="conteudo" layoutY="58.0" prefHeight="44.0" prefWidth="715.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0" />
    </children>
 </AnchorPane>
