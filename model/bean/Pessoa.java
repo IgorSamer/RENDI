@@ -25,7 +25,7 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 	}
 	
 	public Pessoa(String Nome, String Sobrenome) {
-		this.setNome(Sobrenome);
+		this.setNome(Nome);
 		this.setSobrenome(Sobrenome);
 	}
 	

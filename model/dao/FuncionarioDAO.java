@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.bean.Funcao;
 import model.bean.Funcionario;
@@ -65,5 +66,34 @@ public class FuncionarioDAO {
 		Conexao.fecharConexao(con, stmt, rs);
 		
 		return funcionario;
+	}
+	
+	public static ArrayList<Funcionario> listar() {
+		Connection con = Conexao.getConexao();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		
+		try {
+			stmt = con.prepareStatement("SELECT f.id, f.nome, f.sobrenome, f.email, f.rg, f.cpf, f.salario, fun.nome AS nomeFuncao, s.nome AS nomeSetor "
+									+ 	"FROM funcionarios f "
+									+ 	"INNER JOIN funcoes fun ON f.id_funcao = fun.id "
+									+ 	"INNER JOIN setores s ON f.id_setor = s.id");
+			
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Funcionario funcionario = new Funcionario(rs.getInt("id"), null, new Funcao(rs.getString("nomeFuncao")), new Pessoa(rs.getString("nome"), rs.getString("sobrenome")));
+				
+				funcionarios.add(funcionario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		Conexao.fecharConexao(con, stmt, rs);
+		
+		return funcionarios;
 	}
 }
