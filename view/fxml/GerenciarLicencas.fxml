@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Estilos.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarLicencasController">
+<StackPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../css/Estilos.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarLicencasController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="153.0" prefWidth="700.0">
+      <VBox alignment="CENTER" prefHeight="153.0" prefWidth="700.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Licenças" />
+            <Text fx:id="lblGerenciarLicencas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Licenças" />
+            <JFXTreeTableView fx:id="tblLicencas" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="btnExcluirFuncionario" buttonType="RAISED" text="Excluir">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_erro" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnAlterarFuncionario" buttonType="RAISED" text="Alterar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnVisualizarFuncionario" buttonType="RAISED" text="Visualizar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCadastrarFuncionario" buttonType="RAISED" text="Cadastrar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Cadastrar Licença" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextField fx:id="txtIdLicenca" focusColor="#ff9800" labelFloat="true" promptText="ID" />
+                        <JFXComboBox fx:id="cmbTIpoLicenca" prefHeight="25.0" prefWidth="209.0" promptText="Tipo" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXComboBox fx:id="cmbOrgaoExpedidor" prefHeight="25.0" prefWidth="209.0" promptText="Orgão Expedidor" />
+                        <JFXDatePicker fx:id="dateDataEmissao" promptText="Data de emissão" />
+                        <JFXDatePicker fx:id="dateDataValidade" promptText="Data de validade" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXComboBox fx:id="cmbServico" prefHeight="25.0" prefWidth="209.0" promptText="Serviço" />
+                        <JFXTextField fx:id="Contato" promptText="Contato" />
+                        <JFXButton fx:id="btnInserirDoc" text="Inserir Documento">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn_sucesso" />
+                           </styleClass>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextArea fx:id="txtAreaObs" promptText="Observações" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="btnCadastrarFuncionarioFinal" buttonType="RAISED" text="Cadastrar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCancelarFuncionario" buttonType="RAISED" text="Cancelar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_erro" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
