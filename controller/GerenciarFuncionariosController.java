@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -9,6 +10,9 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +25,7 @@ import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import model.bean.Funcionario;
 import model.dao.FuncionarioDAO;
 
@@ -45,9 +50,33 @@ public class GerenciarFuncionariosController implements Initializable {
     
     @FXML
     private JFXButton btnCancelarFuncionario, btnCadastrarFuncionarioFinal;
+    
+    public static boolean mostra = false;
 	
+    Timeline timeline;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		mostra = false;
+		
+		timeline = new Timeline(
+			new KeyFrame(Duration.millis(100),
+					event -> {
+						if(mostra) {
+							funGerenciar.setVisible(false);
+							funCadastrar.setVisible(true);
+							
+							mostra = false;
+							
+							timeline.stop();
+						}
+			        }
+			)
+		);
+		
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.play();
+		
 		JFXTreeTableColumn<Funcionario, String> colId = new JFXTreeTableColumn<>("Id");
 		colId.setPrefWidth(150);
 		colId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
