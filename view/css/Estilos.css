@@ -1,4 +1,4 @@
-.jfx-text-field, .jfx-password-field {
+.jfx-text-field, .jfx-password-field, .jfx-combo-box, .jfx-date-picker {
 	-fx-font-size: 14px;
 	-fx-unfocus-color: #000;
 	-fx-pref-width: 200px;
