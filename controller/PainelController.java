@@ -60,10 +60,12 @@ public class PainelController implements Initializable {
     private JFXListView<Label> listaControle = new JFXListView<Label>();
     private JFXListView<Label> listaServicos = new JFXListView<Label>();
     private JFXListView<Label> listaFuncionarios = new JFXListView<Label>();
+    private JFXListView<Label> listaLicencas = new JFXListView<Label>();
     
     private JFXPopup popupControle = new JFXPopup();
     private JFXPopup popupServicos = new JFXPopup();
     private JFXPopup popupFuncionarios = new JFXPopup();
+    private JFXPopup popupLicencas = new JFXPopup();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -115,7 +117,11 @@ public class PainelController implements Initializable {
 		itemControle3.setId("GerenciarEstoque");
 		itemControle3.setAccessibleText("Estoque");
 		
-		listaControle.getItems().addAll(itemControle, itemControle2, itemControle3);
+		Label itemControle4 = new Label("Fornecedores");
+		itemControle4.setId("GerenciarFornecedores");
+		itemControle4.setAccessibleText("Fornecedores");
+		
+		listaControle.getItems().addAll(itemControle, itemControle2, itemControle3, itemControle4);
 		listaControle.setPrefHeight(170);
 		
 		//Opções no menu de Serviços
@@ -139,12 +145,24 @@ public class PainelController implements Initializable {
 		itemFuncionario.setId("GerenciarFuncionarios");
 		itemFuncionario.setAccessibleText("Gerenciar Funcionários");
 		
-		Label itemFuncionario2 = new Label("Cadastrar Funcionário");
-		itemFuncionario2.setId("CadastrarFuncionario");
-		itemFuncionario2.setAccessibleText("Cadastrar Funcionário");
+		Label itemFuncionario2 = new Label("Cadastrar Funcionários");
+		itemFuncionario2.setId("GerenciarFuncionarios1");
+		itemFuncionario2.setAccessibleText("Cadastrar Funcionários");
 		
 		listaFuncionarios.getItems().addAll(itemFuncionario, itemFuncionario2);
 		listaFuncionarios.setPrefHeight(100);
+		
+		//Opções no menu de Licenças
+		Label itemLicenca = new Label("Gerenciar Licenças");
+		itemLicenca.setId("GerenciarLicencas");
+		itemLicenca.setAccessibleText("Gerenciar Licenças");
+		
+		Label itemLicenca2 = new Label("Cadastrar Licenças");
+		itemLicenca2.setId("GerenciarLicencas1");
+		itemLicenca2.setAccessibleText("Cadastrar Licenças");
+		
+		listaLicencas.getItems().addAll(itemLicenca, itemLicenca2);
+		listaLicencas.setPrefHeight(100);
 	}
 	
 	public void setFuncionario(Funcionario func) {
@@ -235,6 +253,16 @@ public class PainelController implements Initializable {
 									
 									bindarPopups(listaFuncionarios.getItems());
 								break;
+								
+								case "licencas":
+									listaLicencas.setPrefWidth(((Region) botaoMenu).getWidth());
+									popupLicencas.setContent(listaLicencas);
+									popupLicencas.setPopupContainer(anchorPane);
+									popupLicencas.setSource(botaoMenu);
+									popupLicencas.show(PopupVPosition.TOP, PopupHPosition.RIGHT, 0, 58);
+									
+									bindarPopups(listaLicencas.getItems());
+								break;
 							}
 						}
 					});
@@ -258,7 +286,9 @@ public class PainelController implements Initializable {
 			});
 		}
 	}
-
+	
+	String paginaAux = "";
+	
 	protected void mudaConteudo(String pagina) {
 		imgLogo.setImage(logo);
 		
@@ -270,8 +300,14 @@ public class PainelController implements Initializable {
 		fadeOut.setOnFinished(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				try {
-					StackPane paneConteudo = FXMLLoader.load(getClass().getResource("../view/fxml/"+ pagina +".fxml"));
+				try {				
+					paginaAux = pagina;
+					
+					if(pagina.charAt(pagina.length() - 1) == '1') {
+						paginaAux = pagina.substring(0, pagina.length() - 1);
+					}
+					
+					StackPane paneConteudo = FXMLLoader.load(getClass().getResource("../view/fxml/"+ paginaAux +".fxml"));
 					
 					conteudo.getChildren().setAll(paneConteudo);
 					
@@ -284,6 +320,10 @@ public class PainelController implements Initializable {
 						@Override
 						public void handle(ActionEvent arg0) {
 							imgLogo.setImage(logo_estatica);
+							
+							if(pagina.equals("GerenciarFuncionarios1") && paginaAux.equals("GerenciarFuncionarios")) {
+								GerenciarFuncionariosController.mostra = true;
+							}
 						}
 					});
 				} catch (IOException e1) {

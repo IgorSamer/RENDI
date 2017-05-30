@@ -12,7 +12,7 @@
 
 <StackPane prefHeight="500.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarFuncionariosController">
    <children>
-      <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+      <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Funcionários">
                <VBox.margin>
@@ -58,9 +58,12 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="funCadastrar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="funCadastrar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Funcionários" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Cadastrar Funcionários">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Text>
             <VBox alignment="CENTER" prefHeight="56.0" prefWidth="700.0">
                <children>
                   <HBox alignment="CENTER">
@@ -71,6 +74,22 @@
                         <JFXTextField focusColor="#ff9800" labelFloat="true" promptText="CPF" />
                         <JFXTextField focusColor="#ff9800" labelFloat="true" promptText="E-mail" />
                      </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <JFXTextField focusColor="#ff9800" labelFloat="true" promptText="CEP" />
+                        <JFXTextField focusColor="#ff9800" labelFloat="true" promptText="UF" />
+                        <JFXTextField focusColor="#ff9800" labelFloat="true" promptText="Cidade" />
+                        <JFXTextField focusColor="#ff9800" labelFloat="true" promptText="Bairro" />
+                        <JFXTextField focusColor="#ff9800" labelFloat="true" promptText="Rua" />
+                        <JFXTextField focusColor="#ff9800" labelFloat="true" promptText="Número" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>
