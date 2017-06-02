@@ -39,4 +39,9 @@ public class EstadoCivil extends RecursiveTreeObject<EstadoCivil> {
 	public StringProperty nomeProperty() {
 		return nome;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
 }

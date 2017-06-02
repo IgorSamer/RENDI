@@ -13,6 +13,9 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 	private Genero genero;
 	private EstadoCivil estado_civil;
 	private Telefone telefone;
+	private PessoaFisica pessoa_fisica;
+	private PessoaJuridica pessoa_juridica;
+	private Endereco endereco;
 	
 	public Pessoa(String Nome, String Sobrenome, String Data_nascimento, String Email, Genero Genero, EstadoCivil Estado_civil, Telefone Telefone) {
 		this.setNome(Nome);
@@ -27,6 +30,22 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 	public Pessoa(String Nome, String Sobrenome) {
 		this.setNome(Nome);
 		this.setSobrenome(Sobrenome);
+	}
+	
+	public Pessoa(String Nome, String Sobrenome, String Email, PessoaFisica Pessoa_fisica, Endereco Endereco) {
+		this.setNome(Nome);
+		this.setSobrenome(Sobrenome);
+		this.setEmail(Email);
+		this.setPessoa_fisica(Pessoa_fisica);
+		this.setEndereco(Endereco);
+	}
+	
+	public Pessoa(String Nome, String Sobrenome, String Email, PessoaJuridica Pessoa_juridica, Endereco Endereco) {
+		this.setNome(Nome);
+		this.setSobrenome(Sobrenome);
+		this.setEmail(Email);
+		this.setPessoa_juridica(Pessoa_juridica);
+		this.setEndereco(Endereco);
 	}
 	
 	public final String getNome() {
@@ -89,8 +108,8 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 		return estado_civil;
 	}
 	
-	public void setEstado_civil(EstadoCivil estado_civil) {
-		this.estado_civil = estado_civil;
+	public void setEstado_civil(EstadoCivil Estado_civil) {
+		this.estado_civil = Estado_civil;
 	}
 	
 	public Telefone getTelefone() {
@@ -99,5 +118,29 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 	
 	public void setTelefone(Telefone telefone) {
 		this.telefone = telefone;
+	}
+	
+	public PessoaFisica getPessoa_fisica() {
+		return pessoa_fisica;
+	}
+	
+	public void setPessoa_fisica(PessoaFisica Pessoa_fisica) {
+		this.pessoa_fisica = Pessoa_fisica;
+	}
+	
+	public PessoaJuridica getPessoa_juridica() {
+		return pessoa_juridica;
+	}
+	
+	public void setPessoa_juridica(PessoaJuridica Pessoa_juridica) {
+		this.pessoa_juridica = Pessoa_juridica;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	
+	public void setEndereco(Endereco Endereco) {
+		this.endereco = Endereco;
 	}
 }

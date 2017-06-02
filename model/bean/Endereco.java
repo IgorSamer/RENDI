@@ -24,6 +24,10 @@ public class Endereco extends RecursiveTreeObject<Endereco> {
 		this.setNumero(Numero);
 	}
 	
+	public Endereco(String Cidade) {
+		this.setCidade(Cidade);
+	}
+	
 	public final String getUf() {
 		return uf.get();
 	}

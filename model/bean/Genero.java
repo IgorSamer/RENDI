@@ -39,4 +39,9 @@ public class Genero extends RecursiveTreeObject<Genero> {
 	public StringProperty nomeProperty() {
 		return nome;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
 }

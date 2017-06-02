@@ -39,4 +39,9 @@ public class Escolaridade extends RecursiveTreeObject<Escolaridade> {
 	public StringProperty nomeProperty() {
 		return nome;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
 }

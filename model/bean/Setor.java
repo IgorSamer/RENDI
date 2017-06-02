@@ -16,6 +16,10 @@ public class Setor extends RecursiveTreeObject<Setor> {
 		this.setNome(Nome);
 	}
 	
+	public Setor(String Nome) {
+		this.setNome(Nome);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -38,5 +42,10 @@ public class Setor extends RecursiveTreeObject<Setor> {
 	
 	public StringProperty nomeProperty() {
 		return nome;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
 	}
 }
