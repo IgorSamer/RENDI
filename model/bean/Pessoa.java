@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.ArrayList;
+
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -12,19 +14,21 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 	private StringProperty email = new SimpleStringProperty();
 	private Genero genero;
 	private EstadoCivil estado_civil;
-	private Telefone telefone;
+	private ArrayList<Telefone> telefones;
 	private PessoaFisica pessoa_fisica;
 	private PessoaJuridica pessoa_juridica;
 	private Endereco endereco;
 	
-	public Pessoa(String Nome, String Sobrenome, String Data_nascimento, String Email, Genero Genero, EstadoCivil Estado_civil, Telefone Telefone) {
+	public Pessoa(String Nome, String Sobrenome, String Data_nascimento, String Email, Genero Genero, EstadoCivil Estado_civil, ArrayList<Telefone> Telefones, PessoaFisica Pessoa_fisica, Endereco Endereco) {
 		this.setNome(Nome);
 		this.setSobrenome(Sobrenome);
 		this.setData_nascimento(Data_nascimento);
 		this.setEmail(Email);
 		this.setGenero(Genero);
 		this.setEstado_civil(Estado_civil);
-		this.setTelefone(Telefone);
+		this.setTelefones(Telefones);
+		this.setPessoa_fisica(Pessoa_fisica);
+		this.setEndereco(Endereco);
 	}
 	
 	public Pessoa(String Nome, String Sobrenome) {
@@ -112,12 +116,12 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 		this.estado_civil = Estado_civil;
 	}
 	
-	public Telefone getTelefone() {
-		return telefone;
+	public ArrayList<Telefone> getTelefones() {
+		return telefones;
 	}
 	
-	public void setTelefone(Telefone telefone) {
-		this.telefone = telefone;
+	public void setTelefones(ArrayList<Telefone> Telefones) {
+		this.telefones = Telefones;
 	}
 	
 	public PessoaFisica getPessoa_fisica() {

@@ -6,12 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.Statement;
+
 import model.bean.Endereco;
 import model.bean.Funcao;
 import model.bean.Funcionario;
 import model.bean.Pessoa;
 import model.bean.PessoaFisica;
 import model.bean.Setor;
+import model.bean.Telefone;
 import model.conexao.Conexao;
 
 public class FuncionarioDAO {
@@ -87,7 +90,7 @@ public class FuncionarioDAO {
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				Funcionario funcionario = new Funcionario(rs.getInt("id"), rs.getString("foto"), rs.getDouble("salario"), new Funcao(rs.getString("nomeFuncao")), new Setor(rs.getString("nomeSetor")), new Pessoa(rs.getString("nome"), rs.getString("sobrenome"), rs.getString("email"), new PessoaFisica(rs.getString("rg"), rs.getString("cpf")), new Endereco(rs.getString("end_cidade"))));
+				Funcionario funcionario = new Funcionario(rs.getInt("id"), rs.getString("foto"), rs.getDouble("salario"), new Funcao(rs.getString("nomeFuncao")), new Setor(rs.getString("nomeSetor")), new Pessoa(rs.getString("nome"), rs.getString("sobrenome"), rs.getString("email"), new PessoaFisica(rs.getString("rg"), rs.getString("cpf"), null), new Endereco(rs.getString("end_cidade"))));
 				
 				funcionarios.add(funcionario);
 			}
@@ -150,5 +153,64 @@ public class FuncionarioDAO {
 		Conexao.fecharConexao(con, stmt, rs);
 		
 		return lista_setores;
+	}
+	
+	public static boolean cadastrar(Funcionario func) {
+		Connection con = Conexao.getConexao();
+		PreparedStatement stmt = null;
+		
+		boolean cadastrou = false;
+		
+		try {
+			stmt = con.prepareStatement("INSERT INTO funcionarios (email, nome, sobrenome, rg, cpf, end_cep, end_uf, end_cidade, end_bairro, end_rua, end_numero, data_admissao, data_demissao, data_nascimento, salario, foto, ativo, id_estado_civil, id_funcao, id_genero, id_escolaridade, id_setor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, func.getPessoa().getEmail());
+			stmt.setString(2, func.getPessoa().getNome());
+			stmt.setString(3, func.getPessoa().getSobrenome());
+			stmt.setString(4, func.getPessoa().getPessoa_fisica().getRg());
+			stmt.setString(5, func.getPessoa().getPessoa_fisica().getCpf());
+			stmt.setString(6, func.getPessoa().getEndereco().getCep());
+			stmt.setString(7, func.getPessoa().getEndereco().getUf());
+			stmt.setString(8, func.getPessoa().getEndereco().getCidade());
+			stmt.setString(9, func.getPessoa().getEndereco().getBairro());
+			stmt.setString(10, func.getPessoa().getEndereco().getRua());
+			stmt.setInt(11, func.getPessoa().getEndereco().getNumero());
+			stmt.setString(12, func.getData_admissao());
+			stmt.setString(13, func.getData_demissao());
+			stmt.setString(14, func.getPessoa().getData_nascimento());
+			stmt.setDouble(15, func.getSalario());
+			stmt.setString(16, func.getFoto());
+			stmt.setInt(17, func.getAtivo());
+			stmt.setInt(18, func.getPessoa().getEstado_civil().getId());
+			stmt.setInt(19, func.getFuncao().getId());
+			stmt.setInt(20, func.getPessoa().getGenero().getId());
+			stmt.setInt(21, func.getPessoa().getPessoa_fisica().getEscolaridade().getId());
+			stmt.setInt(22, func.getSetor().getId());
+			
+			if(stmt.executeUpdate() > 0) {
+				ResultSet rsId = stmt.getGeneratedKeys();
+				
+				if(rsId.first()) {
+					PreparedStatement stmtTel = null;
+					
+					for(Telefone telefone : func.getPessoa().getTelefones()) {
+						stmtTel = con.prepareStatement("INSERT INTO funcionarios_telefones (numero, id_funcionario) VALUES (?, ?)");
+						stmtTel.setString(1, telefone.getNumero());
+						stmtTel.setInt(2, rsId.getInt(1));
+						
+						stmtTel.executeUpdate();
+					}
+					
+					Conexao.fecharConexao(null, stmtTel, rsId);
+				}
+				
+				cadastrou = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Conexao.fecharConexao(con, stmt);
+		
+		return cadastrou;
 	}
 }

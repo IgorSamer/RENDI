@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane prefHeight="500.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarFuncionariosController">
+<StackPane fx:id="conteudoConteudo" prefHeight="500.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarFuncionariosController">
    <children>
       <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
@@ -115,6 +115,17 @@
                         <JFXComboBox fx:id="cmbFuncao" promptText="Função" />
                         <JFXComboBox fx:id="cmbSetor" promptText="Setor" />
                      </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <JFXTextField fx:id="txtTelefone" focusColor="#ff9800" promptText="Telefone" />
+                        <JFXButton fx:id="btnAdicionarTelefone" text="+" />
+                        <JFXButton fx:id="btnRemoverTelefone" text="-" />
+                        <JFXComboBox fx:id="cmbTelefones" promptText="Telefones" visible="false" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>

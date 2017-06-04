@@ -136,7 +136,7 @@ public class Funcionario  extends RecursiveTreeObject<Funcionario> {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
+
 	public static String getCaminhoFoto(String foto) {
 		return "/view/img/" + foto;
 	}

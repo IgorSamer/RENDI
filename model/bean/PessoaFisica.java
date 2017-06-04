@@ -8,10 +8,12 @@ import javafx.beans.property.StringProperty;
 public class PessoaFisica extends RecursiveTreeObject<PessoaFisica> {
 	private StringProperty rg = new SimpleStringProperty();
 	private StringProperty cpf = new SimpleStringProperty();
+	private Escolaridade escolaridade;
 	
-	public PessoaFisica(String Rg, String Cpf) {
+	public PessoaFisica(String Rg, String Cpf, Escolaridade Escolaridade) {
 		this.setRg(Rg);
 		this.setCpf(Cpf);
+		this.setEscolaridade(Escolaridade);
 	}
 	
 	public final String getRg() {
@@ -36,5 +38,13 @@ public class PessoaFisica extends RecursiveTreeObject<PessoaFisica> {
 	
 	public StringProperty cpfProperty() {
 		return cpf;
+	}
+
+	public Escolaridade getEscolaridade() {
+		return escolaridade;
+	}
+
+	public void setEscolaridade(Escolaridade escolaridade) {
+		this.escolaridade = escolaridade;
 	}
 }
