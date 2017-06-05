@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.ArrayList;
+
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.IntegerProperty;
@@ -15,9 +17,9 @@ public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 	private StringProperty inscricao_estadual = new SimpleStringProperty();
 	private StringProperty nome_fantasia = new SimpleStringProperty();
 	private IntegerProperty status = new SimpleIntegerProperty();
-	private Telefone telefone;
+	private ArrayList<Telefone> telefones;
 	
-	public Fornecedor(Integer Id, String Email, String Razao_social, String Cnpj, String Inscricao_estadual, String Nome_fantasia, Integer Status, Telefone Telefone) {
+	public Fornecedor(Integer Id, String Email, String Razao_social, String Cnpj, String Inscricao_estadual, String Nome_fantasia, Integer Status, ArrayList<Telefone> Telefones) {
 		this.setId(Id);
 		this.setEmail(Email);
 		this.setRazao_social(Razao_social);
@@ -25,7 +27,7 @@ public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 		this.setInscricao_estadual(Inscricao_estadual);
 		this.setNome_fantasia(Nome_fantasia);
 		this.setStatus(Status);
-		this.setTelefone(Telefone);
+		this.setTelefones(Telefones);
 	}
 	
 	public final Integer getId() {
@@ -112,11 +114,11 @@ public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 		return status;
 	}
 	
-	public Telefone getTelefone() {
-		return telefone;
+	public ArrayList<Telefone> getTelefones() {
+		return telefones;
 	}
 	
-	public void setTelefone(Telefone telefone) {
-		this.telefone = telefone;
+	public void setTelefones(ArrayList<Telefone> Telefones) {
+		this.telefones = Telefones;
 	}
 }
