@@ -131,8 +131,20 @@ public class PainelController implements Initializable {
 		itemControle4.setId("GerenciarFornecedores");
 		itemControle4.setAccessibleText("Fornecedores");
 		
-		listaControle.getItems().addAll(itemControle, itemControle2, itemControle3, itemControle4);
-		listaControle.setPrefHeight(170);
+		Label itemControle5 = new Label("Tanques");
+		itemControle4.setId("GerenciarTanques");
+		itemControle4.setAccessibleText("Tanques");
+		
+		Label itemControle6 = new Label("Bombas");
+		itemControle4.setId("GerenciarBombas");
+		itemControle4.setAccessibleText("Bombas");
+		
+		Label itemControle7 = new Label("Bicos");
+		itemControle4.setId("GerenciarBicos");
+		itemControle4.setAccessibleText("Bicos");
+		
+		listaControle.getItems().addAll(itemControle, itemControle2, itemControle3, itemControle4, itemControle5, itemControle6, itemControle7);
+		listaControle.setPrefHeight(250);
 		
 		//Opções no menu de Serviços
 		Label itemServico = new Label("Troca de Óleo");
