@@ -49,109 +49,58 @@ import model.bean.Funcionario;
 import model.bean.Genero;
 import model.bean.Pessoa;
 import model.bean.PessoaFisica;
+import model.bean.Produto;
 import model.bean.Setor;
 import model.bean.Telefone;
+import model.bean.UnidadeMedida;
 import model.dao.FuncionarioDAO;
 import model.dao.PessoaFisicaDAO;
+import model.dao.ProdutoDAO;
 
-public class GerenciarFuncionariosController implements Initializable {
+public class GerenciarEstoqueController implements Initializable {
 	@FXML StackPane conteudoConteudo;
 	
 	@FXML
 	private VBox funGerenciar, funCadastrar;
 	
-	@FXML
-    private JFXTreeTableView<Funcionario> tblFuncionarios;
+	//@FXML
+    //private JFXTreeTableView<Funcionario> tblFuncionarios;
 	
 	@FXML
-    private JFXButton btnPesquisarFuncionario;
+    private JFXButton btnPesquisarEstoque;
 
     @FXML
-    private JFXButton btnAlterarFuncionario;
+    private JFXButton btnAlterarEstoque;
 
     @FXML
-    private JFXButton btnVisualizarFuncionario;
+    private JFXButton btnVisualizarEstoque;
 
     @FXML
-    private JFXButton btnCadastrarFuncionario;
+    private JFXButton btnCadastrarEstoque;
     
     @FXML
-    private JFXButton btnExcluirFuncionario;
+    private JFXButton btnExcluirEstoque;
     
     @FXML
     private JFXTextField txtNome;
 
     @FXML
-    private JFXTextField txtSobrenome;
+    private JFXTextField txtDescricao;
 
     @FXML
-    private JFXTextField txtRg;
+    private JFXTextField txtPreco;
 
     @FXML
-    private JFXTextField txtCpf;
-
-    @FXML
-    private JFXTextField txtEmail;
-
-    @FXML
-    private JFXTextField txtCep;
-
-    @FXML
-    private JFXTextField txtUf;
-
-    @FXML
-    private JFXTextField txtCidade;
-
-    @FXML
-    private JFXTextField txtBairro;
-
-    @FXML
-    private JFXTextField txtRua;
-
-    @FXML
-    private JFXTextField txtNumero;
-
-    @FXML
-    private JFXDatePicker datAdmissao;
-
-    @FXML
-    private JFXDatePicker datDemissao;
-
-    @FXML
-    private JFXDatePicker datNascimento;
-
-    @FXML
-    private JFXTextField txtSalario;
-
-    @FXML
-    private JFXComboBox<EstadoCivil> cmbEstadoCivil;
-
-    @FXML
-    private JFXComboBox<Genero> cmbGenero;
-
-    @FXML
-    private JFXComboBox<Escolaridade> cmbEscolaridade;
-
-    @FXML
-    private JFXComboBox<Funcao> cmbFuncao;
+    private JFXTextField txtQuantidade;
 
     @FXML
     private JFXComboBox<Setor> cmbSetor;
     
     @FXML
-    private JFXTextField txtTelefone;
-
-    @FXML
-    private JFXButton btnAdicionarTelefone;
-
-    @FXML
-    private JFXButton btnRemoverTelefone;
-
-    @FXML
-    private JFXComboBox<String> cmbTelefones;
+    private JFXComboBox<UnidadeMedida> cmbUnidadeMedida;
     
     @FXML
-    private JFXButton btnCancelarFuncionario, btnCadastrarFuncionarioFinal;
+    private JFXButton btnCancelarEstoque, btnCadastrarEstoqueFinal;
     
     @FXML
     private SplitPane splConteudo;
@@ -163,7 +112,7 @@ public class GerenciarFuncionariosController implements Initializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		btnVisualizarFuncionario.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		btnVisualizarEstoque.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
 				DoubleProperty divPos = splConteudo.getDividers().get(0).positionProperty();
@@ -272,11 +221,11 @@ public class GerenciarFuncionariosController implements Initializable {
 		funcionarios.addAll(FuncionarioDAO.listar());
 		TreeItem<Funcionario> root = new RecursiveTreeItem<Funcionario>(funcionarios, RecursiveTreeObject::getChildren);
 		
-		tblFuncionarios.getColumns().setAll(colId, colNome, colRg, colCpf, colCidade, colSalario, colFuncao, colSetor);
-		tblFuncionarios.setRoot(root);
-		tblFuncionarios.setShowRoot(false);
+		//tblFuncionarios.getColumns().setAll(colId, colNome, colRg, colCpf, colCidade, colSalario, colFuncao, colSetor);
+		//tblFuncionarios.setRoot(root);
+		//tblFuncionarios.setShowRoot(false);
 		
-		btnCadastrarFuncionario.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		btnCadastrarEstoque.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
 				funGerenciar.setVisible(false);
@@ -284,7 +233,7 @@ public class GerenciarFuncionariosController implements Initializable {
 			}
 		});
 		
-		btnCancelarFuncionario.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		btnCancelarEstoque.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
 				funCadastrar.setVisible(false);
@@ -292,105 +241,31 @@ public class GerenciarFuncionariosController implements Initializable {
 			}
 		});
 		
-		// Populando combobox Estado Civil
-		ObservableList<EstadoCivil> obsListaEstadoCivil = FXCollections.observableArrayList();
-		obsListaEstadoCivil.addAll(PessoaFisicaDAO.getEstadosCivis());
-		
-		cmbEstadoCivil.setItems(obsListaEstadoCivil);
-		
-		// Populando combobox Gênero
-		ObservableList<Genero> obsListaGenero = FXCollections.observableArrayList();
-		obsListaGenero.addAll(PessoaFisicaDAO.getGeneros());
-		
-		cmbGenero.setItems(obsListaGenero);
-		
-		// Populando combobox Escolaridade
-		ObservableList<Escolaridade> obsListaEscolaridade = FXCollections.observableArrayList();
-		obsListaEscolaridade.addAll(PessoaFisicaDAO.getEscolaridades());
-		
-		cmbEscolaridade.setItems(obsListaEscolaridade);
-		
-		// Populando combobox Função
-		ObservableList<Funcao> obsListaFuncao = FXCollections.observableArrayList();
-		obsListaFuncao.addAll(FuncionarioDAO.getFuncoes());
-		
-		cmbFuncao.setItems(obsListaFuncao);
-		
 		// Populando combobox Setor
 		ObservableList<Setor> obsListaSetor = FXCollections.observableArrayList();
 		obsListaSetor.addAll(FuncionarioDAO.getSetores());
 		
 		cmbSetor.setItems(obsListaSetor);
 		
-		// Adicionando / Removendo Telefones
-		ArrayList<String> lstTelefones = new ArrayList<String>();
-				
-		btnAdicionarTelefone.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				String textoTelefone = txtTelefone.getText().trim();
-				
-				if(!textoTelefone.isEmpty()) {
-					lstTelefones.add(textoTelefone);
-					
-					atualizaTelefones(lstTelefones);
-					
-					txtTelefone.setText("");
-				}
-			}
-		});
+		// Populando combobox Unidade de Medida
+		ObservableList<UnidadeMedida> obsListaUnidadeMedida = FXCollections.observableArrayList();
+		obsListaUnidadeMedida.addAll(ProdutoDAO.getUnidadesMedida());
 		
-		btnRemoverTelefone.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				if(lstTelefones.size() != 0) {
-					lstTelefones.remove(lstTelefones.size() - 1);
-					
-					atualizaTelefones(lstTelefones);
-				}
-			}
-		});
+		cmbUnidadeMedida.setItems(obsListaUnidadeMedida);
 		
-		btnCadastrarFuncionarioFinal.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		btnCadastrarEstoqueFinal.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
 				JFXSnackbar mensagem = new JFXSnackbar(conteudoConteudo);
 				
-				ArrayList<Telefone> telefones = new ArrayList<Telefone>();
+				Produto produto = new Produto(0, txtNome.getText().trim(), txtDescricao.getText().trim(), Double.valueOf(txtPreco.getText().trim()), Float.valueOf(txtQuantidade.getText().trim()), new Setor(cmbSetor.getSelectionModel().getSelectedItem().getId(), null), new UnidadeMedida(cmbUnidadeMedida.getSelectionModel().getSelectedItem().getId(), null), new Funcionario(PainelController.idFuncionario));
 				
-				for(String telefone : cmbTelefones.getItems()) {
-					Telefone tel = new Telefone(0, telefone);
-					
-					telefones.add(tel);
-				}
-				
-				Funcionario funcionario = new Funcionario(0, String.valueOf(datAdmissao.getValue()), String.valueOf(datDemissao.getValue()), Double.valueOf(txtSalario.getText().trim()), "usuario_padrao.png", 1, new Funcao(cmbFuncao.getSelectionModel().getSelectedItem().getId(), null), new Setor(cmbSetor.getSelectionModel().getSelectedItem().getId(), null), new Pessoa(txtNome.getText().trim(), txtSobrenome.getText().trim(), String.valueOf(datNascimento.getValue()), txtEmail.getText().trim(), new Genero(cmbGenero.getSelectionModel().getSelectedItem().getId(), null), new EstadoCivil(cmbEstadoCivil.getSelectionModel().getSelectedItem().getId(), null), telefones, new PessoaFisica(txtRg.getText().trim(), txtCpf.getText().trim(), new Escolaridade(cmbEscolaridade.getSelectionModel().getSelectedItem().getId(), null)), new Endereco(txtUf.getText().trim(), txtCidade.getText().trim(), txtCep.getText().trim(), txtBairro.getText().trim(), txtRua.getText().trim(), Integer.valueOf(txtNumero.getText().trim()))));
-			
-				if(FuncionarioDAO.cadastrar(funcionario)) {
-					mensagem.show("Funcionário cadastrado com sucesso!", 2000);
+				if(ProdutoDAO.cadastrar(produto)) {
+					mensagem.show("Produto cadastrado com sucesso!", 2000);
 				} else {
-					mensagem.show("Erro ao cadastrar funcionário!", 2000);
+					mensagem.show("Erro ao cadastrar produto!", 2000);
 				}
 			}
 		});
-	}
-	
-	protected void atualizaTelefones(ArrayList<String> lstTelefones) {
-		cmbTelefones.valueProperty().set(null);
-		
-		if(lstTelefones.size() != 0) {
-			ObservableList<String> obsListaTelefones = FXCollections.observableArrayList();
-			obsListaTelefones.addAll(lstTelefones);
-			
-			cmbTelefones.setItems(obsListaTelefones);
-			
-			if(!cmbTelefones.isVisible()) {
-				cmbTelefones.setVisible(true);
-			}
-		} else {
-			if(cmbTelefones.isVisible()) {
-				cmbTelefones.setVisible(false);
-			}
-		}
 	}
 }

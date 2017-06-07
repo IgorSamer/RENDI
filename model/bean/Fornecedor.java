@@ -12,22 +12,30 @@ import javafx.beans.property.StringProperty;
 public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty email = new SimpleStringProperty();
-	private StringProperty razao_social = new SimpleStringProperty();
+	private StringProperty nome_empresarial = new SimpleStringProperty();
 	private StringProperty cnpj = new SimpleStringProperty();
-	private StringProperty inscricao_estadual = new SimpleStringProperty();
 	private StringProperty nome_fantasia = new SimpleStringProperty();
 	private IntegerProperty status = new SimpleIntegerProperty();
 	private ArrayList<Telefone> telefones;
+	private Endereco endereco;
 	
-	public Fornecedor(Integer Id, String Email, String Razao_social, String Cnpj, String Inscricao_estadual, String Nome_fantasia, Integer Status, ArrayList<Telefone> Telefones) {
+	public Fornecedor(Integer Id, String Email, String Nome_empresarial, String Cnpj, String Nome_fantasia, Integer Status, ArrayList<Telefone> Telefones, Endereco Endereco) {
 		this.setId(Id);
 		this.setEmail(Email);
-		this.setRazao_social(Razao_social);
+		this.setNome_empresarial(Nome_empresarial);
 		this.setCnpj(Cnpj);
-		this.setInscricao_estadual(Inscricao_estadual);
 		this.setNome_fantasia(Nome_fantasia);
 		this.setStatus(Status);
 		this.setTelefones(Telefones);
+		this.setEndereco(Endereco);
+	}
+	
+	public Fornecedor(String Nome_fantasia) {
+		this.setNome_fantasia(Nome_fantasia);
+	}
+	
+	public Fornecedor(Integer Id) {
+		this.setId(Id);
 	}
 	
 	public final Integer getId() {
@@ -54,16 +62,16 @@ public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 		return email;
 	}
 	
-	public final String getRazao_social() {
-		return razao_social.get();
+	public final String getNome_empresarial() {
+		return nome_empresarial.get();
 	}
 	
-	public final void setRazao_social(String Razao_social) {
-		razao_social.set(Razao_social);
+	public final void setNome_empresarial(String Nome_empresarial) {
+		nome_empresarial.set(Nome_empresarial);
 	}
 	
-	public StringProperty razao_socialProperty() {
-		return razao_social;
+	public StringProperty nome_empresarialProperty() {
+		return nome_empresarial;
 	}
 	
 	public final String getCnpj() {
@@ -76,18 +84,6 @@ public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 	
 	public StringProperty cnpjProperty() {
 		return cnpj;
-	}
-	
-	public final String getInscricao_estadual() {
-		return inscricao_estadual.get();
-	}
-	
-	public final void setInscricao_estadual(String Inscricao_estadual) {
-		inscricao_estadual.set(Inscricao_estadual);
-	}
-	
-	public StringProperty inscricao_estadualProperty() {
-		return inscricao_estadual;
 	}
 	
 	public final String getNome_fantasia() {
@@ -120,5 +116,18 @@ public class Fornecedor extends RecursiveTreeObject<Fornecedor> {
 	
 	public void setTelefones(ArrayList<Telefone> Telefones) {
 		this.telefones = Telefones;
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	
+	public void setEndereco(Endereco Endereco) {
+		this.endereco = Endereco;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome_fantasia();
 	}
 }

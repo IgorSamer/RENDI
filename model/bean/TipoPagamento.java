@@ -39,4 +39,9 @@ public class TipoPagamento extends RecursiveTreeObject<TipoPagamento> {
 	public StringProperty nomeProperty() {
 		return nome;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
 }

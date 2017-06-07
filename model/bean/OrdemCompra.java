@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.ArrayList;
+
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.DoubleProperty;
@@ -21,10 +23,11 @@ public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 	private Fornecedor fornecedor;
 	private Funcionario funcionario;
 	private TipoPagamento tipo_pagamento;
+	private ArrayList<ProdutoOrdemCompra> produtos;
 	
-	public OrdemCompra(Integer Id, String Data, String Data_prevista, Integer Status, String Observacoes, Double Valor, Integer Parcelas, Integer Distancia_pagamento, Fornecedor Fornecedor, Funcionario Funcionario, TipoPagamento Tipo_pagamento) {
+	public OrdemCompra(Integer Id, String Data, String Data_prevista, Integer Status, String Observacoes, Double Valor, Integer Parcelas, Integer Distancia_pagamento, Fornecedor Fornecedor, Funcionario Funcionario, TipoPagamento Tipo_pagamento, ArrayList<ProdutoOrdemCompra> Produtos) {
 		this.setId(Id);
-		this.setData(Data_prevista);
+		this.setData(Data);
 		this.setData_prevista(Data_prevista);
 		this.setStatus(Status);
 		this.setObservacoes(Observacoes);
@@ -34,6 +37,11 @@ public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 		this.setFornecedor(Fornecedor);
 		this.setFuncionario(Funcionario);
 		this.setTipo_pagamento(Tipo_pagamento);
+		this.setProdutos(Produtos);
+	}
+	
+	public OrdemCompra(Integer Id) {
+		this.setId(Id);
 	}
 	
 	public final Integer getId() {
@@ -154,5 +162,13 @@ public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 	
 	public void setTipo_pagamento(TipoPagamento tipo_pagamento) {
 		this.tipo_pagamento = tipo_pagamento;
+	}
+	
+	public ArrayList<ProdutoOrdemCompra> getProdutos() {
+		return produtos;
+	}
+	
+	public void setProdutos(ArrayList<ProdutoOrdemCompra> Produtos) {
+		this.produtos = Produtos;
 	}
 }

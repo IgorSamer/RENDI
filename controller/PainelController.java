@@ -66,6 +66,16 @@ public class PainelController implements Initializable {
     private JFXPopup popupServicos = new JFXPopup();
     private JFXPopup popupFuncionarios = new JFXPopup();
     private JFXPopup popupLicencas = new JFXPopup();
+    
+    public static Integer idFuncionario;
+    
+    public static void setIdFuncionario(Integer Id) {
+    	idFuncionario = Id;
+    }
+    
+    public static Integer getIdFuncionario() {
+    	return idFuncionario;
+    }
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -126,15 +136,15 @@ public class PainelController implements Initializable {
 		
 		//Opções no menu de Serviços
 		Label itemServico = new Label("Troca de Óleo");
-		itemServico.setId("GerenciarOrdemCompra");
+		itemServico.setId("GerenciarTrocaOleo");
 		itemServico.setAccessibleText("Troca de Óleo");
 		
 		Label itemServico2 = new Label("Lava-car");
-		itemServico2.setId("GerenciarClientes");
+		itemServico2.setId("GerenciarLavaCar");
 		itemServico2.setAccessibleText("Lava-car");
 		
 		Label itemServico3 = new Label("Abastecimento");
-		itemServico3.setId("GerenciarEstoque");
+		itemServico3.setId("GerenciarAbastecimento");
 		itemServico3.setAccessibleText("Abastecimento");
 		
 		listaServicos.getItems().addAll(itemServico, itemServico2, itemServico3);
@@ -166,6 +176,8 @@ public class PainelController implements Initializable {
 	}
 	
 	public void setFuncionario(Funcionario func) {
+		setIdFuncionario(func.getId());
+		
 		String tipoFunc = func.getFuncao().getNome();
 		String tipoMenu = "";
 		

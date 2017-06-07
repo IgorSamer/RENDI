@@ -25,12 +25,12 @@ public class FornecedorDAO {
 		ArrayList<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		
 		try {
-			stmt = con.prepareStatement("SELECT id, email, razao_social, cnpj, inscricao_estadual, nome_fantasia, status FROM fornecedores");
+			stmt = con.prepareStatement("SELECT id, email, nome_empresarial, cnpj, nome_fantasia, status, end_cidade FROM fornecedores");
 			
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				Fornecedor fornecedor = new Fornecedor(rs.getInt("id"), rs.getString("email"), rs.getString("razao_social"), rs.getString("cnpj"), rs.getString("inscricao_estadual"), rs.getString("nome_fantasia"), rs.getInt("status"), null);
+				Fornecedor fornecedor = new Fornecedor(rs.getInt("id"), rs.getString("email"), rs.getString("nome_empresarial"), rs.getString("cnpj"), rs.getString("nome_fantasia"), rs.getInt("status"), null, new Endereco(rs.getString("end_cidade")));
 				
 				fornecedores.add(fornecedor);
 			}
@@ -50,12 +50,17 @@ public class FornecedorDAO {
 		boolean cadastrou = false;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO fornecedores (email, razao_social, cnpj, inscricao_estadual, nome_fantasia) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			stmt = con.prepareStatement("INSERT INTO fornecedores (email, nome_empresarial, cnpj, nome_fantasia, end_cep, end_uf, end_cidade, end_bairro, end_rua, end_numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, forn.getEmail());
-			stmt.setString(2, forn.getRazao_social());
+			stmt.setString(2, forn.getNome_empresarial());
 			stmt.setString(3, forn.getCnpj());
-			stmt.setString(4, forn.getInscricao_estadual());
-			stmt.setString(5, forn.getNome_fantasia());
+			stmt.setString(4, forn.getNome_fantasia());
+			stmt.setString(5, forn.getEndereco().getCep());
+			stmt.setString(6, forn.getEndereco().getUf());
+			stmt.setString(7, forn.getEndereco().getCidade());
+			stmt.setString(8, forn.getEndereco().getBairro());
+			stmt.setString(9, forn.getEndereco().getBairro());
+			stmt.setInt(10, forn.getEndereco().getNumero());
 			
 			if(stmt.executeUpdate() > 0) {
 				ResultSet rsId = stmt.getGeneratedKeys();

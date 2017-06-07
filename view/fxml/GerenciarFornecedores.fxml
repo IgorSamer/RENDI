@@ -70,10 +70,22 @@
                   <HBox alignment="CENTER">
                      <children>
                         <JFXTextField fx:id="txtEmail" focusColor="#ff9800" labelFloat="true" promptText="E-mail" />
-                        <JFXTextField fx:id="txtRazaoSocial" focusColor="#ff9800" labelFloat="true" promptText="Razão Social" />
                         <JFXTextField fx:id="txtCnpj" focusColor="#ff9800" labelFloat="true" promptText="CNPJ" />
-                        <JFXTextField fx:id="txtInscricaoEstadual" focusColor="#ff9800" labelFloat="true" promptText="Inscrição Estadual" />
+                        <JFXTextField fx:id="txtNomeEmpresarial" focusColor="#ff9800" labelFloat="true" promptText="Nome Empresarial" />
                         <JFXTextField fx:id="txtNomeFantasia" focusColor="#ff9800" labelFloat="true" promptText="Nome Fantasia" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <JFXTextField fx:id="txtCep" focusColor="#ff9800" labelFloat="true" promptText="CEP" />
+                        <JFXTextField fx:id="txtUf" focusColor="#ff9800" labelFloat="true" promptText="UF" />
+                        <JFXTextField fx:id="txtCidade" focusColor="#ff9800" labelFloat="true" promptText="Cidade" />
+                        <JFXTextField fx:id="txtBairro" focusColor="#ff9800" labelFloat="true" promptText="Bairro" />
+                        <JFXTextField fx:id="txtRua" focusColor="#ff9800" labelFloat="true" promptText="Rua" />
+                        <JFXTextField fx:id="txtNumero" focusColor="#ff9800" labelFloat="true" promptText="Número" />
                      </children>
                      <VBox.margin>
                         <Insets top="15.0" />

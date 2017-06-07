@@ -18,18 +18,18 @@ public class Produto extends RecursiveTreeObject<Produto> {
 	private DoubleProperty preco = new SimpleDoubleProperty();
 	private FloatProperty quantidade = new SimpleFloatProperty();
 	private Setor setor;
-	private OrdemCompra ordem_compra;
 	private UnidadeMedida unidade_medida;
+	private Funcionario funcionario;
 	
-	public Produto(Integer Id, String Nome, String Descricao, Double Preco, Float Quantidade, Setor Setor, OrdemCompra Ordem_compra, UnidadeMedida Unidade_medida) {
+	public Produto(Integer Id, String Nome, String Descricao, Double Preco, Float Quantidade, Setor Setor, UnidadeMedida Unidade_medida, Funcionario Funcionario) {
 		this.setId(Id);
 		this.setNome(Nome);
 		this.setDescricao(Descricao);
 		this.setPreco(Preco);
 		this.setQuantidade(Quantidade);
 		this.setSetor(Setor);
-		this.setOrdem_compra(Ordem_compra);
 		this.setUnidade_medida(Unidade_medida);
+		this.setFuncionario(Funcionario);
 	}
 	
 	public final Integer getId() {
@@ -64,6 +64,10 @@ public class Produto extends RecursiveTreeObject<Produto> {
 		descricao.set(Descricao);
 	}
 	
+	public StringProperty descricaoProperty() {
+		return descricao;
+	}
+	
 	public final Float getQuantidade() {
 		return quantidade.get();
 	}
@@ -96,19 +100,24 @@ public class Produto extends RecursiveTreeObject<Produto> {
 		this.setor = setor;
 	}
 	
-	public OrdemCompra getOrdem_compra() {
-		return ordem_compra;
-	}
-	
-	public void setOrdem_compra(OrdemCompra Ordem_compra) {
-		this.ordem_compra = Ordem_compra;
-	}
-	
 	public UnidadeMedida getUnidade_medida() {
 		return unidade_medida;
 	}
 	
 	public void setUnidade_medida(UnidadeMedida Unidade_medida) {
 		this.unidade_medida = Unidade_medida;
+	}
+	
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	
+	public void setFuncionario(Funcionario Funcionario) {
+		this.funcionario = Funcionario;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome() + " (" + this.getDescricao() + ")";
 	}
 }

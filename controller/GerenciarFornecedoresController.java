@@ -75,16 +75,31 @@ public class GerenciarFornecedoresController implements Initializable {
     private JFXTextField txtEmail;
 
     @FXML
-    private JFXTextField txtRazaoSocial;
+    private JFXTextField txtNomeEmpresarial;
 
     @FXML
     private JFXTextField txtCnpj;
 
     @FXML
-    private JFXTextField txtInscricaoEstadual;
+    private JFXTextField txtNomeFantasia;
+    
+    @FXML
+    private JFXTextField txtCep;
 
     @FXML
-    private JFXTextField txtNomeFantasia;
+    private JFXTextField txtUf;
+
+    @FXML
+    private JFXTextField txtCidade;
+
+    @FXML
+    private JFXTextField txtBairro;
+
+    @FXML
+    private JFXTextField txtRua;
+
+    @FXML
+    private JFXTextField txtNumero;
 
     @FXML
     private JFXTextField txtTelefone;
@@ -137,15 +152,6 @@ public class GerenciarFornecedoresController implements Initializable {
 			}
 		});
 		
-		JFXTreeTableColumn<Fornecedor, String> colNomeFantasia = new JFXTreeTableColumn<>("Nome Fantasia");
-		colNomeFantasia.setPrefWidth(150);
-		colNomeFantasia.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Fornecedor, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Fornecedor, String> param) {
-				return param.getValue().getValue().nome_fantasiaProperty();
-			}
-		});
-		
 		JFXTreeTableColumn<Fornecedor, String> colCnpj = new JFXTreeTableColumn<>("CNPJ");
 		colCnpj.setPrefWidth(150);
 		colCnpj.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Fornecedor, String>, ObservableValue<String>>() {
@@ -155,21 +161,21 @@ public class GerenciarFornecedoresController implements Initializable {
 			}
 		});
 		
-		JFXTreeTableColumn<Fornecedor, String> colInscricaoEstadual = new JFXTreeTableColumn<>("Inscrição Estadual");
-		colInscricaoEstadual.setPrefWidth(150);
-		colInscricaoEstadual.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Fornecedor, String>, ObservableValue<String>>() {
+		JFXTreeTableColumn<Fornecedor, String> colNomeEmpresarial = new JFXTreeTableColumn<>("Nome Empresarial");
+		colNomeEmpresarial.setPrefWidth(300);
+		colNomeEmpresarial.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Fornecedor, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<Fornecedor, String> param) {
-				return param.getValue().getValue().inscricao_estadualProperty();
+				return param.getValue().getValue().nome_empresarialProperty();
 			}
 		});
 		
-		JFXTreeTableColumn<Fornecedor, String> colRazaoSocial = new JFXTreeTableColumn<>("Razão Social");
-		colRazaoSocial.setPrefWidth(150);
-		colRazaoSocial.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Fornecedor, String>, ObservableValue<String>>() {
+		JFXTreeTableColumn<Fornecedor, String> colNomeFantasia = new JFXTreeTableColumn<>("Nome Fantasia");
+		colNomeFantasia.setPrefWidth(300);
+		colNomeFantasia.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Fornecedor, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<Fornecedor, String> param) {
-				return param.getValue().getValue().razao_socialProperty();
+				return param.getValue().getValue().nome_fantasiaProperty();
 			}
 		});
 		
@@ -177,7 +183,7 @@ public class GerenciarFornecedoresController implements Initializable {
 		fornecedores.addAll(FornecedorDAO.listar());
 		TreeItem<Fornecedor> root = new RecursiveTreeItem<Fornecedor>(fornecedores, RecursiveTreeObject::getChildren);
 		
-		tblFornecedores.getColumns().setAll(colId, colNomeFantasia, colCnpj, colInscricaoEstadual, colRazaoSocial);
+		tblFornecedores.getColumns().setAll(colId, colCnpj, colNomeEmpresarial, colNomeFantasia);
 		tblFornecedores.setRoot(root);
 		tblFornecedores.setShowRoot(false);
 		
@@ -239,12 +245,12 @@ public class GerenciarFornecedoresController implements Initializable {
 					telefones.add(tel);
 				}
 				
-				Fornecedor fornecedor = new Fornecedor(0, txtEmail.getText().trim(), txtRazaoSocial.getText().trim(), txtCnpj.getText().trim(), txtInscricaoEstadual.getText().trim(), txtNomeFantasia.getText().trim(), 1, telefones);
+				Fornecedor fornecedor = new Fornecedor(0, txtEmail.getText().trim(), txtNomeEmpresarial.getText().trim(), txtCnpj.getText().trim(), txtNomeFantasia.getText().trim(), 1, telefones, new Endereco(txtUf.getText().trim(), txtCidade.getText().trim(), txtCep.getText().trim(), txtBairro.getText().trim(), txtRua.getText().trim(), Integer.valueOf(txtNumero.getText().trim())));
 			
 				if(FornecedorDAO.cadastrar(fornecedor)) {
-					mensagem.show("Cliente cadastrado com sucesso!", 2000);
+					mensagem.show("Fornecedor cadastrado com sucesso!", 2000);
 				} else {
-					mensagem.show("Erro ao cadastrar cliente!", 2000);
+					mensagem.show("Erro ao cadastrar fornecedor!", 2000);
 				}
 			}
 		});

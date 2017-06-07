@@ -7,6 +7,10 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -20,41 +24,90 @@
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></Text>
-            <JFXTreeTableView fx:id="tblFuncionarios" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <SplitPane fx:id="splConteudo" dividerPositions="1.0" prefHeight="377.0" prefWidth="681.0" styleClass="spl_geral">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="200.0">
+                     <children>
+                        <JFXTreeTableView fx:id="tblFuncionarios" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/usuario_padrao.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <HBox alignment="TOP_CENTER" prefWidth="200.0" style="-fx-background-color: #424242;">
                <children>
-                  <JFXButton fx:id="btnExcluirFuncionario" buttonType="RAISED" text="Excluir">
+                  <JFXButton fx:id="btnPesquisarFuncionario" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/magnify.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnAlterarFuncionario" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/pencil.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnVisualizarFuncionario" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/eye.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCadastrarFuncionario" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/plus-circle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnExcluirFuncionario" buttonType="RAISED">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_erro" />
                      </styleClass>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="btnAlterarFuncionario" buttonType="RAISED" text="Alterar">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn_sucesso" />
-                     </styleClass>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="btnVisualizarFuncionario" buttonType="RAISED" text="Visualizar">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn_sucesso" />
-                     </styleClass>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="btnCadastrarFuncionario" buttonType="RAISED" text="Cadastrar">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn_sucesso" />
-                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </JFXButton>
                </children>
             </HBox>

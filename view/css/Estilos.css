@@ -85,12 +85,15 @@
 	-fx-font-size: 30px;
 	-fx-margin-botton: 30px;
 	-fx-font-weight: bold;
-	
+}
+
+.spl_geral {
+	-fx-box-border: transparent;
 }
 
 .tree-table-view{
-	-fx-tree-table-color: rgba(0, 150, 136, 0.2);
-	-fx-tree-table-rippler-color : rgba(0, 150, 136, 0.4);
+	-fx-tree-table-color: rgb(255, 152, 0, 0.2);
+	-fx-tree-table-rippler-color : rgba(255, 152, 0, 0.4);
 }
  .tree-table-view:focused .tree-table-row-cell:selected {
 	-fx-background-color: -fx-tree-table-color  ;

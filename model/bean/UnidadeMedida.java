@@ -39,4 +39,9 @@ public class UnidadeMedida extends RecursiveTreeObject<UnidadeMedida> {
 	public StringProperty nomeProperty() {
 		return nome;
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
+	}
 }
