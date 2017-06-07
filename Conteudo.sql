@@ -55,3 +55,9 @@ INSERT INTO `funcionarios_telefones` (`id`, `numero`, `id_funcionario`) VALUES
 
 INSERT INTO `usuarios` (`id`, `usuario`, `senha`, `data`, `ativo`, `id_funcionario`) VALUES
 (1, 'Irineu', 'hahaha', '2017-05-09', 1, 1);
+
+INSERT INTO `fornecedores` (`id`, `email`, `nome_empresarial`, `cnpj`, `nome_fantasia`, `status`, `end_cep`, `end_uf`, `end_cidade`, `end_bairro`, `end_rua`, `end_numero`) VALUES
+(1, 'globo@globo.com', 'GLOBO COMUNICACAO E PARTICIPACOES S/A', '27865757000102', 'GCP,TV GLOBO, REDE GLOBO, GLOBO.COM, SOM LIVRE', 1, '22460901', 'RJ', 'Rio de Janeiro', 'Jardim Botânico', 'Jardim Botânico', 303);
+
+INSERT INTO `fornecedores_telefones` (`id`, `numero`, `id_fornecedor`) VALUES
+(1, '(21) 2540-2623', 1);
