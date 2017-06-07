@@ -13,11 +13,13 @@ public class Combustivel extends RecursiveTreeObject<Combustivel> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty nome = new SimpleStringProperty();
 	private DoubleProperty preco = new SimpleDoubleProperty();
+	private StringProperty cor = new SimpleStringProperty();
 	
-	public Combustivel(Integer Id, String Nome, Double Preco) {
+	public Combustivel(Integer Id, String Nome, Double Preco, String Cor) {
 		this.setId(Id);
 		this.setNome(Nome);
 		this.setPreco(Preco);
+		this.setCor(Cor);
 	}
 	
 	public final Integer getId() {
@@ -54,5 +56,22 @@ public class Combustivel extends RecursiveTreeObject<Combustivel> {
 	
 	public DoubleProperty precoProperty() {
 		return preco;
+	}
+	
+	public final String getCor() {
+		return cor.get();
+	}
+	
+	public final void setCor(String Cor) {
+		cor.set(Cor);
+	}
+	
+	public StringProperty corProperty() {
+		return cor;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
 	}
 }

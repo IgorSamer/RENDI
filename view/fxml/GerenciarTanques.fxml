@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<StackPane fx:id="conteudoConteudo" prefHeight="500.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarTanquesController">
+   <children>
+      <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Tanques">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Text>
+            <SplitPane fx:id="splConteudo" dividerPositions="1.0" prefHeight="377.0" prefWidth="681.0" styleClass="spl_geral">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/usuario_padrao.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <HBox alignment="TOP_CENTER" prefWidth="200.0" style="-fx-background-color: #424242;">
+               <children>
+                  <JFXButton fx:id="btnAlterarTanque" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/pencil.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnVisualizarTanque" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/eye.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCadastrarTanque" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/plus-circle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnExcluirTanque" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_erro" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="funCadastrar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Cadastrar Tanque">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Text>
+            <VBox alignment="CENTER" prefHeight="392.0" prefWidth="681.0">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <JFXTextField fx:id="txtNome" focusColor="#ff9800" labelFloat="true" promptText="Nome" />
+                        <JFXTextField fx:id="txtCapacidade" focusColor="#ff9800" labelFloat="true" promptText="Capacidade" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                     <children>
+                        <JFXComboBox fx:id="cmbCombustivel" promptText="Combustível" />
+                        <JFXButton fx:id="btnAdicionarReparticao" text="+" />
+                        <JFXButton fx:id="btnRemoverReparticao" text="-" />
+                        <JFXColorPicker fx:id="clrTanque" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="258.0" prefWidth="681.0">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                     <children>
+                        <SplitPane fx:id="splTanque" dividerPositions="1.0" prefHeight="167.0" prefWidth="782.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="165.0" prefWidth="277.0">
+                                 <children>
+                                    <JFXTreeTableView fx:id="tblReparticoes" prefHeight="167.0" prefWidth="692.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <PieChart fx:id="grfTanque" legendVisible="false" title="Distribuição do Tanque" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="btnCancelarTanque" buttonType="RAISED" text="Cancelar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_erro" />
+                     </styleClass>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCadastrarTanqueFinal" buttonType="RAISED" text="Cadastrar">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

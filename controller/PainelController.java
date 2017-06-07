@@ -132,16 +132,16 @@ public class PainelController implements Initializable {
 		itemControle4.setAccessibleText("Fornecedores");
 		
 		Label itemControle5 = new Label("Tanques");
-		itemControle4.setId("GerenciarTanques");
-		itemControle4.setAccessibleText("Tanques");
+		itemControle5.setId("GerenciarTanques");
+		itemControle5.setAccessibleText("Tanques");
 		
 		Label itemControle6 = new Label("Bombas");
-		itemControle4.setId("GerenciarBombas");
-		itemControle4.setAccessibleText("Bombas");
+		itemControle6.setId("GerenciarBombas");
+		itemControle6.setAccessibleText("Bombas");
 		
 		Label itemControle7 = new Label("Bicos");
-		itemControle4.setId("GerenciarBicos");
-		itemControle4.setAccessibleText("Bicos");
+		itemControle7.setId("GerenciarBicos");
+		itemControle7.setAccessibleText("Bicos");
 		
 		listaControle.getItems().addAll(itemControle, itemControle2, itemControle3, itemControle4, itemControle5, itemControle6, itemControle7);
 		listaControle.setPrefHeight(250);

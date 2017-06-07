@@ -4,14 +4,18 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Bico extends RecursiveTreeObject<Bico> {
 	private IntegerProperty id = new SimpleIntegerProperty();
+	private StringProperty nome = new SimpleStringProperty();
 	private Bomba bomba;
 	private TanqueReparticao reparticao;
 	
-	public Bico(Integer Id, Bomba Bomba, TanqueReparticao Reparticao) {
+	public Bico(Integer Id, String Nome, Bomba Bomba, TanqueReparticao Reparticao) {
 		this.setId(Id);
+		this.setNome(Nome);
 		this.setBomba(Bomba);
 		this.setReparticao(Reparticao);
 	}
@@ -26,6 +30,18 @@ public class Bico extends RecursiveTreeObject<Bico> {
 	
 	public IntegerProperty idProperty() {
 		return id;
+	}
+	
+	public final String getNome() {
+		return nome.get();
+	}
+	
+	public final void setNome(String Nome) {
+		nome.set(Nome);
+	}
+	
+	public StringProperty nomeProperty() {
+		return nome;
 	}
 	
 	public Bomba getBomba() {
