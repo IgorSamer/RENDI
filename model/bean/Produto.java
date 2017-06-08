@@ -17,6 +17,7 @@ public class Produto extends RecursiveTreeObject<Produto> {
 	private StringProperty descricao = new SimpleStringProperty();
 	private DoubleProperty preco = new SimpleDoubleProperty();
 	private FloatProperty quantidade = new SimpleFloatProperty();
+	private StringProperty foto = new SimpleStringProperty();
 	private Setor setor;
 	private UnidadeMedida unidade_medida;
 	private Funcionario funcionario;
@@ -114,6 +115,18 @@ public class Produto extends RecursiveTreeObject<Produto> {
 	
 	public void setFuncionario(Funcionario Funcionario) {
 		this.funcionario = Funcionario;
+	}
+	
+	public final String getFoto() {
+		return foto.get();
+	}
+	
+	public final void setFoto(String Foto) {
+		foto.set(Foto);
+	}
+	
+	public StringProperty fotoProperty() {
+		return foto;
 	}
 	
 	@Override

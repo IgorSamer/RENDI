@@ -57,6 +57,7 @@ import model.bean.PessoaFisica;
 import model.bean.Produto;
 import model.bean.ProdutoOrdemCompra;
 import model.bean.Setor;
+import model.bean.Tanque;
 import model.bean.TanqueReparticao;
 import model.bean.Telefone;
 import model.bean.UnidadeMedida;
@@ -293,15 +294,16 @@ public class GerenciarTanquesController implements Initializable {
 			public void handle(MouseEvent arg0) {
 				JFXSnackbar mensagem = new JFXSnackbar(conteudoConteudo);
 				
-				System.out.println(clrTanque.getValue().toString());
+				String tanqueCor = clrTanque.getValue().toString().substring(2);
+				tanqueCor = tanqueCor.substring(0, tanqueCor.length() -2);
 				
-				//Produto produto = new Produto(0, txtNome.getText().trim(), txtDescricao.getText().trim(), Double.valueOf(txtPreco.getText().trim()), Float.valueOf(txtQuantidade.getText().trim()), new Setor(cmbSetor.getSelectionModel().getSelectedItem().getId(), null), new UnidadeMedida(cmbUnidadeMedida.getSelectionModel().getSelectedItem().getId(), null), new Funcionario(PainelController.idFuncionario));
-				
-				//if(ProdutoDAO.cadastrar(produto)) {
-				//	mensagem.show("Produto cadastrado com sucesso!", 2000);
-				//} else {
-				//	mensagem.show("Erro ao cadastrar produto!", 2000);
-				//}
+				Tanque tanque = new Tanque(0, txtNome.getText().trim(), Float.valueOf(txtCapacidade.getText().trim()), tanqueCor, lstReparticoes);
+
+				if(TanqueDAO.cadastrar(tanque)) {
+					mensagem.show("Tanque cadastrado com sucesso!", 2000);
+				} else {
+					mensagem.show("Erro ao cadastrar tanque!", 2000);
+				}
 			}
 		});
 	}
@@ -328,14 +330,6 @@ public class GerenciarTanquesController implements Initializable {
 			
 			a++;
 		}
-		
-		//float subtotal = 0;
-		
-		//for(ProdutoOrdemCompra prod : lstProdutos) {
-		//	subtotal += prod.getQuantidade() * prod.getProduto().getPreco();
-		//}
-		
-		//lblSubtotal.setText(String.valueOf(subtotal));
 	}
 	
 	protected void animaTanque() {

@@ -1,5 +1,7 @@
 package model.bean;
 
+import java.util.ArrayList;
+
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.FloatProperty;
@@ -14,12 +16,14 @@ public class Tanque extends RecursiveTreeObject<Tanque> {
 	private StringProperty nome = new SimpleStringProperty();
 	private FloatProperty capacidade = new SimpleFloatProperty();
 	private StringProperty cor = new SimpleStringProperty();
+	private ArrayList<TanqueReparticao> reparticoes;
 	
-	public Tanque(Integer Id, String Nome, Float Capacidade, String Cor) {
+	public Tanque(Integer Id, String Nome, Float Capacidade, String Cor, ArrayList<TanqueReparticao> Reparticoes) {
 		this.setId(Id);
 		this.setNome(Nome);
 		this.setCapacidade(Capacidade);
 		this.setCor(Cor);
+		this.setReparticoes(Reparticoes);
 	}
 	
 	public final Integer getId() {
@@ -68,5 +72,13 @@ public class Tanque extends RecursiveTreeObject<Tanque> {
 	
 	public StringProperty corProperty() {
 		return cor;
+	}
+
+	public ArrayList<TanqueReparticao> getReparticoes() {
+		return reparticoes;
+	}
+
+	public void setReparticoes(ArrayList<TanqueReparticao> Reparticoes) {
+		this.reparticoes = Reparticoes;
 	}
 }

@@ -112,7 +112,7 @@
                   <HBox alignment="CENTER">
                      <children>
                         <JFXTextField fx:id="txtNome" focusColor="#ff9800" labelFloat="true" promptText="Nome" />
-                        <JFXTextField fx:id="txtCapacidade" focusColor="#ff9800" labelFloat="true" promptText="Capacidade" />
+                        <JFXTextField fx:id="txtCapacidade" focusColor="#ff9800" labelFloat="true" promptText="Capacidade (Litros)" />
                      </children>
                      <VBox.margin>
                         <Insets top="15.0" />

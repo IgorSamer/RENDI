@@ -22,6 +22,10 @@ public class Combustivel extends RecursiveTreeObject<Combustivel> {
 		this.setCor(Cor);
 	}
 	
+	public Combustivel(Integer Id) {
+		this.setId(Id);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
