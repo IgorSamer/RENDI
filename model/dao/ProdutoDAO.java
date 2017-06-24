@@ -51,14 +51,15 @@ public class ProdutoDAO {
 		boolean cadastrou = false;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO produtos (nome, descricao, preco, quantidade, id_setor, id_unidade_medida, id_funcionario) VALUES (?, ?, ?, ?, ?, ?, ?)");
+			stmt = con.prepareStatement("INSERT INTO produtos (nome, descricao, preco, quantidade, foto, id_setor, id_unidade_medida, id_funcionario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 			stmt.setString(1, prod.getNome());
 			stmt.setString(2, prod.getDescricao());
 			stmt.setDouble(3, prod.getPreco());
 			stmt.setFloat(4, prod.getQuantidade());
-			stmt.setInt(5, prod.getSetor().getId());
-			stmt.setInt(6, prod.getUnidade_medida().getId());
-			stmt.setInt(7, prod.getFuncionario().getId());
+			stmt.setString(5, prod.getFoto());
+			stmt.setInt(6, prod.getSetor().getId());
+			stmt.setInt(7, prod.getUnidade_medida().getId());
+			stmt.setInt(8, prod.getFuncionario().getId());
 			
 			if(stmt.executeUpdate() > 0) {
 				cadastrou = true;
@@ -80,7 +81,7 @@ public class ProdutoDAO {
 		ArrayList<Produto> produtos = new ArrayList<Produto>();
 		
 		try {
-			stmt = con.prepareStatement("SELECT p.id, p.nome, p.descricao, p.preco, p.quantidade, s.nome AS nomeSetor, u.nome AS nomeUnidadeMedida, f.nome AS nomeFuncionario, f.sobrenome AS sobrenomeFuncionario "
+			stmt = con.prepareStatement("SELECT p.id, p.nome, p.descricao, p.preco, p.quantidade, p.foto, s.nome AS nomeSetor, u.nome AS nomeUnidadeMedida, f.nome AS nomeFuncionario, f.sobrenome AS sobrenomeFuncionario "
 					+ "FROM produtos p "
 					+ "INNER JOIN setores s ON p.id_setor = s.id "
 					+ "INNER JOIN unidades_medidas u ON p.id_unidade_medida = u.id "
@@ -89,7 +90,7 @@ public class ProdutoDAO {
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				Produto produto = new Produto(rs.getInt("id"), rs.getString("nome"), rs.getString("descricao"), rs.getDouble("preco"), rs.getFloat("quantidade"), new Setor(0, rs.getString("nomeSetor")), new UnidadeMedida(0, rs.getString("nomeUnidadeMedida")), new Funcionario(new Pessoa(rs.getString("nomeFuncionario"), rs.getString("sobrenomeFuncionario"))));
+				Produto produto = new Produto(rs.getInt("id"), rs.getString("nome"), rs.getString("descricao"), rs.getDouble("preco"), rs.getFloat("quantidade"), rs.getString("foto"), new Setor(0, rs.getString("nomeSetor")), new UnidadeMedida(0, rs.getString("nomeUnidadeMedida")), new Funcionario(new Pessoa(rs.getString("nomeFuncionario"), rs.getString("sobrenomeFuncionario"))));
 				
 				produtos.add(produto);
 			}

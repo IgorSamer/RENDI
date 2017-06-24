@@ -26,6 +26,10 @@ public class Tanque extends RecursiveTreeObject<Tanque> {
 		this.setReparticoes(Reparticoes);
 	}
 	
+	public Tanque(Integer Id) {
+		this.setId(Id);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -80,5 +84,20 @@ public class Tanque extends RecursiveTreeObject<Tanque> {
 
 	public void setReparticoes(ArrayList<TanqueReparticao> Reparticoes) {
 		this.reparticoes = Reparticoes;
+	}
+	
+	@Override
+	public String toString() {
+		String tanqueInfo = this.getNome() + " (";
+		
+		for(int i = 0; i < this.getReparticoes().size(); i++) {
+			if(i == 0) {
+				tanqueInfo += this.getReparticoes().get(i).getCombustivel().getNome();
+			} else {
+				tanqueInfo += " - " + this.getReparticoes().get(i).getCombustivel().getNome();
+			}
+		}
+		
+		return tanqueInfo + ")";
 	}
 }

@@ -19,7 +19,7 @@
 
 <StackPane fx:id="conteudoConteudo" prefHeight="500.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarTanquesController">
    <children>
-      <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+      <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Tanques">
                <VBox.margin>
@@ -29,14 +29,14 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <HBox fx:id="areaTanques" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../img/usuario_padrao.png" />
+                              <Image url="@../img/produtos/produto_padrao.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -101,7 +101,7 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="funCadastrar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="funCadastrar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Cadastrar Tanque">
                <VBox.margin>
@@ -143,7 +143,7 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <PieChart fx:id="grfTanque" legendVisible="false" title="Distribuição do Tanque" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <PieChart fx:id="grfTanqueReparticoes" legendVisible="false" title="Distribuição do Tanque" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                           </items>

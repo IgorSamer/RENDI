@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -25,6 +26,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +37,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -63,8 +67,8 @@ public class GerenciarEstoqueController implements Initializable {
 	@FXML
 	private VBox funGerenciar, funCadastrar;
 	
-	//@FXML
-    //private JFXTreeTableView<Funcionario> tblFuncionarios;
+	@FXML
+    private JFXTreeTableView<Produto> tblEstoque;
 	
 	@FXML
     private JFXButton btnPesquisarEstoque;
@@ -105,6 +109,9 @@ public class GerenciarEstoqueController implements Initializable {
     @FXML
     private SplitPane splConteudo;
     
+    @FXML
+    private ImageView imgProduto;
+    
     public static boolean mostra = false;
 	
     Timeline timeline;
@@ -115,13 +122,7 @@ public class GerenciarEstoqueController implements Initializable {
 		btnVisualizarEstoque.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				DoubleProperty divPos = splConteudo.getDividers().get(0).positionProperty();
-		        
-		        double novaPos = divPos.get() > 0.8 ? 0.7 : 1.0;
-		        
-	            KeyValue keyValue = new KeyValue(splConteudo.getDividers().get(0).positionProperty(), novaPos);
-	            Timeline divTimeline = new Timeline(new KeyFrame(Duration.millis(300), keyValue));
-	            divTimeline.play();
+				
 			}
 		});
 		
@@ -145,85 +146,90 @@ public class GerenciarEstoqueController implements Initializable {
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.play();
 		
-		JFXTreeTableColumn<Funcionario, String> colId = new JFXTreeTableColumn<>("Id");
+		JFXTreeTableColumn<Produto, String> colId = new JFXTreeTableColumn<>("Id");
 		colId.setPrefWidth(150);
-		colId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
+		colId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produto, String>, ObservableValue<String>>() {
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
+			public ObservableValue<String> call(CellDataFeatures<Produto, String> param) {
 				return param.getValue().getValue().idProperty().asString();
 			}
 		});
 		
-		JFXTreeTableColumn<Funcionario, String> colNome = new JFXTreeTableColumn<>("Nome");
+		JFXTreeTableColumn<Produto, String> colNome = new JFXTreeTableColumn<>("Nome");
 		colNome.setPrefWidth(150);
-		colNome.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
+		colNome.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produto, String>, ObservableValue<String>>() {
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return Bindings.concat(param.getValue().getValue().getPessoa().nomeProperty(), " ", param.getValue().getValue().getPessoa().sobrenomeProperty());
+			public ObservableValue<String> call(CellDataFeatures<Produto, String> param) {
+				return param.getValue().getValue().nomeProperty();
 			}
 		});
 		
-		JFXTreeTableColumn<Funcionario, String> colRg = new JFXTreeTableColumn<>("RG");
-		colRg.setPrefWidth(150);
-		colRg.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
+		JFXTreeTableColumn<Produto, String> colPreco = new JFXTreeTableColumn<>("Preço");
+		colPreco.setPrefWidth(150);
+		colPreco.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produto, String>, ObservableValue<String>>() {
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getPessoa().getPessoa_fisica().rgProperty();
+			public ObservableValue<String> call(CellDataFeatures<Produto, String> param) {
+				return param.getValue().getValue().precoProperty().asString();
 			}
 		});
 		
-		JFXTreeTableColumn<Funcionario, String> colCpf = new JFXTreeTableColumn<>("CPF");
-		colCpf.setPrefWidth(150);
-		colCpf.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
+		JFXTreeTableColumn<Produto, String> colQuantidade = new JFXTreeTableColumn<>("Quantidade");
+		colQuantidade.setPrefWidth(150);
+		colQuantidade.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Produto, String>, ObservableValue<String>>() {
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getPessoa().getPessoa_fisica().cpfProperty();
+			public ObservableValue<String> call(CellDataFeatures<Produto, String> param) {
+				return param.getValue().getValue().quantidadeProperty().asString();
 			}
 		});
 		
-		JFXTreeTableColumn<Funcionario, String> colCidade = new JFXTreeTableColumn<>("Cidade");
-		colCidade.setPrefWidth(150);
-		colCidade.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getPessoa().getEndereco().cidadeProperty();
-			}
+		ObservableList<Produto> produtos = FXCollections.observableArrayList();
+		produtos.addAll(ProdutoDAO.listar());
+		TreeItem<Produto> root = new RecursiveTreeItem<Produto>(produtos, RecursiveTreeObject::getChildren);
+		
+		tblEstoque.getColumns().setAll(colId, colNome, colPreco, colQuantidade);
+		tblEstoque.setRoot(root);
+		tblEstoque.setShowRoot(false);
+		
+		tblEstoque.setRowFactory(tv -> {
+			JFXTreeTableRow<Produto> linha = new JFXTreeTableRow<>();
+			
+			linha.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					if(event.getClickCount() == 2 && !linha.isEmpty()) {
+						String fotoProduto = tblEstoque.getSelectionModel().getSelectedItem().getValue().getFoto();
+						
+						Image fotoProdutoImg = new Image(getClass().getResource(Produto.getCaminhoFoto(fotoProduto)).toExternalForm());
+						
+						imgProduto.setImage(fotoProdutoImg);
+						imgProduto.setFitWidth(150);
+						imgProduto.setFitHeight(150);
+						
+						DoubleProperty divPos = splConteudo.getDividers().get(0).positionProperty();
+				        
+				        double novaPos = divPos.get() > 0.8 ? 0.7 : 1.0;
+				        
+			            KeyValue keyValue = new KeyValue(splConteudo.getDividers().get(0).positionProperty(), novaPos);
+			            Timeline divTimeline = new Timeline(new KeyFrame(Duration.millis(300), keyValue));
+			            divTimeline.play();
+					}
+				}
+			});
+			
+			return linha;
 		});
 		
-		JFXTreeTableColumn<Funcionario, String> colSalario = new JFXTreeTableColumn<>("Salário");
-		colSalario.setPrefWidth(150);
-		colSalario.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
+		tblEstoque.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TreeItem<Produto>>() {
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().salarioProperty().asString();
+			public void changed(ObservableValue<? extends TreeItem<Produto>> arg0, TreeItem<Produto> arg1,
+					TreeItem<Produto> arg2) {
+				if(splConteudo.getDividers().get(0).positionProperty().get() > 0.7) {
+					KeyValue keyValue = new KeyValue(splConteudo.getDividers().get(0).positionProperty(), 1.0);
+		            Timeline divTimeline = new Timeline(new KeyFrame(Duration.millis(300), keyValue));
+		            divTimeline.play();
+				}
 			}
 		});
-		
-		JFXTreeTableColumn<Funcionario, String> colFuncao = new JFXTreeTableColumn<>("Função");
-		colFuncao.setPrefWidth(150);
-		colFuncao.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getFuncao().nomeProperty();
-			}
-		});
-		
-		JFXTreeTableColumn<Funcionario, String> colSetor = new JFXTreeTableColumn<>("Setor");
-		colSetor.setPrefWidth(150);
-		colSetor.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getSetor().nomeProperty();
-			}
-		});
-		
-		ObservableList<Funcionario> funcionarios = FXCollections.observableArrayList();
-		funcionarios.addAll(FuncionarioDAO.listar());
-		TreeItem<Funcionario> root = new RecursiveTreeItem<Funcionario>(funcionarios, RecursiveTreeObject::getChildren);
-		
-		//tblFuncionarios.getColumns().setAll(colId, colNome, colRg, colCpf, colCidade, colSalario, colFuncao, colSetor);
-		//tblFuncionarios.setRoot(root);
-		//tblFuncionarios.setShowRoot(false);
 		
 		btnCadastrarEstoque.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -258,7 +264,7 @@ public class GerenciarEstoqueController implements Initializable {
 			public void handle(MouseEvent arg0) {
 				JFXSnackbar mensagem = new JFXSnackbar(conteudoConteudo);
 				
-				Produto produto = new Produto(0, txtNome.getText().trim(), txtDescricao.getText().trim(), Double.valueOf(txtPreco.getText().trim()), Float.valueOf(txtQuantidade.getText().trim()), new Setor(cmbSetor.getSelectionModel().getSelectedItem().getId(), null), new UnidadeMedida(cmbUnidadeMedida.getSelectionModel().getSelectedItem().getId(), null), new Funcionario(PainelController.idFuncionario));
+				Produto produto = new Produto(0, txtNome.getText().trim(), txtDescricao.getText().trim(), Double.valueOf(txtPreco.getText().trim()), Float.valueOf(txtQuantidade.getText().trim()), "produto_padrao.png", new Setor(cmbSetor.getSelectionModel().getSelectedItem().getId(), null), new UnidadeMedida(cmbUnidadeMedida.getSelectionModel().getSelectedItem().getId(), null), new Funcionario(PainelController.idFuncionario));
 				
 				if(ProdutoDAO.cadastrar(produto)) {
 					mensagem.show("Produto cadastrado com sucesso!", 2000);

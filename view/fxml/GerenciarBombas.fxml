@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.SplitPane?>
@@ -15,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="conteudoConteudo" prefHeight="500.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarEstoqueController">
+<StackPane fx:id="conteudoConteudo" prefHeight="552.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarBombasController">
    <children>
-      <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Estoque">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Gerenciar Bombas">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></Text>
@@ -27,12 +26,12 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="200.0">
                      <children>
-                        <JFXTreeTableView fx:id="tblEstoque" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <HBox fx:id="areaBombas" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="imgProduto" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../img/produtos/produto_padrao.png" />
                            </image>
@@ -43,20 +42,7 @@
             </SplitPane>
             <HBox alignment="TOP_CENTER" prefWidth="200.0" style="-fx-background-color: #424242;">
                <children>
-                  <JFXButton fx:id="btnPesquisarEstoque" buttonType="RAISED">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn_sucesso" />
-                     </styleClass>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/icones/magnify.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-                  <JFXButton fx:id="btnAlterarEstoque" buttonType="RAISED">
+                  <JFXButton fx:id="btnAlterarBomba" buttonType="RAISED">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_sucesso" />
@@ -69,7 +55,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="btnVisualizarEstoque" buttonType="RAISED">
+                  <JFXButton fx:id="btnVisualizarBomba" buttonType="RAISED">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_sucesso" />
@@ -82,7 +68,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="btnCadastrarEstoque" buttonType="RAISED">
+                  <JFXButton fx:id="btnCadastrarBomba" buttonType="RAISED">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_sucesso" />
@@ -95,7 +81,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="btnExcluirEstoque" buttonType="RAISED">
+                  <JFXButton fx:id="btnExcluirBomba" buttonType="RAISED">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_erro" />
@@ -112,39 +98,35 @@
             </HBox>
          </children>
       </VBox>
-      <VBox fx:id="funCadastrar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+      <VBox fx:id="funCadastrar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Cadastrar Produto">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Cadastrar Bomba">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></Text>
-            <VBox alignment="CENTER" prefHeight="56.0" prefWidth="700.0">
+            <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="681.0" styleClass="bomba">
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <JFXTextField fx:id="txtNome" focusColor="#ff9800" labelFloat="true" promptText="Nome" />
-                        <JFXTextField fx:id="txtDescricao" focusColor="#ff9800" labelFloat="true" promptText="Descrição" />
-                        <JFXTextField fx:id="txtPreco" focusColor="#ff9800" labelFloat="true" promptText="Preço" />
-                        <JFXTextField fx:id="txtQuantidade" focusColor="#ff9800" labelFloat="true" promptText="Quantidade" />
+                        <JFXTextField fx:id="txtNome" focusColor="#ff9800" promptText="Nome" style="-fx-pref-width: 150;" />
                      </children>
                      <VBox.margin>
-                        <Insets top="15.0" />
+                        <Insets top="125.0" />
                      </VBox.margin>
                   </HBox>
                   <HBox alignment="CENTER">
                      <VBox.margin>
-                        <Insets top="15.0" />
+                        <Insets />
                      </VBox.margin>
                      <children>
-                        <JFXComboBox fx:id="cmbSetor" promptText="Setor" />
-                        <JFXComboBox fx:id="cmbUnidadeMedida" promptText="Unidade de Medida" />
+                        <JFXComboBox fx:id="cmbTanque" promptText="Tanque" style="-fx-pref-width: 130;" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="681.0">
                <children>
-                  <JFXButton fx:id="btnCancelarEstoque" buttonType="RAISED" text="Cancelar">
+                  <JFXButton fx:id="btnCancelarBomba" buttonType="RAISED" text="Cancelar">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_erro" />
@@ -153,13 +135,16 @@
                         <Insets right="30.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="btnCadastrarEstoqueFinal" buttonType="RAISED" text="Cadastrar">
+                  <JFXButton fx:id="btnCadastrarBombaFinal" buttonType="RAISED" text="Cadastrar">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_sucesso" />
                      </styleClass>
                   </JFXButton>
                </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

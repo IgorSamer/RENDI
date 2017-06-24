@@ -124,7 +124,7 @@ public class EntrarController implements Initializable {
 				entrouUsuario = true;
 				
 				Image foto = new Image(getClass().getResource(Funcionario.getCaminhoFoto(entrou)).toExternalForm());
-	
+				
 				imgLogo.setImage(foto);
 				imgLogo.setFitWidth(300);
 				imgLogo.setFitHeight(300);

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.bean.Email;
 
 public class App extends Application {
 	@Override
@@ -26,6 +27,17 @@ public class App extends Application {
 		stage.setTitle("RENDI - Soluções Rentáveis.");
 		stage.setMaximized(true);
 		stage.show();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Email email = new Email();
+				email.setPara("igoremascordeiro@hotmail.com");
+				email.setAssunto("Feliz Aniversário!");
+				email.setMensagem("<h1>Feliz Aniversário!</h1><p>Parabéns pra você! :D</p>");
+				email.enviar();
+			}
+		}).start();
 	}
 	
 	public static void main(String[] args) {

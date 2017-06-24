@@ -146,6 +146,6 @@ public class Funcionario  extends RecursiveTreeObject<Funcionario> {
 	}
 
 	public static String getCaminhoFoto(String foto) {
-		return "/view/img/" + foto;
+		return "/view/img/funcionarios/" + foto;
 	}
 }

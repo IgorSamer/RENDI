@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
+import model.bean.Bomba;
 import model.bean.Combustivel;
 import model.bean.Funcao;
 import model.bean.OrdemCompra;
@@ -81,5 +82,97 @@ public class TanqueDAO {
 		Conexao.fecharConexao(con, stmt);
 		
 		return cadastrou;
+	}
+	
+	public static ArrayList<Tanque> getTanques() {
+		Connection con = Conexao.getConexao();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<Tanque> lista_tanques = new ArrayList<Tanque>();
+		
+		try {		
+			stmt = con.prepareStatement("SELECT t.id, t.nome, t.capacidade, t.cor, GROUP_CONCAT(c.nome) AS nomeCombustivel, GROUP_CONCAT(c.cor) AS corCombustivel "
+					+ "FROM tanques t "
+					+ "INNER JOIN tanques_reparticoes t_r ON t.id = t_r.id_tanque "
+					+ "INNER JOIN combustiveis c ON t_r.id_combustivel = c.id "
+					+ "GROUP BY t_r.id_tanque");
+			
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList<TanqueReparticao> lista_reparticoes = new ArrayList<TanqueReparticao>();
+				
+				String[] reparts_nome = rs.getString("nomeCombustivel").split(",");
+				String[] reparts_cor = rs.getString("corCombustivel").split(",");
+				
+				for(int i = 0; i < reparts_nome.length; i++) {
+					lista_reparticoes.add(new TanqueReparticao(new Combustivel(0, reparts_nome[i], 0.0, reparts_cor[i])));
+				}
+				
+				Tanque tanque = new Tanque(rs.getInt("id"), rs.getString("nome"), rs.getFloat("capacidade"), rs.getString("cor"), lista_reparticoes);
+				
+				lista_tanques.add(tanque);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Conexao.fecharConexao(con, stmt, rs);
+		
+		return lista_tanques;
+	}
+	
+	public static boolean cadastrar(Bomba bomb) {
+		Connection con = Conexao.getConexao();
+		PreparedStatement stmt = null;
+		
+		boolean cadastrou = false;
+		
+		try {
+			stmt = con.prepareStatement("INSERT INTO bombas (nome, id_tanque) VALUES (?, ?)");
+			stmt.setString(1, bomb.getNome());
+			stmt.setInt(2, bomb.getTanque().getId());
+			
+			if(stmt.executeUpdate() > 0) {
+				cadastrou = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Conexao.fecharConexao(con, stmt);
+		
+		return cadastrou;
+	}
+	
+	public static ArrayList<Bomba> getBombas() {
+		Connection con = Conexao.getConexao();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<Bomba> lista_bombas = new ArrayList<Bomba>();
+		
+		try {		
+			stmt = con.prepareStatement("SELECT t.id, t.nome, t.capacidade, t.cor, GROUP_CONCAT(c.nome) AS nomeCombustivel, GROUP_CONCAT(c.cor) AS corCombustivel "
+					+ "FROM tanques t "
+					+ "INNER JOIN tanques_reparticoes t_r ON t.id = t_r.id_tanque "
+					+ "INNER JOIN combustiveis c ON t_r.id_combustivel = c.id "
+					+ "GROUP BY t_r.id_tanque");
+			
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				//Bomba bomba = new Bomba(rs.getInt("id"), rs.getString("nome"), rs.getFloat("capacidade"), rs.getString("cor"), lista_reparticoes);
+				
+				//lista_bombas.add(bomba);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Conexao.fecharConexao(con, stmt, rs);
+		
+		return lista_bombas;
 	}
 }

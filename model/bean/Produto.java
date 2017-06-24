@@ -22,12 +22,13 @@ public class Produto extends RecursiveTreeObject<Produto> {
 	private UnidadeMedida unidade_medida;
 	private Funcionario funcionario;
 	
-	public Produto(Integer Id, String Nome, String Descricao, Double Preco, Float Quantidade, Setor Setor, UnidadeMedida Unidade_medida, Funcionario Funcionario) {
+	public Produto(Integer Id, String Nome, String Descricao, Double Preco, Float Quantidade, String Foto, Setor Setor, UnidadeMedida Unidade_medida, Funcionario Funcionario) {
 		this.setId(Id);
 		this.setNome(Nome);
 		this.setDescricao(Descricao);
 		this.setPreco(Preco);
 		this.setQuantidade(Quantidade);
+		this.setFoto(Foto);
 		this.setSetor(Setor);
 		this.setUnidade_medida(Unidade_medida);
 		this.setFuncionario(Funcionario);
@@ -127,6 +128,10 @@ public class Produto extends RecursiveTreeObject<Produto> {
 	
 	public StringProperty fotoProperty() {
 		return foto;
+	}
+	
+	public static String getCaminhoFoto(String foto) {
+		return "/view/img/produtos/" + foto;
 	}
 	
 	@Override

@@ -26,20 +26,30 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
@@ -112,7 +122,10 @@ public class GerenciarTanquesController implements Initializable {
     private SplitPane splConteudo, splTanque;
     
     @FXML
-    private PieChart grfTanque;
+    private PieChart grfTanqueReparticoes;
+    
+    @FXML
+    private HBox areaTanques;
     
     private ArrayList<TanqueReparticao> lstReparticoes = new ArrayList<TanqueReparticao>();
     
@@ -132,85 +145,35 @@ public class GerenciarTanquesController implements Initializable {
 			}
 		});
 		
-		JFXTreeTableColumn<Funcionario, String> colId = new JFXTreeTableColumn<>("Id");
-		colId.setPrefWidth(150);
-		colId.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().idProperty().asString();
+		CategoryAxis grfX = new CategoryAxis();
+		NumberAxis grfY = new NumberAxis();
+		
+		for(Tanque tanq : TanqueDAO.getTanques()) {
+			StackedBarChart grfTanque = new StackedBarChart(grfX, grfY);
+			grfTanque.setTitle(tanq.getNome());
+			grfTanque.setPrefSize(150, 300);
+			
+			for(TanqueReparticao tanqRep : tanq.getReparticoes()) {
+				XYChart.Data<String, Float> grfDado = new XYChart.Data(tanqRep.getCombustivel().getNome(), (tanq.getCapacidade() / tanq.getReparticoes().size()));
+				
+				grfDado.nodeProperty().addListener(new ChangeListener<Node>() {
+					@Override
+					public void changed(ObservableValue<? extends Node> ov, Node oldNode, Node newNode) {
+						if(newNode != null) {
+							newNode.setStyle("-fx-bar-fill: #" + tanqRep.getCombustivel().getCor());
+						}
+					}
+				});
+				
+				XYChart.Series<String, Float> grfItem = new XYChart.Series<>();
+				grfItem.setName(tanqRep.getCombustivel().getNome());
+				grfItem.getData().add(grfDado);
+				
+				grfTanque.getData().add(grfItem);
 			}
-		});
-		
-		JFXTreeTableColumn<Funcionario, String> colNome = new JFXTreeTableColumn<>("Nome");
-		colNome.setPrefWidth(150);
-		colNome.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return Bindings.concat(param.getValue().getValue().getPessoa().nomeProperty(), " ", param.getValue().getValue().getPessoa().sobrenomeProperty());
-			}
-		});
-		
-		JFXTreeTableColumn<Funcionario, String> colRg = new JFXTreeTableColumn<>("RG");
-		colRg.setPrefWidth(150);
-		colRg.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getPessoa().getPessoa_fisica().rgProperty();
-			}
-		});
-		
-		JFXTreeTableColumn<Funcionario, String> colCpf = new JFXTreeTableColumn<>("CPF");
-		colCpf.setPrefWidth(150);
-		colCpf.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getPessoa().getPessoa_fisica().cpfProperty();
-			}
-		});
-		
-		JFXTreeTableColumn<Funcionario, String> colCidade = new JFXTreeTableColumn<>("Cidade");
-		colCidade.setPrefWidth(150);
-		colCidade.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getPessoa().getEndereco().cidadeProperty();
-			}
-		});
-		
-		JFXTreeTableColumn<Funcionario, String> colSalario = new JFXTreeTableColumn<>("Salário");
-		colSalario.setPrefWidth(150);
-		colSalario.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().salarioProperty().asString();
-			}
-		});
-		
-		JFXTreeTableColumn<Funcionario, String> colFuncao = new JFXTreeTableColumn<>("Função");
-		colFuncao.setPrefWidth(150);
-		colFuncao.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getFuncao().nomeProperty();
-			}
-		});
-		
-		JFXTreeTableColumn<Funcionario, String> colSetor = new JFXTreeTableColumn<>("Setor");
-		colSetor.setPrefWidth(150);
-		colSetor.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Funcionario, String>, ObservableValue<String>>() {
-			@Override
-			public ObservableValue<String> call(CellDataFeatures<Funcionario, String> param) {
-				return param.getValue().getValue().getSetor().nomeProperty();
-			}
-		});
-		
-		ObservableList<Funcionario> funcionarios = FXCollections.observableArrayList();
-		funcionarios.addAll(FuncionarioDAO.listar());
-		TreeItem<Funcionario> root = new RecursiveTreeItem<Funcionario>(funcionarios, RecursiveTreeObject::getChildren);
-		
-		//tblFuncionarios.getColumns().setAll(colId, colNome, colRg, colCpf, colCidade, colSalario, colFuncao, colSetor);
-		//tblFuncionarios.setRoot(root);
-		//tblFuncionarios.setShowRoot(false);
+			
+			areaTanques.getChildren().add(grfTanque);
+		}
 		
 		btnCadastrarTanque.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -321,7 +284,7 @@ public class GerenciarTanquesController implements Initializable {
 			itensGrafico.add(new PieChart.Data(repa.getCombustivel().getNome(), lstReparticoes.size()));
 		}
 		
-		grfTanque.setData(itensGrafico);
+		grfTanqueReparticoes.setData(itensGrafico);
 		
 		int a = 0;
 		

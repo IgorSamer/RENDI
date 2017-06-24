@@ -49,6 +49,13 @@
 	-fx-font-weight: bold;
 }
 
+.bomba {
+	-fx-background-image: url("../img/auxiliares/Bomba.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 300 100%;
+    -fx-background-position: center center;
+}
+
 .jfx-snackbar-content {
 	-fx-background-color: #333333;
   	-fx-background-radius: 6px 6px 0px 0px;
