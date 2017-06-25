@@ -56,6 +56,30 @@
     -fx-background-position: center center;
 }
 
+.fundo {
+    -fx-background-repeat: stretch;
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+}
+
+.carrosel_item {
+	-fx-background-color: transparent;
+	-fx-text-fill: #ffffff;
+	-fx-padding: 0px;
+	-fx-opacity: 0.7;
+	-fx-font-size: 20px;
+	-fx-cursor: hand;
+}
+
+.carrosel_item:hover {
+	-fx-opacity: 1;
+	-fx-effect: dropshadow(three-pass-box, #000000, 10, 0, 0, 0);
+}
+
+.desativado {
+	-fx-opacity: 0.3;
+}
+
 .jfx-snackbar-content {
 	-fx-background-color: #333333;
   	-fx-background-radius: 6px 6px 0px 0px;

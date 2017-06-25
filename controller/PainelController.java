@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -18,6 +19,7 @@ import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,11 +29,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -44,10 +48,19 @@ public class PainelController implements Initializable {
     private AnchorPane anchorPane;
     
 	@FXML
+	private StackPane stackPane, stackPane1;
+	
+	@FXML
+	private HBox boxCarrosel, boxCarrosel1;
+	
+	@FXML
     private ImageView imgLogo;
     
     @FXML
-    private Label lblTipoNome, lblData;
+    private Label lblTipoNome, lblData, lblTitulo;
+    
+    @FXML
+    private BorderPane bdrPainel;
 
     @FXML
     private JFXDrawer drawer;
@@ -76,15 +89,136 @@ public class PainelController implements Initializable {
     public static Integer getIdFuncionario() {
     	return idFuncionario;
     }
-	
+    
+    Integer fundoNumero = 1;
+    
+    double carroselX = 0;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		stackPane.setStyle("-fx-background-image: url('/view/img/fundos/1.jpg')");
+		
+		Timeline fundo = new Timeline(
+			new KeyFrame(Duration.millis(1000),
+					event -> {
+						carroselX -= 30;
+						
+						TranslateTransition carrosel = new TranslateTransition(Duration.millis(1000), boxCarrosel);
+						carrosel.setToX(carroselX);
+						carrosel.play();
+						
+						TranslateTransition carrosel1 = new TranslateTransition(Duration.millis(1000), boxCarrosel1);
+						carrosel1.setToX(carroselX);
+						carrosel1.play();
+						
+						if(boxCarrosel.getTranslateX() < -700) {
+							boxCarrosel.setTranslateX(0);
+							
+							carroselX = 0;
+						}
+						
+						//fundoNumero++;
+						
+						//if(fundoNumero > 6) {
+						//	fundoNumero = 1;
+						//}
+			        }
+			)
+		);
+
+		fundo.setCycleCount(Animation.INDEFINITE);
+		fundo.play();
+		
+		ArrayList<Node> botoes = new ArrayList<>();
+		botoes.addAll(boxCarrosel.getChildren());
+		botoes.addAll(boxCarrosel1.getChildren());
+		
+		for(Node btn : botoes) {
+			btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent arg0) {
+					mudaConteudo(btn.getId());
+					
+					FadeTransition fadeInPainel = new FadeTransition(Duration.millis(500), bdrPainel);
+					fadeInPainel.setFromValue(0);
+					fadeInPainel.setToValue(1);
+					fadeInPainel.play();
+					
+					FadeTransition fadeInDrawer = new FadeTransition(Duration.millis(500), drawer);
+					fadeInDrawer.setFromValue(0);
+					fadeInDrawer.setToValue(1);
+					fadeInDrawer.play();
+					
+					fadeInDrawer.setOnFinished(e -> {
+						drawer.open();
+					});
+					
+					FadeTransition fadeOutStack = new FadeTransition(Duration.millis(500), stackPane);
+					fadeOutStack.setFromValue(1);
+					fadeOutStack.setToValue(0);
+					fadeOutStack.play();
+					
+					FadeTransition fadeOutStack1 = new FadeTransition(Duration.millis(500), stackPane1);
+					fadeOutStack1.setFromValue(1);
+					fadeOutStack1.setToValue(0);
+					fadeOutStack1.play();
+					
+					fadeOutStack.setOnFinished(e -> {
+						anchorPane.getChildren().removeAll(stackPane, stackPane1);
+					});
+				}
+			});
+			
+			btn.setOnMouseEntered(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent arg0) {
+					if(!fundoNumero.equals(Integer.valueOf(btn.getAccessibleText()))) {
+						FadeTransition fadeOut = new FadeTransition(Duration.millis(500), stackPane);
+						fadeOut.setFromValue(1);
+						fadeOut.setToValue(0);
+						fadeOut.play();
+						
+						fadeOut.setOnFinished(e -> {
+							lblTitulo.setText(((Button) btn).getText());
+							
+							stackPane.setStyle("-fx-background-image: url('/view/img/fundos/"+ btn.getAccessibleText() +".jpg')");
+							
+							FadeTransition fadeIn = new FadeTransition(Duration.millis(500), stackPane);
+							fadeIn.setFromValue(0);
+							fadeIn.setToValue(1);
+							fadeIn.play();
+						});
+						
+						fundoNumero = Integer.valueOf(btn.getAccessibleText());
+					}
+					
+					for(Node btnDnv : botoes) {
+						if(!fundoNumero.equals(Integer.valueOf(btnDnv.getAccessibleText()))) {
+							btnDnv.getStyleClass().add("desativado");
+						}
+					}
+					
+					fundo.stop();
+				}
+			});
+			
+			btn.setOnMouseExited(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent arg0) {
+					for(Node btnDnv : botoes) {
+						btnDnv.getStyleClass().remove("desativado");
+					}
+					
+					fundo.play();
+				}
+			});
+		}
+		
 		logo = new Image(getClass().getResource("/view/img/Logo_cinza.gif").toExternalForm());
 		logo_estatica = new Image(getClass().getResource("/view/img/Logo_cinza_estatico.gif").toExternalForm());
 		
+		stackPane.toBack();
 		conteudo.toBack();
-		
-		drawer.open();
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		

@@ -35,7 +35,7 @@ public class App extends Application {
 				email.setPara("igoremascordeiro@hotmail.com");
 				email.setAssunto("Feliz Aniversário!");
 				email.setMensagem("<h1>Feliz Aniversário!</h1><p>Parabéns pra você! :D</p>");
-				email.enviar();
+				//email.enviar();
 			}
 		}).start();
 	}
