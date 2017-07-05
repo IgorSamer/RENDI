@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <StackPane fx:id="conteudoConteudo" prefHeight="500.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarFornecedoresController">
    <children>
@@ -20,40 +22,72 @@
                   <Insets top="10.0" />
                </VBox.margin></Text>
             <JFXTreeTableView fx:id="tblFornecedores" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="TOP_CENTER" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="btnExcluirFornecedor" buttonType="RAISED" text="Excluir">
+                  <JFXButton fx:id="btnPesquisarFornecedor" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/magnify.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnAlterarFornecedor" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/pencil.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnVisualizarFornecedor" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/eye.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCadastrarFornecedor" buttonType="RAISED">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/plus-circle.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnExcluirFornecedor" buttonType="RAISED">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn_erro" />
                      </styleClass>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="btnAlterarFornecedor" buttonType="RAISED" text="Alterar">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn_sucesso" />
-                     </styleClass>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="btnVisualizarFornecedor" buttonType="RAISED" text="Visualizar">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn_sucesso" />
-                     </styleClass>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="btnCadastrarFornecedor" buttonType="RAISED" text="Cadastrar">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn_sucesso" />
-                     </styleClass>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/icones/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </JFXButton>
                </children>
             </HBox>

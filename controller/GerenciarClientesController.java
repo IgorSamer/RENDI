@@ -1,11 +1,12 @@
 package controller;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
+
+import org.apache.commons.io.IOUtils;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -30,20 +31,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import model.bean.Endereco;
-import model.bean.Escolaridade;
-import model.bean.EstadoCivil;
-import model.bean.Funcao;
 import model.bean.Cliente;
+import model.bean.Endereco;
 import model.bean.Genero;
+import model.bean.JSONException;
+import model.bean.JSONObject;
+import model.bean.JSONTokener;
 import model.bean.Pessoa;
 import model.bean.PessoaFisica;
-import model.bean.Setor;
 import model.bean.Telefone;
 import model.dao.ClienteDAO;
 import model.dao.PessoaFisicaDAO;
@@ -216,6 +217,31 @@ public class GerenciarClientesController implements Initializable {
 			public void handle(MouseEvent arg0) {
 				funCadastrar.setVisible(false);
 				funGerenciar.setVisible(true);
+			}
+		});
+		
+		txtCep.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@SuppressWarnings("deprecation")
+			@Override
+			public void handle(KeyEvent event) {
+				String cep = txtCep.getText().trim();
+				
+				if(cep.length() == 8) {
+					try {
+						JSONObject jo = (JSONObject) new JSONTokener(IOUtils.toString(new URL("https://viacep.com.br/ws/"+ cep +"/json").openStream())).nextValue();
+					    
+					    txtUf.setText(jo.getString("uf"));
+					    txtCidade.setText(jo.getString("localidade"));
+					    txtBairro.setText(jo.getString("bairro"));
+					    txtRua.setText(jo.getString("logradouro"));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		});
 		

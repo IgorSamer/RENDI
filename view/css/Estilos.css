@@ -43,6 +43,17 @@
 	-fx-background-color: #ffffff;
 }
 
+.btn_aviso {
+	-fx-padding: 5px;
+	-fx-font-size: 12px;
+}
+
+.btn_mini {
+	-fx-cursor: hand;
+	-fx-text-fill: #fff;
+	-fx-padding: 5px 10px;
+}
+
 .lbl_titulo {
 	-fx-text-fill: #424242;
 	-fx-font-size: 30px;

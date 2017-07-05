@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="conteudoConteudo" prefHeight="500.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarFuncionariosController">
+<StackPane fx:id="conteudoConteudo" prefHeight="562.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarFuncionariosController">
    <children>
       <VBox fx:id="funGerenciar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -33,17 +37,26 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/usuario_padrao.png" />
-                           </image>
-                        </ImageView>
+                        <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ImageView fx:id="imgFuncionario" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="lblNome" text="Label" />
+                              <HBox alignment="TOP_CENTER">
+                                 <children>
+                                    <Label fx:id="lblDataAdmissao" text="Label" />
+                                    <Label fx:id="lblDataDemissao" text="Label" />
+                                 </children>
+                              </HBox>
+                              <JFXTreeTableView fx:id="tblTelefones" />
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
               </items>
             </SplitPane>
-            <HBox alignment="TOP_CENTER" prefWidth="200.0" style="-fx-background-color: #424242;">
+            <HBox alignment="TOP_CENTER" prefWidth="200.0">
                <children>
+                  <JFXTextField fx:id="txtPesquisar" focusColor="#ff9800" promptText="Pesquisar" visible="false" />
                   <JFXButton fx:id="btnPesquisarFuncionario" buttonType="RAISED">
                      <styleClass>
                         <String fx:value="btn" />
@@ -115,73 +128,139 @@
       </VBox>
       <VBox fx:id="funCadastrar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Cadastrar Funcionários">
+            <Text fx:id="txtTitulo" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="lbl_titulo" text="Cadastrar Funcionários">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin></Text>
-            <VBox alignment="CENTER" prefHeight="56.0" prefWidth="700.0">
-               <children>
-                  <HBox alignment="CENTER">
+            <SplitPane fx:id="splCad" dividerPositions="1.0" prefHeight="397.0" prefWidth="681.0" styleClass="spl_geral">
+               <items>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <JFXTextField fx:id="txtNome" focusColor="#ff9800" labelFloat="true" promptText="Nome" />
-                        <JFXTextField fx:id="txtSobrenome" focusColor="#ff9800" labelFloat="true" promptText="Sobrenome" />
-                        <JFXTextField fx:id="txtRg" focusColor="#ff9800" labelFloat="true" promptText="RG" />
-                        <JFXTextField fx:id="txtCpf" focusColor="#ff9800" labelFloat="true" promptText="CPF" />
-                        <JFXTextField fx:id="txtEmail" focusColor="#ff9800" labelFloat="true" promptText="E-mail" />
+                        <VBox alignment="CENTER" prefHeight="406.0" prefWidth="673.0" AnchorPane.bottomAnchor="-42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <JFXTextField fx:id="txtNome" focusColor="#ff9800" labelFloat="true" promptText="Nome" />
+                                    <JFXTextField fx:id="txtSobrenome" focusColor="#ff9800" labelFloat="true" promptText="Sobrenome" />
+                                    <JFXTextField fx:id="txtRg" focusColor="#ff9800" labelFloat="true" promptText="RG" />
+                                    <JFXTextField fx:id="txtCpf" focusColor="#ff9800" labelFloat="true" promptText="CPF" />
+                                    <JFXTextField fx:id="txtEmail" focusColor="#ff9800" labelFloat="true" promptText="E-mail" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <JFXTextField fx:id="txtCep" focusColor="#ff9800" labelFloat="true" promptText="CEP" />
+                                    <JFXTextField fx:id="txtUf" focusColor="#ff9800" labelFloat="true" promptText="UF" />
+                                    <JFXTextField fx:id="txtCidade" focusColor="#ff9800" labelFloat="true" promptText="Cidade" />
+                                    <JFXTextField fx:id="txtBairro" focusColor="#ff9800" labelFloat="true" promptText="Bairro" />
+                                    <JFXTextField fx:id="txtRua" focusColor="#ff9800" labelFloat="true" promptText="Rua" />
+                                    <JFXTextField fx:id="txtNumero" focusColor="#ff9800" labelFloat="true" promptText="Número" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <JFXDatePicker fx:id="datAdmissao" defaultColor="#ff9800" promptText="Data de admissão" />
+                                    <JFXDatePicker fx:id="datDemissao" defaultColor="#ff9800" promptText="Data de demissão" />
+                                    <JFXDatePicker fx:id="datNascimento" defaultColor="#ff9800" promptText="Data de nascimento" />
+                                    <JFXTextField fx:id="txtSalario" focusColor="#ff9800" promptText="Salário" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <JFXComboBox fx:id="cmbEstadoCivil" promptText="Estado Civil" />
+                                    <JFXComboBox fx:id="cmbGenero" promptText="Gênero" />
+                                    <JFXComboBox fx:id="cmbEscolaridade" promptText="Escolaridade" />
+                                    <JFXComboBox fx:id="cmbFuncao" promptText="Função" />
+                                    <JFXComboBox fx:id="cmbSetor" promptText="Setor" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" prefHeight="104.0" prefWidth="673.0">
+                                 <children>
+                                    <JFXTextField fx:id="txtTelefone" focusColor="#ff9800" promptText="Telefone" />
+                                    <JFXButton fx:id="btnAdicionarTelefone" text="+" />
+                                    <JFXButton fx:id="btnRemoverTelefone" text="-" />
+                                    <JFXComboBox fx:id="cmbTelefones" promptText="Telefones" visible="false" />
+                                    <Pane fx:id="paneConteudo" prefHeight="50.0" prefWidth="61.0">
+                                       <children>
+                                          <JFXButton fx:id="btnFotoAdicionar" layoutX="1.0" layoutY="1.0">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <graphic>
+                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../img/icones/file-image.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <styleClass>
+                                                <String fx:value="btn_mini" />
+                                                <String fx:value="btn_sucesso" />
+                                             </styleClass>
+                                          </JFXButton>
+                                       </children>
+                                    </Pane>
+                                    <VBox alignment="CENTER" prefHeight="93.0" prefWidth="200.0">
+                                       <children>
+                                          <HBox>
+                                             <children>
+                                                <ImageView fx:id="imgFoto" fitHeight="147.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="25.0" prefWidth="186.0">
+                                             <children>
+                                                <JFXButton fx:id="btnFotoTirar" text="Tirar Foto" visible="false">
+                                                   <styleClass>
+                                                      <String fx:value="btn_mini" />
+                                                      <String fx:value="btn_sucesso" />
+                                                   </styleClass>
+                                                </JFXButton>
+                                                <JFXButton fx:id="btnFotoCancelar" text="Cancelar" visible="false">
+                                                   <styleClass>
+                                                      <String fx:value="btn_mini" />
+                                                      <String fx:value="btn_erro" />
+                                                   </styleClass>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <JFXCheckBox fx:id="chkCadastrar" text="Cadastrar Usuário" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER">
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <JFXTextField fx:id="txtCep" focusColor="#ff9800" labelFloat="true" promptText="CEP" />
-                        <JFXTextField fx:id="txtUf" focusColor="#ff9800" labelFloat="true" promptText="UF" />
-                        <JFXTextField fx:id="txtCidade" focusColor="#ff9800" labelFloat="true" promptText="Cidade" />
-                        <JFXTextField fx:id="txtBairro" focusColor="#ff9800" labelFloat="true" promptText="Bairro" />
-                        <JFXTextField fx:id="txtRua" focusColor="#ff9800" labelFloat="true" promptText="Rua" />
-                        <JFXTextField fx:id="txtNumero" focusColor="#ff9800" labelFloat="true" promptText="Número" />
+                        <VBox fx:id="vBoxCad" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                     <children>
-                        <JFXDatePicker fx:id="datAdmissao" defaultColor="#ff9800" promptText="Data de admissão" />
-                        <JFXDatePicker fx:id="datDemissao" defaultColor="#ff9800" promptText="Data de demissão" />
-                        <JFXDatePicker fx:id="datNascimento" defaultColor="#ff9800" promptText="Data de nascimento" />
-                        <JFXTextField fx:id="txtSalario" focusColor="#ff9800" promptText="Salário" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                     <children>
-                        <JFXComboBox fx:id="cmbEstadoCivil" promptText="Estado Civil" />
-                        <JFXComboBox fx:id="cmbGenero" promptText="Gênero" />
-                        <JFXComboBox fx:id="cmbEscolaridade" promptText="Escolaridade" />
-                        <JFXComboBox fx:id="cmbFuncao" promptText="Função" />
-                        <JFXComboBox fx:id="cmbSetor" promptText="Setor" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <JFXTextField fx:id="txtTelefone" focusColor="#ff9800" promptText="Telefone" />
-                        <JFXButton fx:id="btnAdicionarTelefone" text="+" />
-                        <JFXButton fx:id="btnRemoverTelefone" text="-" />
-                        <JFXComboBox fx:id="cmbTelefones" promptText="Telefones" visible="false" />
-                     </children>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-            </VBox>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <JFXButton fx:id="btnCancelarFuncionario" buttonType="RAISED" text="Cancelar">
@@ -198,8 +277,20 @@
                         <String fx:value="btn" />
                         <String fx:value="btn_sucesso" />
                      </styleClass>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnAtualizarFuncionario" buttonType="RAISED" text="Atualizar" visible="false">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn_sucesso" />
+                     </styleClass>
                   </JFXButton>
                </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>

@@ -36,6 +36,12 @@ public class Pessoa extends RecursiveTreeObject<Pessoa> {
 		this.setSobrenome(Sobrenome);
 	}
 	
+	public Pessoa(String Nome, String Email, ArrayList<Telefone> Telefones) {
+		this.setNome(Nome);
+		this.setEmail(Email);
+		this.setTelefones(Telefones);
+	}
+	
 	public Pessoa(String Nome, String Sobrenome, String Email, PessoaFisica Pessoa_fisica, Endereco Endereco) {
 		this.setNome(Nome);
 		this.setSobrenome(Sobrenome);

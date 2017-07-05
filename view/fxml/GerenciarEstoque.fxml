@@ -41,7 +41,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <HBox alignment="TOP_CENTER" prefWidth="200.0" style="-fx-background-color: #424242;">
+            <HBox alignment="TOP_CENTER" prefWidth="200.0">
                <children>
                   <JFXButton fx:id="btnPesquisarEstoque" buttonType="RAISED">
                      <styleClass>
@@ -138,6 +138,8 @@
                      <children>
                         <JFXComboBox fx:id="cmbSetor" promptText="Setor" />
                         <JFXComboBox fx:id="cmbUnidadeMedida" promptText="Unidade de Medida" />
+                        <JFXButton fx:id="btnImagem" text="Escolher Imagem" />
+                        <ImageView fx:id="imgProdutoImg" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </HBox>
                </children>

@@ -48,7 +48,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button id="GerenciarLavaCar" accessibleText="4" contentDisplay="TOP" mnemonicParsing="false" styleClass="carrosel_item" text="Lava-car">
+                              <Button id="GerenciarServicos" accessibleText="4" contentDisplay="TOP" mnemonicParsing="false" styleClass="carrosel_item" text="Lava-car">
                                  <graphic>
                                     <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true">
                                        <image>
@@ -57,7 +57,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button id="GerenciarTrocaOleo" accessibleText="5" contentDisplay="TOP" mnemonicParsing="false" styleClass="carrosel_item" text="Troca de Óleo">
+                              <Button id="GerenciarServicos" accessibleText="5" contentDisplay="TOP" mnemonicParsing="false" styleClass="carrosel_item" text="Troca de Óleo">
                                  <graphic>
                                     <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true">
                                        <image>
@@ -97,7 +97,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button id="GerenciarLavaCar" accessibleText="4" contentDisplay="TOP" mnemonicParsing="false" styleClass="carrosel_item" text="Lava-car">
+                              <Button id="GerenciarServicos" accessibleText="4" contentDisplay="TOP" mnemonicParsing="false" styleClass="carrosel_item" text="Lava-car">
                                  <graphic>
                                     <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true">
                                        <image>
@@ -106,7 +106,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button id="GerenciarTrocaOleo" accessibleText="5" contentDisplay="TOP" mnemonicParsing="false" styleClass="carrosel_item" text="Troca de Óleo">
+                              <Button id="GerenciarServicos" accessibleText="5" contentDisplay="TOP" mnemonicParsing="false" styleClass="carrosel_item" text="Troca de Óleo">
                                  <graphic>
                                     <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true">
                                        <image>
@@ -167,7 +167,8 @@
          <left>
             <Pane prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="lblTipoNome" layoutX="5.0" layoutY="15.0" prefHeight="30.0" prefWidth="191.0" text="Label" textFill="#ffffffb2">
+                  <ImageView fx:id="imgFotoFuncionario" fitHeight="40.0" fitWidth="40.0" layoutX="5.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblTipoNome" layoutX="50.0" layoutY="15.0" prefHeight="30.0" prefWidth="150.0" text="Label" textFill="#ffffffb2">
                      <font>
                         <Font size="20.0" />
                      </font>

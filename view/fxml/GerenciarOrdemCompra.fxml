@@ -7,6 +7,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
@@ -15,6 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <StackPane fx:id="conteudoConteudo" prefHeight="500.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GerenciarOrdemCompraController">
@@ -34,16 +36,26 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/usuario_padrao.png" />
-                           </image>
-                        </ImageView>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label fx:id="lblFornecedor">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <JFXTreeTableView fx:id="tblProdutosDetalhes" />
+                              <Label fx:id="lblStatus" text="Status">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
               </items>
             </SplitPane>
-            <HBox alignment="TOP_CENTER" prefWidth="200.0" style="-fx-background-color: #424242;">
+            <HBox alignment="TOP_CENTER" prefWidth="200.0">
                <children>
                   <JFXButton fx:id="btnPesquisarOrdemCompra" buttonType="RAISED">
                      <styleClass>

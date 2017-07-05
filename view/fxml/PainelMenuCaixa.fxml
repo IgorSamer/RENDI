@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton accessibleText="controle" prefHeight="25.0" prefWidth="175.0" text="Controle">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn_menu" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="btn_icone">
+               <image>
+                  <Image url="@../img/icones/settings.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton accessibleText="servicos" prefHeight="25.0" prefWidth="175.0" text="Serviços">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn_menu" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="btn_icone">
+               <image>
+                  <Image url="@../img/icones/truck.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton id="sair" prefHeight="25.0" prefWidth="175.0" text="Sair">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn_menu" />
+         </styleClass>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="btn_icone">
+               <image>
+                  <Image url="@../img/icones/logout.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</HBox>

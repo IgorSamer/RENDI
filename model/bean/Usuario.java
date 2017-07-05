@@ -24,6 +24,13 @@ public class Usuario extends RecursiveTreeObject<Usuario> {
 		this.setFuncionario(Funcionario);
 	}
 	
+	public Usuario(String Usuario, String Senha, String Data, Integer Ativo) {
+		this.setUsuario(Usuario);
+		this.setSenha(Senha);
+		this.setData(Data);
+		this.setAtivo(Ativo);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -73,9 +80,8 @@ public class Usuario extends RecursiveTreeObject<Usuario> {
 		return data;
 	}
 	
-	
 	public final Integer getAtivo() {
-		return id.get();
+		return ativo.get();
 	}
 	
 	public final void setAtivo(Integer Ativo) {

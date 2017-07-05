@@ -20,6 +20,16 @@ public class Bico extends RecursiveTreeObject<Bico> {
 		this.setReparticao(Reparticao);
 	}
 	
+	public Bico(Integer Id, String Nome, TanqueReparticao Reparticao) {
+		this.setId(Id);
+		this.setNome(Nome);
+		this.setReparticao(Reparticao);
+	}
+	
+	public Bico(Integer Id) {
+		this.setId(Id);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -58,5 +68,10 @@ public class Bico extends RecursiveTreeObject<Bico> {
 	
 	public void setReparticao(TanqueReparticao reparticao) {
 		this.reparticao = reparticao;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome() + " (" + this.getReparticao().getCombustivel().getNome() + ")";
 	}
 }

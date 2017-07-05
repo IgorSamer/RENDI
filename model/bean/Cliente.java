@@ -13,6 +13,10 @@ public class Cliente extends RecursiveTreeObject<Cliente> {
 		this.setId(Id);
 		this.setPessoa(Pessoa);
 	}
+	
+	public Cliente(Integer Id) {
+		this.setId(Id);
+	}
 
 	public final Integer getId() {
 		return id.get();
@@ -32,5 +36,10 @@ public class Cliente extends RecursiveTreeObject<Cliente> {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getPessoa().getNome() + " " + this.getPessoa().getSobrenome();
 	}
 }

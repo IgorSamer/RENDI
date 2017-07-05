@@ -53,7 +53,7 @@ public class ServicoVenda extends RecursiveTreeObject<ServicoVenda> {
 	}
 	
 	public final String getPlaca() {
-		return data.get();
+		return placa.get();
 	}
 	
 	public final void setPlaca(String Placa) {

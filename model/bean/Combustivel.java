@@ -26,6 +26,15 @@ public class Combustivel extends RecursiveTreeObject<Combustivel> {
 		this.setId(Id);
 	}
 	
+	public Combustivel(String Nome) {
+		this.setNome(Nome);
+	}
+	
+	public Combustivel(String Nome, Double Preco) {
+		this.setNome(Nome);
+		this.setPreco(Preco);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

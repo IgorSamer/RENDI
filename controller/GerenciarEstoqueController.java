@@ -1,15 +1,18 @@
 package controller;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
+import javax.xml.bind.DatatypeConverter;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -18,14 +21,10 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -40,25 +39,16 @@ import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import model.bean.Endereco;
-import model.bean.Escolaridade;
-import model.bean.EstadoCivil;
-import model.bean.Funcao;
 import model.bean.Funcionario;
-import model.bean.Genero;
-import model.bean.Pessoa;
-import model.bean.PessoaFisica;
 import model.bean.Produto;
 import model.bean.Setor;
-import model.bean.Telefone;
 import model.bean.UnidadeMedida;
 import model.dao.FuncionarioDAO;
-import model.dao.PessoaFisicaDAO;
 import model.dao.ProdutoDAO;
 
 public class GerenciarEstoqueController implements Initializable {
@@ -104,6 +94,12 @@ public class GerenciarEstoqueController implements Initializable {
     private JFXComboBox<UnidadeMedida> cmbUnidadeMedida;
     
     @FXML
+    private JFXButton btnImagem;
+    
+    @FXML
+    private ImageView imgProdutoImg;
+    
+    @FXML
     private JFXButton btnCancelarEstoque, btnCadastrarEstoqueFinal;
     
     @FXML
@@ -112,9 +108,7 @@ public class GerenciarEstoqueController implements Initializable {
     @FXML
     private ImageView imgProduto;
     
-    public static boolean mostra = false;
-	
-    Timeline timeline;
+    private File arquivo;
     
 	@SuppressWarnings("unchecked")
 	@Override
@@ -125,26 +119,6 @@ public class GerenciarEstoqueController implements Initializable {
 				
 			}
 		});
-		
-		mostra = false;
-		
-		timeline = new Timeline(
-			new KeyFrame(Duration.millis(100),
-					event -> {
-						if(mostra) {
-							funGerenciar.setVisible(false);
-							funCadastrar.setVisible(true);
-							
-							mostra = false;
-							
-							timeline.stop();
-						}
-			        }
-			)
-		);
-		
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.play();
 		
 		JFXTreeTableColumn<Produto, String> colId = new JFXTreeTableColumn<>("Id");
 		colId.setPrefWidth(150);
@@ -247,6 +221,25 @@ public class GerenciarEstoqueController implements Initializable {
 			}
 		});
 		
+		btnImagem.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				FileChooser.ExtensionFilter arquivoFiltro = new FileChooser.ExtensionFilter("Apenas Imagens", "*.jpg", "*.jpeg", "*.png");
+				
+				FileChooser fcEscolher = new FileChooser();
+				fcEscolher.setTitle("Escolher arquivo");
+				fcEscolher.getExtensionFilters().add(arquivoFiltro);
+				
+				arquivo = fcEscolher.showOpenDialog(null);
+				
+				if(arquivo != null) {
+					Image imagemAnexo = new Image(arquivo.toURI().toString());
+					
+					imgProdutoImg.setImage(imagemAnexo);
+				}
+			}
+		});
+		
 		// Populando combobox Setor
 		ObservableList<Setor> obsListaSetor = FXCollections.observableArrayList();
 		obsListaSetor.addAll(FuncionarioDAO.getSetores());
@@ -264,7 +257,32 @@ public class GerenciarEstoqueController implements Initializable {
 			public void handle(MouseEvent arg0) {
 				JFXSnackbar mensagem = new JFXSnackbar(conteudoConteudo);
 				
-				Produto produto = new Produto(0, txtNome.getText().trim(), txtDescricao.getText().trim(), Double.valueOf(txtPreco.getText().trim()), Float.valueOf(txtQuantidade.getText().trim()), "produto_padrao.png", new Setor(cmbSetor.getSelectionModel().getSelectedItem().getId(), null), new UnidadeMedida(cmbUnidadeMedida.getSelectionModel().getSelectedItem().getId(), null), new Funcionario(PainelController.idFuncionario));
+				String imagemNomeNovoFinal = "";
+				
+				if(arquivo != null) {					
+		            try {
+		            	BufferedImage imagemSla = ImageIO.read(arquivo);
+		            	
+		            	String imagemNome = arquivo.getName();       
+		            	String imagemExtensao = imagemNome.substring(imagemNome.indexOf(".") + 1, arquivo.getName().length());
+		            	byte[] imagemNomeByte = imagemNome.getBytes("UTF-8");
+		            	
+		            	MessageDigest md = MessageDigest.getInstance("MD5");
+		            	byte[] retorno = md.digest(imagemNomeByte);
+		            	
+		            	String imagemNomeNovo = DatatypeConverter.printHexBinary(retorno);
+		            	
+		            	imagemNomeNovoFinal = imagemNomeNovo + "." + imagemExtensao;
+		            	
+		            	ImageIO.write(imagemSla, imagemExtensao, new File("C:\\Users\\Igor PC\\workspace\\RENDI\\src\\view\\img\\produtos\\" + imagemNomeNovo + "." + imagemExtensao));
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (NoSuchAlgorithmException e) {
+						e.printStackTrace();
+					}
+				}
+				
+				Produto produto = new Produto(0, txtNome.getText().trim(), txtDescricao.getText().trim(), Double.valueOf(txtPreco.getText().trim()), Float.valueOf(txtQuantidade.getText().trim()), imagemNomeNovoFinal, new Setor(cmbSetor.getSelectionModel().getSelectedItem().getId(), null), new UnidadeMedida(cmbUnidadeMedida.getSelectionModel().getSelectedItem().getId(), null), new Funcionario(PainelController.idFuncionario));
 				
 				if(ProdutoDAO.cadastrar(produto)) {
 					mensagem.show("Produto cadastrado com sucesso!", 2000);

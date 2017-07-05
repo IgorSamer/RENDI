@@ -15,7 +15,7 @@ public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 	private IntegerProperty id = new SimpleIntegerProperty();
 	private StringProperty data = new SimpleStringProperty();
 	private StringProperty data_prevista = new SimpleStringProperty();
-	private IntegerProperty status = new SimpleIntegerProperty();
+	private OrdemCompraStatus status;
 	private StringProperty observacoes = new SimpleStringProperty();
 	private DoubleProperty valor = new SimpleDoubleProperty();
 	private IntegerProperty parcelas = new SimpleIntegerProperty();
@@ -25,7 +25,7 @@ public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 	private TipoPagamento tipo_pagamento;
 	private ArrayList<ProdutoOrdemCompra> produtos;
 	
-	public OrdemCompra(Integer Id, String Data, String Data_prevista, Integer Status, String Observacoes, Double Valor, Integer Parcelas, Integer Distancia_pagamento, Fornecedor Fornecedor, Funcionario Funcionario, TipoPagamento Tipo_pagamento, ArrayList<ProdutoOrdemCompra> Produtos) {
+	public OrdemCompra(Integer Id, String Data, String Data_prevista, OrdemCompraStatus Status, String Observacoes, Double Valor, Integer Parcelas, Integer Distancia_pagamento, Fornecedor Fornecedor, Funcionario Funcionario, TipoPagamento Tipo_pagamento, ArrayList<ProdutoOrdemCompra> Produtos) {
 		this.setId(Id);
 		this.setData(Data);
 		this.setData_prevista(Data_prevista);
@@ -78,18 +78,6 @@ public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 	
 	public StringProperty data_previstaProperty() {
 		return data_prevista;
-	}
-	
-	public final Integer getStatus() {
-		return status.get();
-	}
-	
-	public final void setStatus(Integer Status) {
-		status.set(Status);
-	}
-	
-	public IntegerProperty statusProperty() {
-		return status;
 	}
 	
 	public final String getObservacoes() {
@@ -170,5 +158,13 @@ public class OrdemCompra extends RecursiveTreeObject<OrdemCompra> {
 	
 	public void setProdutos(ArrayList<ProdutoOrdemCompra> Produtos) {
 		this.produtos = Produtos;
+	}
+
+	public OrdemCompraStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrdemCompraStatus status) {
+		this.status = status;
 	}
 }

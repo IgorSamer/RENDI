@@ -40,7 +40,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <HBox alignment="TOP_CENTER" prefWidth="200.0" style="-fx-background-color: #424242;">
+            <HBox alignment="TOP_CENTER" prefWidth="200.0">
                <children>
                   <JFXButton fx:id="btnAlterarBomba" buttonType="RAISED">
                      <styleClass>

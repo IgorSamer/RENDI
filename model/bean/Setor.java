@@ -20,6 +20,10 @@ public class Setor extends RecursiveTreeObject<Setor> {
 		this.setNome(Nome);
 	}
 	
+	public Setor(Integer Id) {
+		this.setId(Id);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

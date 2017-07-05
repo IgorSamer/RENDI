@@ -18,6 +18,10 @@ public class Bomba extends RecursiveTreeObject<Bomba> {
 		this.setTanque(Tanque);
 	}
 	
+	public Bomba(Integer Id) {
+		this.setId(Id);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -48,5 +52,10 @@ public class Bomba extends RecursiveTreeObject<Bomba> {
 	
 	public void setTanque(Tanque tanque) {
 		this.tanque = tanque;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome() + " (" + this.getTanque().getNome() + ")";
 	}
 }

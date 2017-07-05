@@ -34,6 +34,12 @@ public class Produto extends RecursiveTreeObject<Produto> {
 		this.setFuncionario(Funcionario);
 	}
 	
+	public Produto(Integer Id, String Nome, Double Preco) {
+		this.setId(Id);
+		this.setNome(Nome);
+		this.setPreco(Preco);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

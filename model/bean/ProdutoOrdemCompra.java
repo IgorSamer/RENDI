@@ -18,6 +18,12 @@ public class ProdutoOrdemCompra extends RecursiveTreeObject<ProdutoOrdemCompra> 
 		this.setProduto(Produto);
 	}
 	
+	public ProdutoOrdemCompra(Integer Id, Integer Quantidade, Produto Produto) {
+		this.setId(Id);
+		this.setQuantidade(Quantidade);
+		this.setProduto(Produto);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

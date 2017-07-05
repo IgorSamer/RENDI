@@ -20,6 +20,15 @@ public class TanqueReparticao extends RecursiveTreeObject<TanqueReparticao> {
 		this.setCombustivel(Combustivel);
 	}
 	
+	public TanqueReparticao(Integer Id, Combustivel Combustivel) {
+		this.setId(Id);
+		this.setCombustivel(Combustivel);
+	}
+	
+	public TanqueReparticao(Integer Id) {
+		this.setId(Id);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -46,5 +55,10 @@ public class TanqueReparticao extends RecursiveTreeObject<TanqueReparticao> {
 	
 	public void setTanque(Tanque tanque) {
 		this.tanque = tanque;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getCombustivel().getNome();
 	}
 }

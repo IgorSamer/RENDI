@@ -16,6 +16,14 @@ public class OrgaoEmissor extends RecursiveTreeObject<OrgaoEmissor> {
 		this.setNome(Nome);
 	}
 	
+	public OrgaoEmissor(String Nome) {
+		this.setNome(Nome);
+	}
+	
+	public OrgaoEmissor(Integer Id) {
+		this.setId(Id);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -38,5 +46,10 @@ public class OrgaoEmissor extends RecursiveTreeObject<OrgaoEmissor> {
 	
 	public StringProperty nomeProperty() {
 		return nome;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
 	}
 }

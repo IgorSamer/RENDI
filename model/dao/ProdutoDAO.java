@@ -6,14 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.mysql.jdbc.Statement;
-
-import model.bean.Fornecedor;
 import model.bean.Funcionario;
 import model.bean.Pessoa;
 import model.bean.Produto;
 import model.bean.Setor;
-import model.bean.Telefone;
 import model.bean.UnidadeMedida;
 import model.conexao.Conexao;
 

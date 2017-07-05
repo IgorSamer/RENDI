@@ -8,11 +8,8 @@ import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
-import model.bean.Cliente;
 import model.bean.Endereco;
 import model.bean.Fornecedor;
-import model.bean.Pessoa;
-import model.bean.PessoaFisica;
 import model.bean.Telefone;
 import model.conexao.Conexao;
 

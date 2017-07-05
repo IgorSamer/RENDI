@@ -1,14 +1,15 @@
 package controller;
 
-import com.jfoenix.controls.JFXDecorator;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.bean.Cliente;
 import model.bean.Email;
+import model.bean.SMS;
+import model.dao.ClienteDAO;
 
 public class App extends Application {
 	@Override
@@ -31,11 +32,18 @@ public class App extends Application {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Email email = new Email();
-				email.setPara("igoremascordeiro@hotmail.com");
-				email.setAssunto("Feliz Aniversário!");
-				email.setMensagem("<h1>Feliz Aniversário!</h1><p>Parabéns pra você! :D</p>");
-				//email.enviar();
+				for(Cliente cliente : ClienteDAO.getAniversariantes()) {
+					Email email = new Email();
+					email.setPara(cliente.getPessoa().getEmail());
+					email.setAssunto("Feliz Aniversário!");
+					email.setMensagem("<h1>Feliz Aniversário, "+ cliente.getPessoa().getNome() +"!</h1><p>Parabéns pra você! :D</p>");
+					email.enviar();
+					
+					SMS mensagem = new SMS();
+					mensagem.setDestinatario(cliente.getPessoa().getTelefones().get(0).getNumero());
+					mensagem.setMensagem("Feliz aniversario, " + cliente.getPessoa().getNome());
+					mensagem.enviar();
+				}
 			}
 		}).start();
 	}

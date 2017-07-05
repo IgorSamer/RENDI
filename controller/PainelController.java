@@ -13,7 +13,6 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXPopup.PopupHPosition;
 import com.jfoenix.controls.JFXPopup.PopupVPosition;
-import com.jfoenix.controls.JFXSpinner;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
@@ -36,9 +35,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.bean.Funcionario;
@@ -54,7 +53,7 @@ public class PainelController implements Initializable {
 	private HBox boxCarrosel, boxCarrosel1;
 	
 	@FXML
-    private ImageView imgLogo;
+    private ImageView imgFotoFuncionario, imgLogo;
     
     @FXML
     private Label lblTipoNome, lblData, lblTitulo;
@@ -247,78 +246,6 @@ public class PainelController implements Initializable {
 		popup.setPopupContainer(anchorPane);
 		popup.setSource(lblTipoNome);
 		lblTipoNome.setOnMouseClicked((e)-> popup.show(PopupVPosition.TOP, PopupHPosition.RIGHT));
-		
-		// Opções no menu de Controle
-		Label itemControle = new Label("Ordem de Compra");
-		itemControle.setId("GerenciarOrdemCompra");
-		itemControle.setAccessibleText("Gerenciar Ordem de Compra");
-		
-		Label itemControle2 = new Label("Clientes");
-		itemControle2.setId("GerenciarClientes");
-		itemControle2.setAccessibleText("Clientes");
-		
-		Label itemControle3 = new Label("Estoque");
-		itemControle3.setId("GerenciarEstoque");
-		itemControle3.setAccessibleText("Estoque");
-		
-		Label itemControle4 = new Label("Fornecedores");
-		itemControle4.setId("GerenciarFornecedores");
-		itemControle4.setAccessibleText("Fornecedores");
-		
-		Label itemControle5 = new Label("Tanques");
-		itemControle5.setId("GerenciarTanques");
-		itemControle5.setAccessibleText("Tanques");
-		
-		Label itemControle6 = new Label("Bombas");
-		itemControle6.setId("GerenciarBombas");
-		itemControle6.setAccessibleText("Bombas");
-		
-		Label itemControle7 = new Label("Bicos");
-		itemControle7.setId("GerenciarBicos");
-		itemControle7.setAccessibleText("Bicos");
-		
-		listaControle.getItems().addAll(itemControle, itemControle2, itemControle3, itemControle4, itemControle5, itemControle6, itemControle7);
-		listaControle.setPrefHeight(250);
-		
-		//Opções no menu de Serviços
-		Label itemServico = new Label("Troca de Óleo");
-		itemServico.setId("GerenciarTrocaOleo");
-		itemServico.setAccessibleText("Troca de Óleo");
-		
-		Label itemServico2 = new Label("Lava-car");
-		itemServico2.setId("GerenciarLavaCar");
-		itemServico2.setAccessibleText("Lava-car");
-		
-		Label itemServico3 = new Label("Abastecimento");
-		itemServico3.setId("GerenciarAbastecimento");
-		itemServico3.setAccessibleText("Abastecimento");
-		
-		listaServicos.getItems().addAll(itemServico, itemServico2, itemServico3);
-		listaServicos.setPrefHeight(130);
-		
-		//Opções no menu de Funcionários
-		Label itemFuncionario = new Label("Gerenciar Funcionários");
-		itemFuncionario.setId("GerenciarFuncionarios");
-		itemFuncionario.setAccessibleText("Gerenciar Funcionários");
-		
-		Label itemFuncionario2 = new Label("Cadastrar Funcionários");
-		itemFuncionario2.setId("GerenciarFuncionarios1");
-		itemFuncionario2.setAccessibleText("Cadastrar Funcionários");
-		
-		listaFuncionarios.getItems().addAll(itemFuncionario, itemFuncionario2);
-		listaFuncionarios.setPrefHeight(100);
-		
-		//Opções no menu de Licenças
-		Label itemLicenca = new Label("Gerenciar Licenças");
-		itemLicenca.setId("GerenciarLicencas");
-		itemLicenca.setAccessibleText("Gerenciar Licenças");
-		
-		Label itemLicenca2 = new Label("Cadastrar Licenças");
-		itemLicenca2.setId("GerenciarLicencas1");
-		itemLicenca2.setAccessibleText("Cadastrar Licenças");
-		
-		listaLicencas.getItems().addAll(itemLicenca, itemLicenca2);
-		listaLicencas.setPrefHeight(100);
 	}
 	
 	public void setFuncionario(Funcionario func) {
@@ -327,16 +254,134 @@ public class PainelController implements Initializable {
 		String tipoFunc = func.getFuncao().getNome();
 		String tipoMenu = "";
 		
+		Image fotoFuncionarioImg = new Image(getClass().getResource(Funcionario.getCaminhoFoto(func.getFoto())).toExternalForm());
+		
+		imgFotoFuncionario.setImage(fotoFuncionarioImg);
 		lblTipoNome.setText(func.getPessoa().getNome() + "(" + tipoFunc + ")");
 		
 		try {
+			Label itemControle, itemControle2, itemControle3, itemControle10;
+			Label itemServico, itemServico2;
+			
 			switch(tipoFunc) {
 				case "Gerente":
 					tipoMenu = "PainelMenuGerente";
+					
+					// Opções no menu de Controle
+					itemControle = new Label("Ordem de Compra");
+					itemControle.setId("GerenciarOrdemCompra");
+					itemControle.setAccessibleText("Gerenciar Ordem de Compra");
+					
+					itemControle2 = new Label("Clientes");
+					itemControle2.setId("GerenciarClientes");
+					itemControle2.setAccessibleText("Clientes");
+					
+					itemControle3 = new Label("Estoque");
+					itemControle3.setId("GerenciarEstoque");
+					itemControle3.setAccessibleText("Estoque");
+					
+					Label itemControle4 = new Label("Fornecedores");
+					itemControle4.setId("GerenciarFornecedores");
+					itemControle4.setAccessibleText("Fornecedores");
+					
+					Label itemControle5 = new Label("Órgãos Emissores");
+					itemControle5.setId("GerenciarOrgaosEmissores");
+					itemControle5.setAccessibleText("Órgãos Emissores");
+					
+					Label itemControle6 = new Label("Servicos");
+					itemControle6.setId("GerenciarServicosControle");
+					itemControle6.setAccessibleText("Servicos");
+					
+					Label itemControle7 = new Label("Tanques");
+					itemControle7.setId("GerenciarTanques");
+					itemControle7.setAccessibleText("Tanques");
+					
+					Label itemControle8 = new Label("Bombas");
+					itemControle8.setId("GerenciarBombas");
+					itemControle8.setAccessibleText("Bombas");
+					
+					Label itemControle9 = new Label("Bicos");
+					itemControle9.setId("GerenciarBicos");
+					itemControle9.setAccessibleText("Bicos");
+					
+					itemControle10 = new Label("Caixa");
+					itemControle10.setId("GerenciarCaixa");
+					itemControle10.setAccessibleText("Caixa");
+					
+					listaControle.getItems().addAll(itemControle, itemControle2, itemControle3, itemControle4, itemControle5, itemControle6, itemControle7, itemControle8, itemControle9, itemControle10);
+					listaControle.setPrefHeight(350);
+					
+					//Opções no menu de Serviços
+					itemServico = new Label("Gerais");
+					itemServico.setId("GerenciarServicos");
+					itemServico.setAccessibleText("Gerais");
+					
+					itemServico2 = new Label("Abastecimento");
+					itemServico2.setId("GerenciarAbastecimento");
+					itemServico2.setAccessibleText("Abastecimento");
+					
+					listaServicos.getItems().addAll(itemServico, itemServico2);
+					listaServicos.setPrefHeight(130);
+					
+					//Opções no menu de Funcionários
+					Label itemFuncionario = new Label("Gerenciar Funcionários");
+					itemFuncionario.setId("GerenciarFuncionarios");
+					itemFuncionario.setAccessibleText("Gerenciar Funcionários");
+					
+					Label itemFuncionario2 = new Label("Cadastrar Funcionários");
+					itemFuncionario2.setId("GerenciarFuncionarios1");
+					itemFuncionario2.setAccessibleText("Cadastrar Funcionários");
+					
+					listaFuncionarios.getItems().addAll(itemFuncionario, itemFuncionario2);
+					listaFuncionarios.setPrefHeight(100);
+					
+					//Opções no menu de Licenças
+					Label itemLicenca = new Label("Gerenciar Licenças");
+					itemLicenca.setId("GerenciarLicencas");
+					itemLicenca.setAccessibleText("Gerenciar Licenças");
+					
+					Label itemLicenca2 = new Label("Cadastrar Licenças");
+					itemLicenca2.setId("GerenciarLicencas1");
+					itemLicenca2.setAccessibleText("Cadastrar Licenças");
+					
+					listaLicencas.getItems().addAll(itemLicenca, itemLicenca2);
+					listaLicencas.setPrefHeight(100);
 				break;
 				
 				case "Caixa":
 					tipoMenu = "PainelMenuCaixa";
+					
+					// Opções no menu de Controle
+					itemControle = new Label("Ordem de Compra");
+					itemControle.setId("GerenciarOrdemCompra");
+					itemControle.setAccessibleText("Gerenciar Ordem de Compra");
+					
+					itemControle2 = new Label("Clientes");
+					itemControle2.setId("GerenciarClientes");
+					itemControle2.setAccessibleText("Clientes");
+					
+					itemControle3 = new Label("Estoque");
+					itemControle3.setId("GerenciarEstoque");
+					itemControle3.setAccessibleText("Estoque");
+					
+					itemControle10 = new Label("Caixa");
+					itemControle10.setId("GerenciarCaixa");
+					itemControle10.setAccessibleText("Caixa");
+					
+					listaControle.getItems().addAll(itemControle, itemControle2, itemControle3, itemControle10);
+					listaControle.setPrefHeight(250);
+					
+					//Opções no menu de Serviços
+					itemServico = new Label("Gerais");
+					itemServico.setId("GerenciarServicos");
+					itemServico.setAccessibleText("Gerais");
+					
+					itemServico2 = new Label("Abastecimento");
+					itemServico2.setId("GerenciarAbastecimento");
+					itemServico2.setAccessibleText("Abastecimento");
+					
+					listaServicos.getItems().addAll(itemServico, itemServico2);
+					listaServicos.setPrefHeight(130);
 				break;
 			}
 			

@@ -22,6 +22,16 @@ public class Servico extends RecursiveTreeObject<Servico> {
 		this.setSetor(Setor);
 	}
 	
+	public Servico(Integer Id, String Nome, Double Preco) {
+		this.setId(Id);
+		this.setNome(Nome);
+		this.setPreco(Preco);
+	}
+	
+	public Servico(Integer Id) {
+		this.setId(Id);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}
@@ -64,5 +74,10 @@ public class Servico extends RecursiveTreeObject<Servico> {
 	
 	public void setSetor(Setor setor) {
 		this.setor = setor;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
 	}
 }

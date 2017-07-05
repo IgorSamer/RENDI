@@ -1,16 +1,12 @@
 package controller;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -18,14 +14,10 @@ import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -34,46 +26,27 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import model.bean.Combustivel;
-import model.bean.Endereco;
-import model.bean.Escolaridade;
-import model.bean.EstadoCivil;
-import model.bean.Funcao;
-import model.bean.Funcionario;
-import model.bean.Genero;
-import model.bean.OrdemCompra;
-import model.bean.Pessoa;
-import model.bean.PessoaFisica;
-import model.bean.Produto;
-import model.bean.ProdutoOrdemCompra;
-import model.bean.Setor;
 import model.bean.Tanque;
 import model.bean.TanqueReparticao;
-import model.bean.Telefone;
-import model.bean.UnidadeMedida;
-import model.dao.FuncionarioDAO;
-import model.dao.PessoaFisicaDAO;
-import model.dao.ProdutoDAO;
 import model.dao.TanqueDAO;
 
 public class GerenciarTanquesController implements Initializable {
@@ -127,6 +100,9 @@ public class GerenciarTanquesController implements Initializable {
     @FXML
     private HBox areaTanques;
     
+    @FXML
+    private WebView web;
+    
     private ArrayList<TanqueReparticao> lstReparticoes = new ArrayList<TanqueReparticao>();
     
 	@SuppressWarnings("unchecked")
@@ -154,7 +130,7 @@ public class GerenciarTanquesController implements Initializable {
 			grfTanque.setPrefSize(150, 300);
 			
 			for(TanqueReparticao tanqRep : tanq.getReparticoes()) {
-				XYChart.Data<String, Float> grfDado = new XYChart.Data(tanqRep.getCombustivel().getNome(), (tanq.getCapacidade() / tanq.getReparticoes().size()));
+				XYChart.Data<String, Float> grfDado = new javafx.scene.chart.XYChart.Data<String, Float>(tanqRep.getCombustivel().getNome(), (tanq.getCapacidade() / tanq.getReparticoes().size()));
 				
 				grfDado.nodeProperty().addListener(new ChangeListener<Node>() {
 					@Override
@@ -251,6 +227,9 @@ public class GerenciarTanquesController implements Initializable {
 				}
 			}
 		});
+		
+		WebEngine webEng = web.getEngine();
+		webEng.load("http://www.precodoscombustiveis.com.br/");
 		
 		btnCadastrarTanqueFinal.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override

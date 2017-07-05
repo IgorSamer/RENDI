@@ -41,6 +41,17 @@ public class Funcionario  extends RecursiveTreeObject<Funcionario> {
 		this.setSetor(Setor);
 	}
 	
+	public Funcionario(Integer Id, String Data_admissao, String Data_demissao, String Foto, Double Salario, Funcao Funcao, Setor Setor, Pessoa Pessoa) {
+		this.setId(Id);
+		this.setData_admissao(Data_admissao);
+		this.setData_demissao(Data_demissao);
+		this.setFoto(Foto);
+		this.setSalario(Salario);
+		this.setFuncao(Funcao);
+		this.setPessoa(Pessoa);
+		this.setSetor(Setor);
+	}
+	
 	public Funcionario(Pessoa Pessoa) {
 		this.setPessoa(Pessoa);
 	}

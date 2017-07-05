@@ -91,4 +91,36 @@ public class ClienteDAO {
 		
 		return cadastrou;
 	}
+	
+	public static ArrayList<Cliente> getAniversariantes() {
+		Connection con = Conexao.getConexao();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		
+		try {
+			stmt = con.prepareStatement("SELECT c.nome, c.email, c_t.numero "
+					+ " FROM clientes c "
+					+ "INNER JOIN clientes_telefones c_t ON c_t.id_cliente = c.id "
+					+ "WHERE MONTH(data_nascimento) = MONTH(CURDATE()) AND DAY(data_nascimento) = DAY(CURDATE())");
+			
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList<Telefone> telefones = new ArrayList<>();
+				telefones.add(new Telefone(rs.getString("numero")));
+				
+				Cliente cliente = new Cliente(0, new Pessoa(rs.getString("nome"), rs.getString("email"), telefones));
+				
+				clientes.add(cliente);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		Conexao.fecharConexao(con, stmt, rs);
+		
+		return clientes;
+	}
 }

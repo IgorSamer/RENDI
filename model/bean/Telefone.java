@@ -16,6 +16,10 @@ public class Telefone extends RecursiveTreeObject<Telefone> {
 		this.setNumero(Numero);
 	}
 	
+	public Telefone(String Numero) {
+		this.setNumero(Numero);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

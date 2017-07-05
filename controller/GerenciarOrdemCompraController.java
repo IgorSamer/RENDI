@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,11 +14,11 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -28,43 +29,37 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
-import model.bean.Endereco;
-import model.bean.Escolaridade;
-import model.bean.EstadoCivil;
 import model.bean.Fornecedor;
-import model.bean.Funcao;
 import model.bean.Funcionario;
-import model.bean.Cliente;
-import model.bean.Genero;
 import model.bean.OrdemCompra;
-import model.bean.Pessoa;
-import model.bean.PessoaFisica;
+import model.bean.OrdemCompraStatus;
 import model.bean.Produto;
 import model.bean.ProdutoOrdemCompra;
-import model.bean.Setor;
-import model.bean.Telefone;
 import model.bean.TipoPagamento;
-import model.dao.ClienteDAO;
 import model.dao.FornecedorDAO;
-import model.dao.FuncionarioDAO;
 import model.dao.OrdemCompraDAO;
-import model.dao.PessoaFisicaDAO;
 import model.dao.ProdutoDAO;
 import model.dao.TipoPagamentoDAO;
 
 public class GerenciarOrdemCompraController implements Initializable {
-	@FXML StackPane conteudoConteudo;
+	@FXML
+	private StackPane conteudoConteudo;
 	
 	@FXML
 	private VBox funGerenciar, funCadastrar;
@@ -115,7 +110,10 @@ public class GerenciarOrdemCompraController implements Initializable {
     private JFXTreeTableView<ProdutoOrdemCompra> tblProdutos;
     
     @FXML
-    private Label lblSubtotal;
+    private Label lblSubtotal, lblFornecedor, lblStatus;
+    
+    @FXML
+    private JFXTreeTableView<ProdutoOrdemCompra> tblProdutosDetalhes;
     
     @FXML
     private JFXButton btnCancelarOrdemCompra, btnCadastrarOrdemCompraFinal;
@@ -131,13 +129,7 @@ public class GerenciarOrdemCompraController implements Initializable {
 		btnVisualizarOrdemCompra.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
-				DoubleProperty divPos = splConteudo.getDividers().get(0).positionProperty();
-		        
-		        double novaPos = divPos.get() > 0.8 ? 0.7 : 1.0;
-		        
-	            KeyValue keyValue = new KeyValue(splConteudo.getDividers().get(0).positionProperty(), novaPos);
-	            Timeline divTimeline = new Timeline(new KeyFrame(Duration.millis(300), keyValue));
-	            divTimeline.play();
+				
 			}
 		});
 		
@@ -191,7 +183,16 @@ public class GerenciarOrdemCompraController implements Initializable {
 		colStatus.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<OrdemCompra, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<OrdemCompra, String> param) {
-				return param.getValue().getValue().statusProperty().asString();
+				return param.getValue().getValue().getStatus().nomeProperty();
+			}
+		});
+		
+		JFXTreeTableColumn<OrdemCompra, String> colObs = new JFXTreeTableColumn<>("Observações");
+		colObs.setPrefWidth(150);
+		colObs.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<OrdemCompra, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<OrdemCompra, String> param) {
+				return param.getValue().getValue().observacoesProperty();
 			}
 		});
 		
@@ -199,10 +200,79 @@ public class GerenciarOrdemCompraController implements Initializable {
 		ordensCompra.addAll(OrdemCompraDAO.listar());
 		TreeItem<OrdemCompra> root = new RecursiveTreeItem<OrdemCompra>(ordensCompra, RecursiveTreeObject::getChildren);
 
-		tblOrdensCompra.getColumns().setAll(colId, colFornecedor, colFuncionario, colDataPrevista, colValor, colStatus);
+		tblOrdensCompra.getColumns().setAll(colId, colFornecedor, colFuncionario, colDataPrevista, colValor, colStatus, colObs);
 		tblOrdensCompra.setRoot(root);
 		tblOrdensCompra.setShowRoot(false);
 		
+		tblOrdensCompra.setRowFactory(tv -> {
+			JFXTreeTableRow<OrdemCompra> linha = new JFXTreeTableRow<>();
+			
+			linha.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					if(event.getClickCount() == 2 && !linha.isEmpty()) {
+						OrdemCompra oc = tblOrdensCompra.getSelectionModel().getSelectedItem().getValue();
+						
+						JFXTreeTableColumn<ProdutoOrdemCompra, String> colIdProd = new JFXTreeTableColumn<>("Id");
+						colIdProd.setPrefWidth(150);
+						colIdProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProdutoOrdemCompra, String>, ObservableValue<String>>() {
+							@Override
+							public ObservableValue<String> call(CellDataFeatures<ProdutoOrdemCompra, String> param) {
+								return param.getValue().getValue().idProperty().asString();
+							}
+						});
+						
+						JFXTreeTableColumn<ProdutoOrdemCompra, String> colNomeProd = new JFXTreeTableColumn<>("Produto");
+						colNomeProd.setPrefWidth(150);
+						colNomeProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProdutoOrdemCompra, String>, ObservableValue<String>>() {
+							@Override
+							public ObservableValue<String> call(CellDataFeatures<ProdutoOrdemCompra, String> param) {
+								return param.getValue().getValue().getProduto().nomeProperty();
+							}
+						});
+						
+						JFXTreeTableColumn<ProdutoOrdemCompra, String> colPrecoProd = new JFXTreeTableColumn<>("Preço");
+						colPrecoProd.setPrefWidth(150);
+						colPrecoProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProdutoOrdemCompra, String>, ObservableValue<String>>() {
+							@Override
+							public ObservableValue<String> call(CellDataFeatures<ProdutoOrdemCompra, String> param) {
+								return Bindings.concat("R$", param.getValue().getValue().getProduto().precoProperty().asString());
+							}
+						});
+						
+						JFXTreeTableColumn<ProdutoOrdemCompra, String> colQuantidadeProd = new JFXTreeTableColumn<>("Quantidade");
+						colQuantidadeProd.setPrefWidth(150);
+						colQuantidadeProd.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProdutoOrdemCompra, String>, ObservableValue<String>>() {
+							@Override
+							public ObservableValue<String> call(CellDataFeatures<ProdutoOrdemCompra, String> param) {
+								return param.getValue().getValue().quantidadeProperty().asString();
+							}
+						});
+						
+						ObservableList<ProdutoOrdemCompra> ordensCompraProd = FXCollections.observableArrayList();
+						ordensCompraProd.addAll(OrdemCompraDAO.listarProdutos(oc.getId()));
+						TreeItem<ProdutoOrdemCompra> root = new RecursiveTreeItem<ProdutoOrdemCompra>(ordensCompraProd, RecursiveTreeObject::getChildren);
+
+						tblProdutosDetalhes.getColumns().setAll(colIdProd, colNomeProd, colPrecoProd, colQuantidadeProd);
+						tblProdutosDetalhes.setRoot(root);
+						tblProdutosDetalhes.setShowRoot(false);
+						
+						lblFornecedor.setText(oc.getFornecedor().getNome_fantasia());
+						lblStatus.setText("Status: " + oc.getStatus());
+						
+						DoubleProperty divPos = splConteudo.getDividers().get(0).positionProperty();
+				        
+				        double novaPos = divPos.get() > 0.8 ? 0.7 : 1.0;
+				        
+			            KeyValue keyValue = new KeyValue(splConteudo.getDividers().get(0).positionProperty(), novaPos);
+			            Timeline divTimeline = new Timeline(new KeyFrame(Duration.millis(300), keyValue));
+			            divTimeline.play();
+					}
+				}
+			});
+			
+			return linha;
+		});
 
 		btnCadastrarOrdemCompra.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -318,7 +388,7 @@ public class GerenciarOrdemCompraController implements Initializable {
 		colPrecoProdutos.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ProdutoOrdemCompra, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<ProdutoOrdemCompra, String> param) {
-				return param.getValue().getValue().getProduto().precoProperty().asString();
+				return Bindings.concat("R$", param.getValue().getValue().getProduto().precoProperty().asString());
 			}
 		});
 		
@@ -339,6 +409,27 @@ public class GerenciarOrdemCompraController implements Initializable {
 		tblProdutos.setRoot(rootProdutos);
 		tblProdutos.setShowRoot(false);
 		
+		lblStatus.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent arg0) {
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource("../view/fxml/GerenciarOrdemCompraStatus.fxml"));
+					
+					Stage stage = new Stage();
+					Scene scene = new Scene(root);
+
+					stage.getIcons().add(new Image("/view/img/Logo.png"));
+					stage.setScene(scene);
+					stage.setTitle("RENDI - Alterar status da ordem de compra");
+					stage.show();
+					
+					GerenciarOrdemCompraStatusController.idOrdemCompra = tblOrdensCompra.getSelectionModel().getSelectedItem().getValue().getId();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
 		btnCadastrarOrdemCompraFinal.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent arg0) {
@@ -346,7 +437,7 @@ public class GerenciarOrdemCompraController implements Initializable {
 				
 				DateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				
-				OrdemCompra ordemCompra = new OrdemCompra(0, formatoData.format(new Date()), String.valueOf(datPrevista.getValue()), 1, null, Double.valueOf(lblSubtotal.getText()), Integer.valueOf(txtParcelas.getText().trim()), Integer.valueOf(txtDistanciaPagamento.getText().trim()), new Fornecedor(cmbFornecedor.getSelectionModel().getSelectedItem().getId()), new Funcionario(PainelController.idFuncionario), new TipoPagamento(cmbTipoPagamento.getSelectionModel().getSelectedItem().getId(), null), lstProdutos);
+				OrdemCompra ordemCompra = new OrdemCompra(0, formatoData.format(new Date()), String.valueOf(datPrevista.getValue()), new OrdemCompraStatus(1, null), null, Double.valueOf(lblSubtotal.getText()), Integer.valueOf(txtParcelas.getText().trim()), Integer.valueOf(txtDistanciaPagamento.getText().trim()), new Fornecedor(cmbFornecedor.getSelectionModel().getSelectedItem().getId()), new Funcionario(PainelController.idFuncionario), new TipoPagamento(cmbTipoPagamento.getSelectionModel().getSelectedItem().getId(), null), lstProdutos);
 				
 				if(OrdemCompraDAO.cadastrar(ordemCompra)) {
 					mensagem.show("Ordem de compra cadastrada com sucesso!", 2000);

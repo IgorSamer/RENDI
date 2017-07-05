@@ -30,6 +30,11 @@ public class Tanque extends RecursiveTreeObject<Tanque> {
 		this.setId(Id);
 	}
 	
+	public Tanque(Integer Id, String Nome) {
+		this.setId(Id);
+		this.setNome(Nome);
+	}
+	
 	public final Integer getId() {
 		return id.get();
 	}

@@ -1,15 +1,15 @@
 package controller;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
+
+import org.apache.commons.io.IOUtils;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -20,7 +20,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,25 +29,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableColumn.CellDataFeatures;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import model.bean.Endereco;
-import model.bean.Escolaridade;
-import model.bean.EstadoCivil;
 import model.bean.Fornecedor;
-import model.bean.Funcao;
-import model.bean.Cliente;
-import model.bean.Genero;
-import model.bean.Pessoa;
-import model.bean.PessoaFisica;
-import model.bean.Setor;
+import model.bean.JSONException;
+import model.bean.JSONObject;
+import model.bean.JSONTokener;
 import model.bean.Telefone;
-import model.dao.ClienteDAO;
+import model.bean.TextFieldFormatter;
 import model.dao.FornecedorDAO;
-import model.dao.PessoaFisicaDAO;
 
 public class GerenciarFornecedoresController implements Initializable {
 	@FXML StackPane conteudoConteudo;
@@ -59,6 +53,9 @@ public class GerenciarFornecedoresController implements Initializable {
 	@FXML
     private JFXTreeTableView<Fornecedor> tblFornecedores;
 
+	@FXML
+    private JFXButton btnPesquisarFornecedor;
+	
     @FXML
     private JFXButton btnExcluirFornecedor;
 
@@ -200,6 +197,52 @@ public class GerenciarFornecedoresController implements Initializable {
 			public void handle(MouseEvent arg0) {
 				funCadastrar.setVisible(false);
 				funGerenciar.setVisible(true);
+			}
+		});
+		
+		txtCnpj.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@SuppressWarnings("deprecation")
+			@Override
+			public void handle(KeyEvent event) {
+				String cnpj = txtCnpj.getText().trim();
+				
+				if(cnpj.length() == 14) {
+					try {
+						JSONObject jo = (JSONObject) new JSONTokener(IOUtils.toString(new URL("https://www.receitaws.com.br/v1/cnpj/"+ cnpj).openStream())).nextValue();
+					    
+					    txtEmail.setText(jo.getString("email"));
+					    txtNomeEmpresarial.setText(jo.getString("nome"));
+					    txtNomeFantasia.setText(jo.getString("fantasia"));
+					    
+					    String cep = jo.getString("cep").replace(".", "");
+					    cep = cep.replace("-", "");
+					    
+					    JSONObject jo2 = (JSONObject) new JSONTokener(IOUtils.toString(new URL("https://viacep.com.br/ws/"+ cep +"/json").openStream())).nextValue();
+					    
+					    txtCep.setText(cep);
+					    txtUf.setText(jo2.getString("uf"));
+					    txtCidade.setText(jo2.getString("localidade"));
+					    txtBairro.setText(jo2.getString("bairro"));
+					    txtRua.setText(jo2.getString("logradouro"));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		txtTelefone.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				TextFieldFormatter tff = new TextFieldFormatter();
+				tff.setMask("#### ### ###");
+				tff.setCaracteresValidos("0123456789");
+				tff.setTf(txtTelefone);
+				tff.formatter();
 			}
 		});
 		
